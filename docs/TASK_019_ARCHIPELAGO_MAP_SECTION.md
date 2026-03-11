@@ -2,15 +2,14 @@
 
 ## Purpose
 
-Add a visual "Archipelago Map" section to the landing page that explains the learning structure of Dao-Yu-101.
+Redesign the Archipelago Map section to visually look like an island instead of simple boxes, and update the learning structure to reflect the current platform launch plan.
 
 ## Learning Structure Representation
 
-The archipelago map visually demonstrates how Dao-Yu-101 organizes learning content:
+The archipelago map visually demonstrates the initial learning structure of Dao-Yu-101:
 
-- **Subjects** are represented as archipelagos (groups of islands)
-- **Islands** represent individual learning topics within a subject
-- **Lessons** are the activities and content within each island
+- **Programming Archipelago** - The first learning world of Dao-Yu-101
+- **Minecraft MakeCode Island** - The initial island focusing on programming fundamentals
 
 This metaphor helps users understand that learning is structured as interconnected topics that build upon each other, much like islands in an archipelago.
 
