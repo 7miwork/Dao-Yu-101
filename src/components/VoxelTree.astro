@@ -1,0 +1,120 @@
+---
+interface Props {
+  size?: number;
+  position?: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  rotation?: number;
+}
+
+const { 
+  size = 1, 
+  position = { x: 0, y: 0, z: 0 },
+  rotation = 0 
+} = Astro.props;
+
+const baseSize = 20;
+const trunkHeight = baseSize * 1.5 * size;
+const trunkWidth = baseSize * 0.4 * size;
+const foliageSize = baseSize * 2 * size;
+---
+
+<style>
+  .voxel-tree {
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translate3d(
+      calc(var(--x) * 1px), 
+      calc(var(--y) * 1px), 
+      calc(var(--z) * 1px)
+    ) rotateY(calc(var(--rotation) * 1deg));
+    transform-origin: center;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .tree-trunk {
+    position: absolute;
+    width: calc(var(--trunk-width) * 1px);
+    height: calc(var(--trunk-height) * 1px);
+    background: linear-gradient(
+      to bottom,
+      #8B4513 0%,
+      #5D4037 50%,
+      #3E2723 100%
+    );
+    border: 2px solid #2E1B14;
+    border-radius: 2px;
+    transform: translate3d(
+      calc(var(--trunk-width) / -2 * 1px), 
+      calc(var(--trunk-height) / -1 * 1px), 
+      0
+    );
+    box-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.3),
+      -2px 2px 4px rgba(255, 255, 255, 0.1);
+  }
+
+  .tree-foliage {
+    position: absolute;
+    width: calc(var(--foliage-size) * 1px);
+    height: calc(var(--foliage-size) * 1px);
+    background: linear-gradient(
+      to bottom,
+      #2E8B57 0%,
+      #3CB371 50%,
+      #228B22 100%
+    );
+    border: 2px solid #1E7A4E;
+    border-radius: 4px;
+    transform: translate3d(
+      calc(var(--foliage-size) / -2 * 1px), 
+      calc(var(--trunk-height) * -1.2 * 1px), 
+      10px
+    );
+    box-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 -2px 4px rgba(255, 255, 255, 0.1);
+  }
+
+  .tree-foliage::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(var(--foliage-size) * 0.8 * 1px);
+    height: calc(var(--foliage-size) * 0.8 * 1px);
+    background: inherit;
+    border: inherit;
+    border-radius: inherit;
+    transform: translateX(-50%) translateY(-10px);
+    box-shadow: inherit;
+  }
+
+  .tree-foliage::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(var(--foliage-size) * 0.6 * 1px);
+    height: calc(var(--foliage-size) * 0.6 * 1px);
+    background: inherit;
+    border: inherit;
+    border-radius: inherit;
+    transform: translateX(-50%) translateY(-20px);
+    box-shadow: inherit;
+  }
+</style>
+
+<div 
+  class="voxel-tree"
+  style="--x: {position.x}; --y: {position.y}; --z: {position.z}; --rotation: {rotation}; --trunk-width: {trunkWidth}; --trunk-height: {trunkHeight}; --foliage-size: {foliageSize};"
+>
+  <div class="tree-trunk"></div>
+  <div class="tree-foliage"></div>
+</div>

@@ -1,5 +1,8 @@
 ---
 import VoxelBlock from './VoxelBlock.astro';
+import VoxelTree from './VoxelTree.astro';
+import VoxelRock from './VoxelRock.astro';
+import VoxelHouse from './VoxelHouse.astro';
 
 interface Props {
   id: string;
@@ -8,9 +11,50 @@ interface Props {
   z: number;
   scale?: number;
   className?: string;
+  includeDetails?: boolean;
 }
 
-const { id, x, y, z, scale = 1, className = '' } = Astro.props;
+const { id, x, y, z, scale = 1, className = '', includeDetails = true } = Astro.props;
+
+// Generate random seed for consistent detail placement
+const seed = id.split('').reduce((a, b) => {
+  a = ((a << 5) - a) + b.charCodeAt(0);
+  return a & a;
+}, 0);
+
+function random(seed: number, min: number, max: number): number {
+  const x = Math.sin(seed) * 10000;
+  return Math.floor((x - Math.floor(x)) * (max - min + 1) + min);
+}
+
+// Generate detail positions based on island position for consistency
+const treeCount = random(seed + x + y, 1, 3);
+const rockCount = random(seed + x + y + 100, 2, 4);
+const houseCount = random(seed + x + y + 200, 0, 2);
+
+const treePositions = Array.from({ length: treeCount }, (_, i) => ({
+  x: random(seed + i, -60, 60),
+  y: random(seed + i + 10, -60, 60),
+  z: 0,
+  rotation: random(seed + i + 20, 0, 360),
+  size: random(seed + i + 30, 8, 12) / 10
+}));
+
+const rockPositions = Array.from({ length: rockCount }, (_, i) => ({
+  x: random(seed + i + 100, -80, 80),
+  y: random(seed + i + 110, -80, 80),
+  z: 0,
+  rotation: random(seed + i + 120, 0, 360),
+  size: random(seed + i + 130, 6, 10) / 10
+}));
+
+const housePositions = Array.from({ length: houseCount }, (_, i) => ({
+  x: random(seed + i + 200, -100, 100),
+  y: random(seed + i + 210, -100, 100),
+  z: 0,
+  rotation: random(seed + i + 220, 0, 360),
+  size: random(seed + i + 230, 8, 12) / 10
+}));
 ---
 
 <div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
@@ -24,6 +68,41 @@ const { id, x, y, z, scale = 1, className = '' } = Astro.props;
   
   <!-- Bottom Layer: Sand -->
   <VoxelBlock type="sand" size={40} className="island-bottom" />
+  
+  <!-- Environmental Details -->
+  {includeDetails && (
+    <>
+      {/* Trees */}
+      {treePositions.map((pos, index) => (
+        <VoxelTree 
+          key={`tree-${id}-${index}`}
+          size={pos.size}
+          position={pos}
+          rotation={pos.rotation}
+        />
+      ))}
+      
+      {/* Rocks */}
+      {rockPositions.map((pos, index) => (
+        <VoxelRock 
+          key={`rock-${id}-${index}`}
+          size={pos.size}
+          position={pos}
+          rotation={pos.rotation}
+        />
+      ))}
+      
+      {/* Houses */}
+      {housePositions.map((pos, index) => (
+        <VoxelHouse 
+          key={`house-${id}-${index}`}
+          size={pos.size}
+          position={pos}
+          rotation={pos.rotation}
+        />
+      ))}
+    </>
+  )}
 </div>
 
 <style>
@@ -70,4 +149,7 @@ const { id, x, y, z, scale = 1, className = '' } = Astro.props;
 
 <script>
   import VoxelBlock from './VoxelBlock.astro';
+  import VoxelTree from './VoxelTree.astro';
+  import VoxelRock from './VoxelRock.astro';
+  import VoxelHouse from './VoxelHouse.astro';
 </script>
