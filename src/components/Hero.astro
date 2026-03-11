@@ -1,0 +1,174 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="floating-islands">
+      <div class="island island-1"></div>
+      <div class="island island-2"></div>
+      <div class="island island-3"></div>
+    </div>
+    
+    <div class="hero-text">
+      <h1 class="title">Dao-Yu-101</h1>
+      <p class="tagline">Discover your island adventure</p>
+      
+      <div class="hero-buttons">
+        <button class="btn-primary">Store</button>
+        <button class="btn-secondary">Login</button>
+        <button class="btn-secondary">Register</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #B2EBF2 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .floating-islands {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  .island {
+    position: absolute;
+    background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .island-1 {
+    width: 200px;
+    height: 120px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .island-2 {
+    width: 150px;
+    height: 90px;
+    top: 40%;
+    right: 15%;
+    animation-delay: 2s;
+  }
+
+  .island-3 {
+    width: 180px;
+    height: 110px;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 3;
+  }
+
+  .title {
+    font-size: 4rem;
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.8);
+    font-weight: 800;
+    letter-spacing: -2px;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin: 0 0 3rem 0;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: #2c3e50;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+</style>
