@@ -6,7 +6,7 @@ interface Props {
 const { variant = 'foreground' } = Astro.props;
 ---
 
-<div class={`island-layer island-${variant}`}>
+<div class={`island-layer island-${variant}`} data-variant={variant}>
   {variant === 'foreground' && (
     <>
       <div class="island island-1 foreground-island" style="--delay: 0">

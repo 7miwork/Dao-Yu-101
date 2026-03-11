@@ -1,35 +1,49 @@
 ---
 interface Props {
-  variant?: 'slow' | 'medium';
+  variant?: 'layer1' | 'layer2' | 'layer3';
 }
 
-const { variant = 'slow' } = Astro.props;
+const { variant = 'layer1' } = Astro.props;
 ---
 
 <div class={`clouds-layer cloud-${variant}`}>
-  {variant === 'slow' && (
+  {variant === 'layer1' && (
     <>
-      <div class="cloud cloud-slow" style="--delay: 0">
+      <div class="cloud cloud-layer1" style="--delay: 0">
         <div class="wave"></div>
       </div>
-      <div class="cloud cloud-slow" style="--delay: 4">
+      <div class="cloud cloud-layer1" style="--delay: 30">
         <div class="wave"></div>
       </div>
-      <div class="cloud cloud-slow" style="--delay: 8">
+      <div class="cloud cloud-layer1" style="--delay: 60">
         <div class="wave"></div>
       </div>
     </>
   )}
   
-  {variant === 'medium' && (
+  {variant === 'layer2' && (
     <>
-      <div class="cloud cloud-medium" style="--delay: 2">
+      <div class="cloud cloud-layer2" style="--delay: 15">
         <div class="wave"></div>
       </div>
-      <div class="cloud cloud-medium" style="--delay: 6">
+      <div class="cloud cloud-layer2" style="--delay: 45">
         <div class="wave"></div>
       </div>
-      <div class="cloud cloud-medium" style="--delay: 10">
+      <div class="cloud cloud-layer2" style="--delay: 75">
+        <div class="wave"></div>
+      </div>
+    </>
+  )}
+  
+  {variant === 'layer3' && (
+    <>
+      <div class="cloud cloud-layer3" style="--delay: 10">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-layer3" style="--delay: 50">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-layer3" style="--delay: 80">
         <div class="wave"></div>
       </div>
     </>
@@ -97,14 +111,27 @@ const { variant = 'slow' } = Astro.props;
   }
 
   /* Layer-specific styles */
-  .cloud-slow {
+  .cloud-layer1 {
     z-index: 1;
-    opacity: 0.6;
+    opacity: 0.4;
+    animation: float 90s linear infinite;
   }
 
-  .cloud-medium {
+  .cloud-layer2 {
     z-index: 2;
+    opacity: 0.6;
+    animation: float 120s linear infinite;
+  }
+
+  .cloud-layer3 {
+    z-index: 3;
     opacity: 0.8;
+    animation: float 150s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateX(-100px); }
+    100% { transform: translateX(100vw); }
   }
 
   /* Responsive adjustments */

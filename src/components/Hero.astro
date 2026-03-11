@@ -1,27 +1,30 @@
 ---
 import FloatingIslands from './FloatingIslands.astro';
 import Clouds from './Clouds.astro';
+import Ocean from './Ocean.astro';
 import GameButton from './GameButton.astro';
 ---
 
 <section class="hero-container">
+  <!-- Sky Background -->
+  <div class="sky-background"></div>
+
   <!-- Clouds Layer -->
   <div class="clouds-container">
-    <Clouds variant="slow" />
-    <Clouds variant="medium" />
+    <Clouds variant="layer1" />
+    <Clouds variant="layer2" />
+    <Clouds variant="layer3" />
   </div>
 
   <!-- Floating Islands Layer -->
-  <div class="islands-container">
+  <div class="islands-container" id="islands-container">
     <FloatingIslands variant="background" />
     <FloatingIslands variant="midground" />
     <FloatingIslands variant="foreground" />
   </div>
 
-  <!-- Ocean Waves -->
-  <div class="ocean-waves">
-    <div class="wave"></div>
-  </div>
+  <!-- Ocean Layer -->
+  <Ocean />
 
   <!-- Hero Content -->
   <div class="hero-content">
@@ -40,3 +43,60 @@ import GameButton from './GameButton.astro';
   /* Import hero styles */
   @import '../styles/hero.css';
 </style>
+
+<script>
+  // Mouse parallax effect for floating islands
+  document.addEventListener('DOMContentLoaded', () => {
+    const islandsContainer = document.getElementById('islands-container');
+    
+    // Check if mobile device
+    if (window.innerWidth < 768) {
+      return; // Disable parallax on mobile
+    }
+
+    if (islandsContainer) {
+      islandsContainer.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        
+        // Calculate mouse position as percentage (0 to 1)
+        const x = clientX / innerWidth;
+        const y = clientY / innerHeight;
+        
+        // Apply parallax effect to different island layers
+        const backgroundIslands = islandsContainer.querySelector('[data-variant="background"]') as HTMLElement;
+        const midgroundIslands = islandsContainer.querySelector('[data-variant="midground"]') as HTMLElement;
+        const foregroundIslands = islandsContainer.querySelector('[data-variant="foreground"]') as HTMLElement;
+        
+        if (backgroundIslands) {
+          // Background islands move less (max 5px)
+          const bgX = (x - 0.5) * 5;
+          const bgY = (y - 0.5) * 5;
+          backgroundIslands.style.transform = `translate(${bgX}px, ${bgY}px)`;
+        }
+        
+        if (midgroundIslands) {
+          // Midground islands move medium (max 7px)
+          const midX = (x - 0.5) * 7;
+          const midY = (y - 0.5) * 7;
+          midgroundIslands.style.transform = `translate(${midX}px, ${midY}px)`;
+        }
+        
+        if (foregroundIslands) {
+          // Foreground islands move more (max 10px)
+          const fgX = (x - 0.5) * 10;
+          const fgY = (y - 0.5) * 10;
+          foregroundIslands.style.transform = `translate(${fgX}px, ${fgY}px)`;
+        }
+      });
+
+      // Reset transform when mouse leaves
+      islandsContainer.addEventListener('mouseleave', () => {
+        const islands = islandsContainer.querySelectorAll('[data-variant]') as NodeListOf<HTMLElement>;
+        islands.forEach(island => {
+          island.style.transform = 'translate(0, 0)';
+        });
+      });
+    }
+  });
+</script>
