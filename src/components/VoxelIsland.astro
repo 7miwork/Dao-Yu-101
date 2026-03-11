@@ -85,6 +85,9 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     width: 320px;
     height: 40px;
     margin: 0 auto;
+    background: #7ed957;
+    border-bottom: 6px solid #5da63e;
+    z-index: 3;
   }
 
   /* First Dirt Layer (wider) */
@@ -93,6 +96,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     height: 70px;
     background: #8b5a2b;
     margin: 0 auto;
+    z-index: 1;
   }
 
   /* Second Dirt Layer */
@@ -101,6 +105,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     height: 70px;
     background: #7a4b24;
     margin: 0 auto;
+    z-index: 1;
   }
 
   /* Bottom Dirt Tip */
@@ -109,6 +114,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     height: 70px;
     background: #6e4424;
     margin: 0 auto;
+    z-index: 1;
   }
 
   /* Tree Position */
@@ -116,6 +122,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     position: absolute;
     bottom: 100%;
     height: 60px;
+    z-index: 4;
   }
 
   .tree-left {
@@ -133,6 +140,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     left: 50%;
     transform: translateX(-50%);
     height: 50px;
+    z-index: 4;
   }
 
   /* Rock Position */
@@ -141,6 +149,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     bottom: 100%;
     right: 20px;
     height: 25px;
+    z-index: 4;
   }
 
   /* Responsive Adjustments */
