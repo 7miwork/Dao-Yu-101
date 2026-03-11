@@ -1,4 +1,8 @@
 ---
+import VoxelTree from './island-details/VoxelTree.astro';
+import VoxelHouse from './island-details/VoxelHouse.astro';
+import VoxelRock from './island-details/VoxelRock.astro';
+
 interface Props {
   id: string;
   x: number;
@@ -13,7 +17,15 @@ interface Props {
 const { id, x, y, z, scale = 1, className = '', showDetails = true, detailLevel = 'foreground' } = Astro.props;
 ---
 <div class={`voxel-island ${className}`} style={`transform: translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`}>
-  <div class="grass-surface"></div>
+  <div class="grass-surface">
+    {showDetails && (
+      <div class="island-details">
+        <VoxelTree position="center" size="large" />
+        <VoxelRock position="left" size="medium" />
+        <VoxelHouse position="right" size="medium" />
+      </div>
+    )}
+  </div>
   <div class="dirt-layer-1"></div>
   <div class="dirt-layer-2"></div>
   <div class="dirt-layer-3"></div>
@@ -35,6 +47,18 @@ const { id, x, y, z, scale = 1, className = '', showDetails = true, detailLevel 
     overflow: visible;
     z-index: 3;
     margin-top: 120px;
+  }
+  
+  .island-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    z-index: 10;
   }
   .dirt-layer-1 { width: 320px; height: 55px; background: linear-gradient(to right, #7a4f22 0%, #8b5a2b 40%, #7a4f22 100%); margin: 0 auto; z-index: 2; }
   .dirt-layer-2 { width: 230px; height: 50px; background: linear-gradient(to right, #6b4019 0%, #7a4b24 40%, #6b4019 100%); margin: 0 auto; z-index: 2; }

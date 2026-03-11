@@ -22,13 +22,6 @@ const { className = '' } = Astro.props;
     showDetails={true}
     detailLevel="foreground"
   />
-  
-  <!-- Additional details on top of the island -->
-  <div class="island-details">
-    <VoxelTree position="center" size="large" />
-    <VoxelRock position="left" size="medium" />
-    <VoxelHouse position="right" size="medium" />
-  </div>
 </div>
 
 <style>
@@ -40,18 +33,6 @@ const { className = '' } = Astro.props;
     transform-origin: center;
     z-index: 5;
     top: 10%;
-  }
-
-  .island-details {
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 18px;
-    z-index: 10;
   }
 
   /* Floating Animation */
@@ -74,11 +55,6 @@ const { className = '' } = Astro.props;
       width: 320px;
       transform: scale(1.0);
     }
-    
-    .island-details {
-      bottom: -4px;
-      gap: 15px;
-    }
   }
 
   @media (max-width: 640px) {
@@ -87,22 +63,12 @@ const { className = '' } = Astro.props;
       transform: scale(0.9);
       top: 10%;
     }
-    
-    .island-details {
-      bottom: -3px;
-      gap: 10px;
-    }
   }
 
   @media (max-width: 480px) {
     .main-island {
       width: 240px;
       transform: scale(0.8);
-    }
-    
-    .island-details {
-      bottom: -2px;
-      gap: 8px;
     }
   }
 </style>
