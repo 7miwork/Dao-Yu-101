@@ -18,11 +18,17 @@ import GameButton from './GameButton.astro';
     <div class="nav-actions">
       <LanguageSwitcher />
     </div>
+    <button class="menu-toggle">☰</button>
   </div>
 </header>
 
 <style>
   .navbar {
+    height: 70px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
     backdrop-filter: blur(10px);
     position: sticky;
@@ -34,22 +40,23 @@ import GameButton from './GameButton.astro';
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%;
   }
 
   .logo h1 {
-    margin: 0;
     font-size: 1.5rem;
     color: #2c3e50;
     text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+    margin: 0;
   }
 
   .nav-menu {
     display: flex;
-    gap: 1rem;
+    gap: 20px;
+    font-size: 0.95rem;
     align-items: center;
   }
 
@@ -91,15 +98,59 @@ import GameButton from './GameButton.astro';
     gap: 1rem;
   }
 
+  .menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2c3e50;
+  }
+
+  /* Mobile Styles */
   @media (max-width: 768px) {
-    .container {
+    .nav-menu {
+      display: none;
       flex-direction: column;
-      gap: 1rem;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 99;
+    }
+
+    .nav-menu.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+
+    .logo h1 {
+      font-size: 1.2rem;
     }
 
     .nav-menu {
-      flex-wrap: wrap;
-      justify-content: center;
+      gap: 16px;
     }
   }
 </style>
+
+<script>
+  const button = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.nav-menu');
+
+  if (button && menu) {
+    button.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+  }
+</script>
