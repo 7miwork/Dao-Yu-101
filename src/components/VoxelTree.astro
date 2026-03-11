@@ -16,9 +16,9 @@ const {
 } = Astro.props;
 
 const baseSize = 20;
-const trunkHeight = baseSize * 1.5 * size;
-const trunkWidth = baseSize * 0.4 * size;
-const foliageSize = baseSize * 2 * size;
+const trunkHeight = baseSize * 2 * size;
+const trunkWidth = baseSize * 0.6 * size;
+const leafSize = baseSize * 1.2 * size;
 ---
 
 <style>
@@ -60,61 +60,52 @@ const foliageSize = baseSize * 2 * size;
 
   .tree-foliage {
     position: absolute;
-    width: calc(var(--foliage-size) * 1px);
-    height: calc(var(--foliage-size) * 1px);
-    background: linear-gradient(
-      to bottom,
-      #2E8B57 0%,
-      #3CB371 50%,
-      #228B22 100%
-    );
-    border: 2px solid #1E7A4E;
-    border-radius: 4px;
     transform: translate3d(
-      calc(var(--foliage-size) / -2 * 1px), 
+      calc(var(--leaf-size) / -2 * 1px), 
       calc(var(--trunk-height) * -1.2 * 1px), 
       10px
     );
+    transform-style: preserve-3d;
+  }
+
+  .leaf-block {
+    position: absolute;
+    width: calc(var(--leaf-size) * 1px);
+    height: calc(var(--leaf-size) * 1px);
+    background: #4CAF50;
+    border: 2px solid #2E7D32;
+    border-radius: 2px;
     box-shadow: 
-      0 4px 8px rgba(0, 0, 0, 0.3),
-      0 -2px 4px rgba(255, 255, 255, 0.1);
+      2px 2px 4px rgba(0, 0, 0, 0.3),
+      -2px 2px 4px rgba(255, 255, 255, 0.1);
   }
 
-  .tree-foliage::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(var(--foliage-size) * 0.8 * 1px);
-    height: calc(var(--foliage-size) * 0.8 * 1px);
-    background: inherit;
-    border: inherit;
-    border-radius: inherit;
-    transform: translateX(-50%) translateY(-10px);
-    box-shadow: inherit;
-  }
-
-  .tree-foliage::after {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(var(--foliage-size) * 0.6 * 1px);
-    height: calc(var(--foliage-size) * 0.6 * 1px);
-    background: inherit;
-    border: inherit;
-    border-radius: inherit;
-    transform: translateX(-50%) translateY(-20px);
-    box-shadow: inherit;
-  }
+  /* 3x3 leaf cube structure */
+  .leaf-center { transform: translate3d(0, 0, 0); }
+  .leaf-left { transform: translate3d(calc(var(--leaf-size) * -1.2px), 0, 0); }
+  .leaf-right { transform: translate3d(calc(var(--leaf-size) * 1.2px), 0, 0); }
+  .leaf-front { transform: translate3d(0, calc(var(--leaf-size) * -1.2px), 0); }
+  .leaf-back { transform: translate3d(0, calc(var(--leaf-size) * 1.2px), 0); }
+  
+  .leaf-top { transform: translate3d(0, 0, calc(var(--leaf-size) * 1.2px)); }
+  .leaf-top-left { transform: translate3d(calc(var(--leaf-size) * -1.2px), 0, calc(var(--leaf-size) * 1.2px)); }
+  .leaf-top-right { transform: translate3d(calc(var(--leaf-size) * 1.2px), 0, calc(var(--leaf-size) * 1.2px)); }
 </style>
 
 <div 
   class="voxel-tree"
-  style="--x: {position.x}; --y: {position.y}; --z: {position.z}; --rotation: {rotation}; --trunk-width: {trunkWidth}; --trunk-height: {trunkHeight}; --foliage-size: {foliageSize};"
+  style="--x: {position.x}; --y: {position.y}; --z: {position.z}; --rotation: {rotation}; --trunk-width: {trunkWidth}; --trunk-height: {trunkHeight}; --leaf-size: {leafSize};"
 >
   <div class="tree-trunk"></div>
-  <div class="tree-foliage"></div>
+  <div class="tree-foliage">
+    <!-- 3x3 leaf cube structure -->
+    <div class="leaf-block leaf-center"></div>
+    <div class="leaf-block leaf-left"></div>
+    <div class="leaf-block leaf-right"></div>
+    <div class="leaf-block leaf-front"></div>
+    <div class="leaf-block leaf-back"></div>
+    <div class="leaf-block leaf-top"></div>
+    <div class="leaf-block leaf-top-left"></div>
+    <div class="leaf-block leaf-top-right"></div>
+  </div>
 </div>

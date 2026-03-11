@@ -9,42 +9,63 @@ const { variant = 'layer1' } = Astro.props;
 <div class={`clouds-layer cloud-${variant}`}>
   {variant === 'layer1' && (
     <>
-      <div class="cloud cloud-layer1" style="--delay: 0">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer1" style="--delay: 0">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer1" style="--delay: 30">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer1" style="--delay: 30">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer1" style="--delay: 60">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer1" style="--delay: 60">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
     </>
   )}
   
   {variant === 'layer2' && (
     <>
-      <div class="cloud cloud-layer2" style="--delay: 15">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer2" style="--delay: 15">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer2" style="--delay: 45">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer2" style="--delay: 45">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer2" style="--delay: 75">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer2" style="--delay: 75">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
     </>
   )}
   
   {variant === 'layer3' && (
     <>
-      <div class="cloud cloud-layer3" style="--delay: 10">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer3" style="--delay: 10">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer3" style="--delay: 50">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer3" style="--delay: 50">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
-      <div class="cloud cloud-layer3" style="--delay: 80">
-        <div class="wave"></div>
+      <div class="block-cloud cloud-layer3" style="--delay: 80">
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
+        <div class="cloud-block"></div>
       </div>
     </>
   )}
@@ -61,54 +82,77 @@ const { variant = 'layer1' } = Astro.props;
     z-index: 1;
   }
 
-  .cloud {
+  .block-cloud {
     position: absolute;
-    opacity: 0.8;
-    filter: blur(2px);
+    opacity: 0.9;
   }
 
-  /* Cloud positions */
-  .cloud:nth-child(1) {
+  .cloud-block {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Cloud formations */
+  .block-cloud:nth-child(1) {
     top: 10%;
-    left: -100px;
-    width: 200px;
-    height: 60px;
+    left: -200px;
   }
+  
+  .block-cloud:nth-child(1) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(1) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
+  .block-cloud:nth-child(1) .cloud-block:nth-child(3) { transform: translate(15px, -20px); }
+  .block-cloud:nth-child(1) .cloud-block:nth-child(4) { transform: translate(45px, -20px); }
 
-  .cloud:nth-child(2) {
+  .block-cloud:nth-child(2) {
     top: 30%;
     left: 100%;
-    width: 150px;
-    height: 45px;
   }
+  
+  .block-cloud:nth-child(2) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(2) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
+  .block-cloud:nth-child(2) .cloud-block:nth-child(3) { transform: translate(15px, -20px); }
 
-  .cloud:nth-child(3) {
+  .block-cloud:nth-child(3) {
     top: 50%;
-    left: -150px;
-    width: 180px;
-    height: 55px;
+    left: -250px;
   }
+  
+  .block-cloud:nth-child(3) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(3) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
+  .block-cloud:nth-child(3) .cloud-block:nth-child(3) { transform: translate(60px, 0); }
+  .block-cloud:nth-child(3) .cloud-block:nth-child(4) { transform: translate(15px, -20px); }
+  .block-cloud:nth-child(3) .cloud-block:nth-child(5) { transform: translate(45px, -20px); }
 
-  .cloud:nth-child(4) {
+  .block-cloud:nth-child(4) {
     top: 20%;
     left: 120%;
-    width: 160px;
-    height: 50px;
   }
+  
+  .block-cloud:nth-child(4) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(4) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
+  .block-cloud:nth-child(4) .cloud-block:nth-child(3) { transform: translate(15px, -20px); }
 
-  .cloud:nth-child(5) {
+  .block-cloud:nth-child(5) {
     top: 40%;
-    left: -120px;
-    width: 140px;
-    height: 42px;
+    left: -220px;
   }
+  
+  .block-cloud:nth-child(5) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(5) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
 
-  .cloud:nth-child(6) {
+  .block-cloud:nth-child(6) {
     top: 60%;
     left: 110%;
-    width: 170px;
-    height: 52px;
   }
+  
+  .block-cloud:nth-child(6) .cloud-block:nth-child(1) { transform: translate(0, 0); }
+  .block-cloud:nth-child(6) .cloud-block:nth-child(2) { transform: translate(30px, 0); }
+  .block-cloud:nth-child(6) .cloud-block:nth-child(3) { transform: translate(15px, -20px); }
 
   /* Layer-specific styles */
   .cloud-layer1 {
@@ -136,28 +180,30 @@ const { variant = 'layer1' } = Astro.props;
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .cloud {
-      transform: scale(0.8);
+    .cloud-block {
+      width: 30px;
+      height: 30px;
     }
     
-    .cloud:nth-child(1) { top: 15%; }
-    .cloud:nth-child(2) { top: 35%; }
-    .cloud:nth-child(3) { top: 55%; }
-    .cloud:nth-child(4) { top: 25%; }
-    .cloud:nth-child(5) { top: 45%; }
-    .cloud:nth-child(6) { top: 65%; }
+    .block-cloud:nth-child(1) { top: 15%; }
+    .block-cloud:nth-child(2) { top: 35%; }
+    .block-cloud:nth-child(3) { top: 55%; }
+    .block-cloud:nth-child(4) { top: 25%; }
+    .block-cloud:nth-child(5) { top: 45%; }
+    .block-cloud:nth-child(6) { top: 65%; }
   }
 
   @media (max-width: 480px) {
-    .cloud {
-      transform: scale(0.6);
+    .cloud-block {
+      width: 25px;
+      height: 25px;
     }
     
-    .cloud:nth-child(1) { top: 20%; }
-    .cloud:nth-child(2) { top: 40%; }
-    .cloud:nth-child(3) { top: 60%; }
-    .cloud:nth-child(4) { top: 30%; }
-    .cloud:nth-child(5) { top: 50%; }
-    .cloud:nth-child(6) { top: 70%; }
+    .block-cloud:nth-child(1) { top: 20%; }
+    .block-cloud:nth-child(2) { top: 40%; }
+    .block-cloud:nth-child(3) { top: 60%; }
+    .block-cloud:nth-child(4) { top: 30%; }
+    .block-cloud:nth-child(5) { top: 50%; }
+    .block-cloud:nth-child(6) { top: 70%; }
   }
 </style>

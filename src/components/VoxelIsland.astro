@@ -58,16 +58,38 @@ const housePositions = Array.from({ length: houseCount }, (_, i) => ({
 ---
 
 <div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
-  <!-- Top Layer: Grass -->
-  <VoxelBlock type="grass" size={40} className="island-top" />
+  <!-- Top Layer: Grass (3x3 blocks) -->
+  <VoxelBlock type="grass" size={20} className="island-top center" />
+  <VoxelBlock type="grass" size={20} className="island-top left" />
+  <VoxelBlock type="grass" size={20} className="island-top right" />
+  <VoxelBlock type="grass" size={20} className="island-top front" />
+  <VoxelBlock type="grass" size={20} className="island-top back" />
   
-  <!-- Middle Layer: Dirt -->
-  <VoxelBlock type="dirt" size={40} className="island-dirt-1" />
-  <VoxelBlock type="dirt" size={40} className="island-dirt-2" />
-  <VoxelBlock type="dirt" size={40} className="island-dirt-3" />
+  <!-- Middle Layer: Dirt (5x5 blocks, tapered) -->
+  <VoxelBlock type="dirt" size={20} className="island-dirt center" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt left" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt right" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt front" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt back" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt corner-1" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt corner-2" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt corner-3" />
+  <VoxelBlock type="dirt" size={20} className="island-dirt corner-4" />
   
-  <!-- Bottom Layer: Sand -->
-  <VoxelBlock type="sand" size={40} className="island-bottom" />
+  <!-- Bottom Layer: Sand (7x7 blocks, wider base) -->
+  <VoxelBlock type="sand" size={20} className="island-sand center" />
+  <VoxelBlock type="sand" size={20} className="island-sand left" />
+  <VoxelBlock type="sand" size={20} className="island-sand right" />
+  <VoxelBlock type="sand" size={20} className="island-sand front" />
+  <VoxelBlock type="sand" size={20} className="island-sand back" />
+  <VoxelBlock type="sand" size={20} className="island-sand corner-1" />
+  <VoxelBlock type="sand" size={20} className="island-sand corner-2" />
+  <VoxelBlock type="sand" size={20} className="island-sand corner-3" />
+  <VoxelBlock type="sand" size={20} className="island-sand corner-4" />
+  <VoxelBlock type="sand" size={20} className="island-sand edge-1" />
+  <VoxelBlock type="sand" size={20} className="island-sand edge-2" />
+  <VoxelBlock type="sand" size={20} className="island-sand edge-3" />
+  <VoxelBlock type="sand" size={20} className="island-sand edge-4" />
   
   <!-- Environmental Details -->
   {includeDetails && (
@@ -126,25 +148,32 @@ const housePositions = Array.from({ length: houseCount }, (_, i) => ({
     z-index: 4;
   }
 
-  .voxel-island .island-dirt-1 {
+  .voxel-island .island-dirt {
     transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(20px);
     z-index: 3;
   }
 
-  .voxel-island .island-dirt-2 {
+  .voxel-island .island-sand {
     transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(40px);
     z-index: 2;
   }
 
-  .voxel-island .island-dirt-3 {
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(60px);
-    z-index: 1;
-  }
-
-  .voxel-island .island-bottom {
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(80px);
-    z-index: 0;
-  }
+  /* Block positioning within layers */
+  .voxel-island .center { transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .left { transform: translate(-65%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .right { transform: translate(-35%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .front { transform: translate(-50%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .back { transform: translate(-50%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  
+  .voxel-island .corner-1 { transform: translate(-65%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .corner-2 { transform: translate(-35%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .corner-3 { transform: translate(-65%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .corner-4 { transform: translate(-35%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  
+  .voxel-island .edge-1 { transform: translate(-80%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .edge-2 { transform: translate(-20%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .edge-3 { transform: translate(-50%, -80%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  .voxel-island .edge-4 { transform: translate(-50%, -20%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
 </style>
 
 <script>
