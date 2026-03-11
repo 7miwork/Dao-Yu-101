@@ -12,11 +12,14 @@
     </p>
     
     <div class="island-container">
-      <div class="island">
-        <div class="grass"></div>
-        <div class="dirt"></div>
-        <div class="island-label">
-          Minecraft MakeCode
+      <div class="archipelago-island">
+        <div class="island-grass"></div>
+        <div class="island-dirt layer1"></div>
+        <div class="island-dirt layer2"></div>
+        <div class="island-dirt layer3"></div>
+        <div class="island-tree"></div>
+        <div class="island-name">
+          Minecraft MakeCode Island
         </div>
       </div>
     </div>
@@ -61,34 +64,67 @@
     min-height: 200px;
   }
   
-  .island {
-    width: 220px;
-    margin: 60px auto;
+  .archipelago-island {
     position: relative;
+    margin: 80px auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
   }
   
-  .grass {
-    height: 24px;
-    background: #7ED957;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  .island-grass {
+    width: 220px;
+    height: 28px;
+    background: linear-gradient(#7ED957, #5FAE3E);
+    border-radius: 6px 6px 0 0;
+    margin: auto;
   }
   
-  .dirt {
-    height: 60px;
+  .island-dirt.layer1 {
+    width: 240px;
+    height: 40px;
     background: #8B5A2B;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    margin: auto;
   }
   
-  .island-label {
-    margin-top: 10px;
-    text-align: center;
+  .island-dirt.layer2 {
+    width: 180px;
+    height: 30px;
+    background: #7A4A22;
+    margin: auto;
+  }
+  
+  .island-dirt.layer3 {
+    width: 120px;
+    height: 24px;
+    background: #6A3D1A;
+    margin: auto;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .island-tree {
+    width: 20px;
+    height: 40px;
+    background: #5A3A1A;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 70px;
+  }
+  
+  .island-tree::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    background: #3FAE3A;
+    position: absolute;
+    bottom: 30px;
+    left: -10px;
+    border-radius: 6px;
+  }
+  
+  .island-name {
+    margin-top: 16px;
     font-weight: bold;
-    font-size: 1.1rem;
-    color: #2c3e50;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    text-align: center;
   }
   
   /* Responsive styles */
@@ -101,8 +137,8 @@
       font-size: 1.1rem;
     }
     
-    .island {
-      transform: scale(0.8);
+    .archipelago-island {
+      transform: scale(0.85);
     }
   }
   
@@ -115,8 +151,8 @@
       font-size: 1rem;
     }
     
-    .island {
-      transform: scale(0.7);
+    .archipelago-island {
+      transform: scale(0.75);
     }
   }
 </style>
