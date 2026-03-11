@@ -1,4 +1,9 @@
 ---
+import VoxelIsland from './VoxelIsland.astro';
+import VoxelTree from './island-details/VoxelTree.astro';
+import VoxelRock from './island-details/VoxelRock.astro';
+import VoxelHouse from './island-details/VoxelHouse.astro';
+
 interface Props {
   className?: string;
 }
@@ -7,72 +12,43 @@ const { className = '' } = Astro.props;
 ---
 
 <div class={`main-island ${className}`}>
-  <!-- Bottom Layer: Base -->
-  <div class="bottom-layer"></div>
+  <!-- Main Voxel Island with details -->
+  <VoxelIsland 
+    id="main-island"
+    x={0}
+    y={0}
+    z={0}
+    scale={1.2}
+    showDetails={true}
+    detailLevel="foreground"
+  />
   
-  <!-- Middle Layers: Dirt -->
-  <div class="dirt-layer"></div>
-  <div class="dirt-layer"></div>
-  
-  <!-- Top Layer: Grass -->
-  <div class="grass-layer"></div>
-  
-  <!-- Tree on top -->
-  <div class="island-tree">
-    <slot></slot>
+  <!-- Additional details on top of the island -->
+  <div class="island-details">
+    <VoxelTree position="center" size="large" />
+    <VoxelRock position="left" size="medium" />
+    <VoxelHouse position="right" size="medium" />
   </div>
 </div>
 
 <style>
   .main-island {
     position: relative;
-    width: 400px;
+    width: 420px;
     margin: 0 auto;
     animation: floatIsland 6s ease-in-out infinite;
     transform-origin: center;
     z-index: 5;
   }
 
-  /* Island Layers */
-  .bottom-layer {
-    height: 40px;
-    width: 60%;
-    margin: 0 auto;
-    background: #8B5A2B;
-    border: 2px solid #654321;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-
-  .dirt-layer {
-    height: 40px;
-    width: 80%;
-    margin: 0 auto;
-    background: #8B5A2B;
-    border: 2px solid #654321;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-
-  .grass-layer {
-    height: 40px;
-    width: 100%;
-    background: #7ED957;
-    border: 2px solid #56B33A;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-
-  /* Tree positioning */
-  .island-tree {
+  .island-details {
     position: absolute;
-    top: -60px;
+    top: -80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+    display: flex;
+    gap: 20px;
   }
 
   /* Floating Animation */
@@ -83,21 +59,47 @@ const { className = '' } = Astro.props;
   }
 
   /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .main-island {
+      width: 380px;
+      transform: scale(1.1);
+    }
+  }
+
   @media (max-width: 768px) {
     .main-island {
-      width: 300px;
+      width: 320px;
+      transform: scale(1.0);
     }
     
-    .bottom-layer { width: 70%; }
-    .dirt-layer { width: 90%; }
+    .island-details {
+      top: -60px;
+      gap: 15px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .main-island {
+      width: 280px;
+      transform: scale(0.9);
+      top: 10%;
+    }
+    
+    .island-details {
+      top: -50px;
+      gap: 10px;
+    }
   }
 
   @media (max-width: 480px) {
     .main-island {
-      width: 250px;
+      width: 240px;
+      transform: scale(0.8);
     }
     
-    .bottom-layer { width: 80%; }
-    .dirt-layer { width: 100%; }
+    .island-details {
+      top: -40px;
+      gap: 8px;
+    }
   }
 </style>
