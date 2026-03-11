@@ -15,162 +15,42 @@ interface Props {
 }
 
 const { id, x, y, z, scale = 1, className = '', showDetails = true, detailLevel = 'foreground' } = Astro.props;
-
-// Generate random seed for consistent detail placement
-const seed = id.split('').reduce((a, b) => {
-  a = ((a << 5) - a) + b.charCodeAt(0);
-  return a & a;
-}, 0);
-
-function random(seed: number, min: number, max: number): number {
-  const x = Math.sin(seed) * 10000;
-  return Math.floor((x - Math.floor(x)) * (max - min + 1) + min);
-}
-
-// Determine detail count based on island level
-let maxDetails = 3;
-if (detailLevel === 'background') {
-  maxDetails = 0;
-} else if (detailLevel === 'midground') {
-  maxDetails = 2;
-}
-
-// Mobile optimization: reduce detail count by 50%
-const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-if (isMobile) {
-  maxDetails = Math.floor(maxDetails * 0.5);
-}
-
-// Generate detail positions based on island position for consistency
-const totalDetails = showDetails && maxDetails > 0 ? random(seed + x + y, 1, maxDetails) : 0;
-
-const details = Array.from({ length: totalDetails }, (_, i) => {
-  const type = random(seed + i, 0, 2);
-  const positionOptions = ['left', 'center', 'right'];
-  const sizeOptions = ['small', 'medium', 'large'];
-  
-  return {
-    type: type === 0 ? 'tree' : type === 1 ? 'rock' : 'house',
-    position: positionOptions[random(seed + i + 10, 0, 2)] as 'left' | 'center' | 'right',
-    size: sizeOptions[random(seed + i + 20, 0, 2)] as 'small' | 'medium' | 'large',
-    rotation: random(seed + i + 30, 0, 360)
-  };
-});
 ---
-
-<div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
+<div class={`voxel-island ${className}`} style={`transform: translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`}>
   <div class="grass-surface">
-    <VoxelTree position="left" size="medium"/>
-    <VoxelTree position="right" size="medium"/>
-    <VoxelHouse position="center" size="medium"/>
-    <VoxelRock position="left" size="small"/>
-    <VoxelRock position="right" size="small"/>
+    {showDetails && detailLevel !== 'background' && (
+      <>
+        <VoxelTree  position="left"   size="medium" />
+        <VoxelTree  position="right"  size="medium" />
+        <VoxelHouse position="center" size="medium" />
+        <VoxelRock  position="left"   size="small"  />
+        <VoxelRock  position="right"  size="small"  />
+      </>
+    )}
   </div>
   <div class="dirt-layer-1"></div>
   <div class="dirt-layer-2"></div>
   <div class="dirt-layer-3"></div>
 </div>
-
 <style>
   .voxel-island {
     position: relative;
-    width: 420px;
-    height: 340px;
+    width: 320px;
+    height: 260px;
     margin: 0 auto;
-    transform-style: preserve-3d;
-    will-change: transform;
+    overflow: visible;
   }
-
-  /* Grass Surface */
   .grass-surface {
     position: relative;
     width: 320px;
     height: 40px;
-    margin: 0 auto;
-    background: #7ed957;
-    border-bottom: 6px solid #5da63e;
+    background: linear-gradient(to bottom, #7ed957 60%, #5da63e 100%);
+    border-bottom: 5px solid #4a8c2e;
+    overflow: visible;
     z-index: 3;
+    margin-top: 120px;
   }
-
-  /* First Dirt Layer (wider) */
-  .dirt-layer-1 {
-    width: 420px;
-    height: 70px;
-    background: #8b5a2b;
-    margin: 0 auto;
-    z-index: 1;
-  }
-
-  /* Second Dirt Layer */
-  .dirt-layer-2 {
-    width: 300px;
-    height: 70px;
-    background: #7a4b24;
-    margin: 0 auto;
-    z-index: 1;
-  }
-
-  /* Bottom Dirt Tip */
-  .dirt-layer-3 {
-    width: 160px;
-    height: 70px;
-    background: #6e4424;
-    margin: 0 auto;
-    z-index: 1;
-  }
-
-  /* Tree Position */
-  .tree {
-    position: absolute;
-    bottom: 0;
-    height: 60px;
-    z-index: 4;
-  }
-
-  .tree-left {
-    left: 30px;
-  }
-
-  .tree-right {
-    right: 30px;
-  }
-
-  /* House Position */
-  .house {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 50px;
-    z-index: 4;
-  }
-
-  /* Rock Position */
-  .rock {
-    position: absolute;
-    bottom: 0;
-    right: 30px;
-    height: 25px;
-    z-index: 4;
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 640px) {
-    .tree {
-      height: 48px;
-    }
-    .house {
-      height: 40px;
-    }
-    .rock {
-      height: 20px;
-    }
-  }
-
-  /* Maintain Center Alignment */
-  .voxel-island {
-    position: relative;
-    width: 420px;
-    margin: 0 auto;
-  }
+  .dirt-layer-1 { width: 320px; height: 55px; background: linear-gradient(to right, #7a4f22 0%, #8b5a2b 40%, #7a4f22 100%); margin: 0 auto; z-index: 2; }
+  .dirt-layer-2 { width: 230px; height: 50px; background: linear-gradient(to right, #6b4019 0%, #7a4b24 40%, #6b4019 100%); margin: 0 auto; z-index: 2; }
+  .dirt-layer-3 { width: 130px; height: 45px; background: linear-gradient(to right, #5c3414 0%, #6e4424 50%, #5c3414 100%); margin: 0 auto; border-radius: 0 0 4px 4px; z-index: 2; }
 </style>

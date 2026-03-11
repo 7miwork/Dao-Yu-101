@@ -1,107 +1,45 @@
 ---
 interface Props {
-  position?: 'left' | 'center' | 'right'
-  size?: 'small' | 'medium' | 'large'
+  position?: 'left' | 'center' | 'right';
+  size?: 'small' | 'medium' | 'large';
 }
-
-const { position = 'center', size = 'medium' } = Astro.props
+const { position = 'center', size = 'medium' } = Astro.props;
+const sizeMap = { small: 0.7, medium: 1, large: 1.3 };
+const scale = sizeMap[size];
+const trunkW = Math.round(10 * scale);
+const trunkH = Math.round(28 * scale);
+const leafW  = Math.round(28 * scale);
+const leafH  = Math.round(22 * scale);
 ---
-
-<div class="voxel-tree" data-position={position} data-size={size}>
-  <!-- Trunk -->
-  <div class="trunk">
-    <div class="block trunk-block"></div>
-    <div class="block trunk-block"></div>
-  </div>
-  
-  <!-- Leaves -->
-  <div class="leaves">
-    <div class="block leaf-block"></div>
-    <div class="block leaf-block"></div>
-    <div class="block leaf-block"></div>
-    <div class="block leaf-block"></div>
-  </div>
+<div class={`voxel-tree pos-${position}`}>
+  <div class="trunk" style={`width:${trunkW}px; height:${trunkH}px; bottom:0; left:${Math.round((leafW - trunkW) / 2)}px;`}></div>
+  <div class="foliage" style={`width:${leafW}px; height:${leafH}px; bottom:${trunkH}px; left:0;`}></div>
 </div>
-
 <style>
-.voxel-tree {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 2;
-}
-
-/* Positioning */
-.voxel-tree[data-position="left"] {
-  left: 15%;
-  bottom: 0;
-}
-
-.voxel-tree[data-position="center"] {
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-}
-
-.voxel-tree[data-position="right"] {
-  right: 15%;
-  bottom: 0;
-}
-
-/* Size variations */
-.voxel-tree[data-size="small"] {
-  transform: scale(0.8) translateX(-50%);
-}
-
-.voxel-tree[data-size="medium"] {
-  transform: translateX(-50%);
-}
-
-.voxel-tree[data-size="large"] {
-  transform: scale(1.2) translateX(-50%);
-}
-
-/* Trunk styling */
-.trunk {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.trunk-block {
-  width: 12px;
-  height: 12px;
-  background: #8b5a2b;
-  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Leaves styling */
-.leaves {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-  margin-top: -4px;
-}
-
-.leaf-block {
-  width: 12px;
-  height: 12px;
-  background: #2f9e44;
-  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Mobile optimization */
-@media (max-width: 768px) {
-  .voxel-tree {
-    transform: scale(0.7) translateX(-50%);
+  .voxel-tree { position: absolute; bottom: 0; z-index: 4; }
+  .pos-left   { left: 18%; }
+  .pos-center { left: 50%; transform: translateX(-50%); }
+  .pos-right  { right: 18%; }
+  .trunk {
+    position: absolute;
+    background: linear-gradient(to right, #6B3A1F 0%, #8B4513 40%, #5D3A1A 100%);
+    border: 1.5px solid #3E2208;
+    border-radius: 2px;
+    box-shadow: inset -2px 0 4px rgba(0,0,0,0.3);
   }
-  
-  .trunk-block, .leaf-block {
-    width: 10px;
-    height: 10px;
+  .foliage {
+    position: absolute;
+    background: linear-gradient(135deg, #56C34A 0%, #3A9E2F 50%, #2D7D24 100%);
+    border: 1.5px solid #1E5C17;
+    border-radius: 3px 3px 2px 2px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.35), inset 2px 2px 6px rgba(255,255,255,0.15);
   }
-}
+  .foliage::before {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 35%; height: 35%;
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+  }
 </style>
