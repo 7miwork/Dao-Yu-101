@@ -55,48 +55,57 @@ import GameButton from './GameButton.astro';
     }
 
     if (islandsContainer) {
+      // Use requestAnimationFrame for smooth animations
+      let animationId: number;
+      let mouseX = 0;
+      let mouseY = 0;
+      let isAnimating = false;
+
       islandsContainer.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-        // Calculate mouse position as percentage (0 to 1)
-        const x = clientX / innerWidth;
-        const y = clientY / innerHeight;
-        
-        // Apply parallax effect to different island layers
-        const backgroundIslands = islandsContainer.querySelector('[data-variant="background"]') as HTMLElement;
-        const midgroundIslands = islandsContainer.querySelector('[data-variant="midground"]') as HTMLElement;
-        const foregroundIslands = islandsContainer.querySelector('[data-variant="foreground"]') as HTMLElement;
-        
-        if (backgroundIslands) {
-          // Background islands move less (max 5px)
-          const bgX = (x - 0.5) * 5;
-          const bgY = (y - 0.5) * 5;
-          backgroundIslands.style.transform = `translate(${bgX}px, ${bgY}px)`;
-        }
-        
-        if (midgroundIslands) {
-          // Midground islands move medium (max 7px)
-          const midX = (x - 0.5) * 7;
-          const midY = (y - 0.5) * 7;
-          midgroundIslands.style.transform = `translate(${midX}px, ${midY}px)`;
-        }
-        
-        if (foregroundIslands) {
-          // Foreground islands move more (max 10px)
-          const fgX = (x - 0.5) * 10;
-          const fgY = (y - 0.5) * 10;
-          foregroundIslands.style.transform = `translate(${fgX}px, ${fgY}px)`;
+        if (!isAnimating) {
+          isAnimating = true;
+          animationId = requestAnimationFrame(updateParallax);
         }
       });
 
-      // Reset transform when mouse leaves
       islandsContainer.addEventListener('mouseleave', () => {
-        const islands = islandsContainer.querySelectorAll('[data-variant]') as NodeListOf<HTMLElement>;
-        islands.forEach(island => {
-          island.style.transform = 'translate(0, 0)';
+        cancelAnimationFrame(animationId);
+        isAnimating = false;
+        
+        // Reset transform when mouse leaves
+        const parallaxElements = islandsContainer.querySelectorAll('.parallax') as NodeListOf<HTMLElement>;
+        parallaxElements.forEach(element => {
+          element.style.transform = 'translate(0, 0)';
         });
       });
+
+      function updateParallax() {
+        if (!isAnimating) return;
+        
+        const { innerWidth, innerHeight } = window;
+        
+        // Calculate mouse position relative to center (-0.5 to 0.5)
+        const x = (mouseX / innerWidth - 0.5);
+        const y = (mouseY / innerHeight - 0.5);
+        
+        // Apply parallax effect to all parallax elements
+        const parallaxElements = islandsContainer.querySelectorAll('.parallax') as NodeListOf<HTMLElement>;
+        
+        parallaxElements.forEach(element => {
+          const depth = parseFloat(element.getAttribute('data-depth') || '0.5');
+          
+          // Calculate movement with depth factor (max 10px)
+          const moveX = Math.max(-10, Math.min(10, x * 20 * depth));
+          const moveY = Math.max(-10, Math.min(10, y * 20 * depth));
+          
+          element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+        
+        animationId = requestAnimationFrame(updateParallax);
+      }
     }
   });
 </script>

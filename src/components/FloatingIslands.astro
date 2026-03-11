@@ -8,27 +8,27 @@ interface Props {
 const { variant = 'foreground' } = Astro.props;
 ---
 
-<div class={`island-layer island-${variant}`} data-variant={variant}>
+<div class={`island-layer island-${variant} parallax-layer`} data-variant={variant} data-depth={variant === 'foreground' ? '1.0' : variant === 'midground' ? '0.5' : '0.2'}>
   {variant === 'foreground' && (
     <>
-      <VoxelIsland id="island-1" x={-100} y={200} z={100} scale={1.2} className="foreground-island" />
-      <VoxelIsland id="island-2" x={200} y={250} z={80} scale={1.0} className="foreground-island" />
+      <VoxelIsland id="island-1" x={-100} y={200} z={100} scale={1.2} className="foreground-island parallax" data-depth="1.0" />
+      <VoxelIsland id="island-2" x={200} y={250} z={80} scale={1.0} className="foreground-island parallax" data-depth="1.0" />
     </>
   )}
   
   {variant === 'midground' && (
     <>
-      <VoxelIsland id="island-3" x={-150} y={150} z={50} scale={0.9} className="midground-island" />
-      <VoxelIsland id="island-4" x={100} y={180} z={40} scale={0.8} className="midground-island" />
-      <VoxelIsland id="island-5" x={250} y={220} z={30} scale={0.7} className="midground-island" />
+      <VoxelIsland id="island-3" x={-150} y={150} z={50} scale={0.9} className="midground-island parallax" data-depth="0.5" />
+      <VoxelIsland id="island-4" x={100} y={180} z={40} scale={0.8} className="midground-island parallax" data-depth="0.5" />
+      <VoxelIsland id="island-5" x={250} y={220} z={30} scale={0.7} className="midground-island parallax" data-depth="0.5" />
     </>
   )}
   
   {variant === 'background' && (
     <>
-      <VoxelIsland id="island-6" x={-200} y={80} z={0} scale={0.6} className="background-island" />
-      <VoxelIsland id="island-7" x={50} y={120} z={-20} scale={0.5} className="background-island" />
-      <VoxelIsland id="island-8" x={300} y={100} z={-40} scale={0.4} className="background-island" />
+      <VoxelIsland id="island-6" x={-200} y={80} z={0} scale={0.6} className="background-island parallax" data-depth="0.2" />
+      <VoxelIsland id="island-7" x={50} y={120} z={-20} scale={0.5} className="background-island parallax" data-depth="0.2" />
+      <VoxelIsland id="island-8" x={300} y={100} z={-40} scale={0.4} className="background-island parallax" data-depth="0.2" />
     </>
   )}
 </div>
