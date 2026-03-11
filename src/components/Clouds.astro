@@ -1,0 +1,136 @@
+---
+interface Props {
+  variant?: 'slow' | 'medium';
+}
+
+const { variant = 'slow' } = Astro.props;
+---
+
+<div class={`clouds-layer cloud-${variant}`}>
+  {variant === 'slow' && (
+    <>
+      <div class="cloud cloud-slow" style="--delay: 0">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-slow" style="--delay: 4">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-slow" style="--delay: 8">
+        <div class="wave"></div>
+      </div>
+    </>
+  )}
+  
+  {variant === 'medium' && (
+    <>
+      <div class="cloud cloud-medium" style="--delay: 2">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-medium" style="--delay: 6">
+        <div class="wave"></div>
+      </div>
+      <div class="cloud cloud-medium" style="--delay: 10">
+        <div class="wave"></div>
+      </div>
+    </>
+  )}
+</div>
+
+<style>
+  .clouds-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cloud {
+    position: absolute;
+    opacity: 0.8;
+    filter: blur(2px);
+  }
+
+  /* Cloud positions */
+  .cloud:nth-child(1) {
+    top: 10%;
+    left: -100px;
+    width: 200px;
+    height: 60px;
+  }
+
+  .cloud:nth-child(2) {
+    top: 30%;
+    left: 100%;
+    width: 150px;
+    height: 45px;
+  }
+
+  .cloud:nth-child(3) {
+    top: 50%;
+    left: -150px;
+    width: 180px;
+    height: 55px;
+  }
+
+  .cloud:nth-child(4) {
+    top: 20%;
+    left: 120%;
+    width: 160px;
+    height: 50px;
+  }
+
+  .cloud:nth-child(5) {
+    top: 40%;
+    left: -120px;
+    width: 140px;
+    height: 42px;
+  }
+
+  .cloud:nth-child(6) {
+    top: 60%;
+    left: 110%;
+    width: 170px;
+    height: 52px;
+  }
+
+  /* Layer-specific styles */
+  .cloud-slow {
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .cloud-medium {
+    z-index: 2;
+    opacity: 0.8;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .cloud {
+      transform: scale(0.8);
+    }
+    
+    .cloud:nth-child(1) { top: 15%; }
+    .cloud:nth-child(2) { top: 35%; }
+    .cloud:nth-child(3) { top: 55%; }
+    .cloud:nth-child(4) { top: 25%; }
+    .cloud:nth-child(5) { top: 45%; }
+    .cloud:nth-child(6) { top: 65%; }
+  }
+
+  @media (max-width: 480px) {
+    .cloud {
+      transform: scale(0.6);
+    }
+    
+    .cloud:nth-child(1) { top: 20%; }
+    .cloud:nth-child(2) { top: 40%; }
+    .cloud:nth-child(3) { top: 60%; }
+    .cloud:nth-child(4) { top: 30%; }
+    .cloud:nth-child(5) { top: 50%; }
+    .cloud:nth-child(6) { top: 70%; }
+  }
+</style>

@@ -1,0 +1,281 @@
+/* Voxel Hero System Styles */
+
+/* CSS Variables for Color Palette */
+:root {
+  --sky-top: #87CEEB;
+  --sky-bottom: #E6F6FF;
+  --ocean: #4FB3FF;
+  --grass: #7ED957;
+  --sand: #F4D19B;
+  --shadow: #2E2E2E;
+  --button-bg: #7ED957;
+  --button-hover: #66c246;
+  --text-color: #2E2E2E;
+}
+
+/* Hero Container Styles */
+.hero-container {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 1;
+}
+
+/* Title and Subtitle Styles */
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  z-index: 10;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-color);
+  margin: 0 0 3rem 0;
+  z-index: 10;
+  text-align: center;
+}
+
+/* Button Container */
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 10;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Floating Islands Container */
+.islands-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Clouds Container */
+.clouds-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Voxel Island Base Styles */
+.island {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Island Layers */
+.island-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Grass Layer */
+.grass-layer {
+  background-color: var(--grass);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 0 var(--shadow);
+}
+
+/* Dirt Layer */
+.dirt-layer {
+  background-color: #8B4513;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+}
+
+/* Sand Edge */
+.sand-edge {
+  position: absolute;
+  bottom: -4px;
+  width: 100%;
+  height: 8px;
+  background-color: var(--sand);
+  border-radius: 0 0 8px 8px;
+}
+
+/* Cloud Styles */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  filter: blur(1px);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 60%;
+  height: 100%;
+  top: -30%;
+  left: 20%;
+}
+
+.cloud::after {
+  width: 40%;
+  height: 80%;
+  top: -20%;
+  right: 10%;
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Cloud Movement Keyframes */
+@keyframes cloudMove {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+
+/* Parallax Speed Classes */
+.foreground-island {
+  animation: float 20s ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 1s);
+}
+
+.midground-island {
+  animation: float 25s ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 1.5s);
+}
+
+.background-island {
+  animation: float 30s ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 2s);
+}
+
+/* Cloud Animation */
+.cloud-slow {
+  animation: cloudMove 90s linear infinite;
+  animation-delay: calc(var(--delay) * 3s);
+}
+
+.cloud-medium {
+  animation: cloudMove 70s linear infinite;
+  animation-delay: calc(var(--delay) * 2s);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-buttons button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-container {
+    padding: 1rem;
+  }
+}
+
+/* Performance Optimizations */
+.island, .cloud {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Ocean Wave Effect */
+.ocean-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(to top, var(--ocean), transparent);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.3) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255,255,255,0.3) 50%, 
+    rgba(255,255,255,0.3) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  background-size: 40px 40px;
+  animation: wave 10s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}

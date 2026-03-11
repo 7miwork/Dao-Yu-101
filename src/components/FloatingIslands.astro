@@ -1,217 +1,169 @@
 ---
+interface Props {
+  variant?: 'foreground' | 'midground' | 'background';
+}
+
+const { variant = 'foreground' } = Astro.props;
 ---
 
-<div class="floating-islands-container">
-  <div class="island-layer layer-1">
-    <div class="island island-a"></div>
-    <div class="island island-b"></div>
-  </div>
+<div class={`island-layer island-${variant}`}>
+  {variant === 'foreground' && (
+    <>
+      <div class="island island-1 foreground-island" style="--delay: 0">
+        <div class="grass-layer" style="width: 120px; height: 80px;"></div>
+        <div class="dirt-layer" style="width: 120px; height: 40px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+      <div class="island island-2 foreground-island" style="--delay: 2">
+        <div class="grass-layer" style="width: 100px; height: 60px;"></div>
+        <div class="dirt-layer" style="width: 100px; height: 30px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+    </>
+  )}
   
-  <div class="island-layer layer-2">
-    <div class="island island-c"></div>
-    <div class="island island-d"></div>
-  </div>
+  {variant === 'midground' && (
+    <>
+      <div class="island island-3 midground-island" style="--delay: 1">
+        <div class="grass-layer" style="width: 140px; height: 100px;"></div>
+        <div class="dirt-layer" style="width: 140px; height: 50px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+      <div class="island island-4 midground-island" style="--delay: 3">
+        <div class="grass-layer" style="width: 110px; height: 70px;"></div>
+        <div class="dirt-layer" style="width: 110px; height: 35px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+      <div class="island island-5 midground-island" style="--delay: 5">
+        <div class="grass-layer" style="width: 90px; height: 50px;"></div>
+        <div class="dirt-layer" style="width: 90px; height: 25px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+    </>
+  )}
   
-  <div class="island-layer layer-3">
-    <div class="island island-e"></div>
-    <div class="island island-f"></div>
-  </div>
-  
-  <div class="island-layer layer-4">
-    <div class="island island-g"></div>
-  </div>
+  {variant === 'background' && (
+    <>
+      <div class="island island-6 background-island" style="--delay: 2">
+        <div class="grass-layer" style="width: 160px; height: 120px;"></div>
+        <div class="dirt-layer" style="width: 160px; height: 60px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+      <div class="island island-7 background-island" style="--delay: 4">
+        <div class="grass-layer" style="width: 130px; height: 90px;"></div>
+        <div class="dirt-layer" style="width: 130px; height: 45px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+      <div class="island island-8 background-island" style="--delay: 6">
+        <div class="grass-layer" style="width: 100px; height: 70px;"></div>
+        <div class="dirt-layer" style="width: 100px; height: 35px;"></div>
+        <div class="sand-edge"></div>
+      </div>
+    </>
+  )}
 </div>
 
 <style>
-  .floating-islands-container {
+  .island-layer {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .island-layer {
-    position: absolute;
     width: 100%;
     height: 100%;
+    pointer-events: none;
   }
 
   .island {
     position: absolute;
-    background: linear-gradient(135deg, #2E7D32, #4CAF50);
-    border-radius: 50% 50% 0 0;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    animation: float 8s ease-in-out infinite;
-    transform-origin: center bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  /* Layer 1 - Closest, fastest movement */
-  .layer-1 {
+  /* Foreground Islands */
+  .island-1 {
+    top: 60%;
+    left: 10%;
+  }
+
+  .island-2 {
+    top: 70%;
+    right: 15%;
+  }
+
+  /* Midground Islands */
+  .island-3 {
+    top: 40%;
+    left: 20%;
+  }
+
+  .island-4 {
+    top: 50%;
+    left: 60%;
+  }
+
+  .island-5 {
+    top: 60%;
+    right: 30%;
+  }
+
+  /* Background Islands */
+  .island-6 {
+    top: 20%;
+    left: 10%;
+  }
+
+  .island-7 {
+    top: 30%;
+    left: 50%;
+  }
+
+  .island-8 {
+    top: 25%;
+    right: 20%;
+  }
+
+  /* Layer-specific styles */
+  .island-foreground {
     z-index: 4;
   }
 
-  .island-a {
-    width: 250px;
-    height: 150px;
-    top: 15%;
-    left: 5%;
-    animation-delay: 0s;
-    animation-duration: 6s;
-    background: linear-gradient(135deg, #1b5e20, #2e7d32);
-  }
-
-  .island-b {
-    width: 200px;
-    height: 120px;
-    top: 25%;
-    right: 10%;
-    animation-delay: 2s;
-    animation-duration: 7s;
-    background: linear-gradient(135deg, #2e7d32, #4caf50);
-  }
-
-  /* Layer 2 - Medium distance, medium speed */
-  .layer-2 {
+  .island-midground {
     z-index: 3;
-    opacity: 0.9;
   }
 
-  .island-c {
-    width: 180px;
-    height: 110px;
-    top: 45%;
-    left: 15%;
-    animation-delay: 1s;
-    animation-duration: 9s;
-    background: linear-gradient(135deg, #388e3c, #66bb6a);
-  }
-
-  .island-d {
-    width: 220px;
-    height: 130px;
-    top: 55%;
-    right: 20%;
-    animation-delay: 3s;
-    animation-duration: 8s;
-    background: linear-gradient(135deg, #4caf50, #81c784);
-  }
-
-  /* Layer 3 - Farther, slower movement */
-  .layer-3 {
+  .island-background {
     z-index: 2;
-    opacity: 0.8;
-  }
-
-  .island-e {
-    width: 160px;
-    height: 100px;
-    bottom: 20%;
-    left: 10%;
-    animation-delay: 4s;
-    animation-duration: 10s;
-    background: linear-gradient(135deg, #66bb6a, #a5d6a7);
-  }
-
-  .island-f {
-    width: 190px;
-    height: 115px;
-    bottom: 30%;
-    right: 15%;
-    animation-delay: 5s;
-    animation-duration: 11s;
-    background: linear-gradient(135deg, #81c784, #c8e6c9);
-  }
-
-  /* Layer 4 - Background, slowest movement */
-  .layer-4 {
-    z-index: 1;
-    opacity: 0.6;
-  }
-
-  .island-g {
-    width: 300px;
-    height: 180px;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-delay: 6s;
-    animation-duration: 12s;
-    background: linear-gradient(135deg, #a5d6a7, #e8f5e9);
-  }
-
-  @keyframes float {
-    0%, 100% { 
-      transform: translateY(0px) rotate(0deg);
-    }
-    50% { 
-      transform: translateY(-30px) rotate(1deg);
-    }
-  }
-
-  /* Add subtle floating animation variations */
-  .island-a { animation-name: floatSlow; }
-  .island-b { animation-name: floatMedium; }
-  .island-c { animation-name: floatSlow; }
-  .island-d { animation-name: floatFast; }
-  .island-e { animation-name: floatMedium; }
-  .island-f { animation-name: floatSlow; }
-  .island-g { animation-name: floatVerySlow; }
-
-  @keyframes floatFast {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(0.5deg); }
-  }
-
-  @keyframes floatMedium {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-25px) rotate(0.8deg); }
-  }
-
-  @keyframes floatSlow {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-35px) rotate(1.2deg); }
-  }
-
-  @keyframes floatVerySlow {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-40px) rotate(1.5deg); }
-  }
-
-  /* Add some voxel-style details */
-  .island::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 10px;
-    width: 60%;
-    height: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    filter: blur(2px);
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .island {
-      transform: scale(0.8);
+      transform: scale(0.7);
     }
     
-    .island-g {
-      transform: translateX(-50%) scale(0.9);
-    }
+    .island-1 { top: 65%; left: 5%; }
+    .island-2 { top: 75%; right: 10%; }
+    .island-3 { top: 45%; left: 15%; }
+    .island-4 { top: 55%; left: 55%; }
+    .island-5 { top: 65%; right: 25%; }
+    .island-6 { top: 25%; left: 5%; }
+    .island-7 { top: 35%; left: 45%; }
+    .island-8 { top: 30%; right: 15%; }
   }
 
   @media (max-width: 480px) {
     .island {
-      transform: scale(0.6);
+      transform: scale(0.5);
     }
     
-    .island-g {
-      transform: translateX(-50%) scale(0.7);
-    }
+    .island-1 { top: 70%; left: 0%; }
+    .island-2 { top: 80%; right: 5%; }
+    .island-3 { top: 50%; left: 10%; }
+    .island-4 { top: 60%; left: 50%; }
+    .island-5 { top: 70%; right: 20%; }
+    .island-6 { top: 30%; left: 0%; }
+    .island-7 { top: 40%; left: 40%; }
+    .island-8 { top: 35%; right: 10%; }
   }
 </style>

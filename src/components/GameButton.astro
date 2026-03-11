@@ -1,0 +1,76 @@
+---
+interface Props {
+  label: string;
+  variant?: 'primary' | 'secondary';
+}
+
+const { label, variant = 'primary' } = Astro.props;
+---
+
+<button class={`game-button ${variant}`} data-label={label}>
+  {label}
+</button>
+
+<style>
+  .game-button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 0 var(--shadow), 0 10px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #5a9e3f;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .game-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 0 var(--shadow), 0 12px 20px rgba(0, 0, 0, 0.3);
+    background-color: var(--button-hover);
+  }
+
+  .game-button:active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 2px 0 var(--shadow), 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .game-button.secondary {
+    background-color: #4FB3FF;
+    border-color: #3a8cc7;
+    --button-hover: #3a8cc7;
+  }
+
+  .game-button.secondary:hover {
+    background-color: #3a8cc7;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .game-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      min-width: 120px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .game-button {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      min-width: 100px;
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+</style>
