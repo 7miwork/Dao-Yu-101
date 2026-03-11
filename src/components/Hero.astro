@@ -1,5 +1,6 @@
 ---
-import FloatingIslands from './FloatingIslands.astro';
+import MainIsland from './MainIsland.astro';
+import VoxelTree from './VoxelTree.astro';
 import Clouds from './Clouds.astro';
 import Ocean from './Ocean.astro';
 import GameButton from './GameButton.astro';
@@ -16,11 +17,11 @@ import GameButton from './GameButton.astro';
     <Clouds variant="layer3" />
   </div>
 
-  <!-- Floating Islands Layer -->
-  <div class="islands-container" id="islands-container">
-    <FloatingIslands variant="background" />
-    <FloatingIslands variant="midground" />
-    <FloatingIslands variant="foreground" />
+  <!-- Main Island -->
+  <div class="main-island-container">
+    <MainIsland>
+      <VoxelTree size={1.2} />
+    </MainIsland>
   </div>
 
   <!-- Ocean Layer -->
@@ -42,70 +43,27 @@ import GameButton from './GameButton.astro';
 <style>
   /* Import hero styles */
   @import '../styles/hero.css';
+
+  /* Main Island Container */
+  .main-island-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    pointer-events: none;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-island-container {
+      top: 45%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main-island-container {
+      top: 40%;
+    }
+  }
 </style>
-
-<script>
-  // Mouse parallax effect for floating islands
-  document.addEventListener('DOMContentLoaded', () => {
-    const islandsContainer = document.getElementById('islands-container');
-    
-    // Check if mobile device
-    if (window.innerWidth < 768) {
-      return; // Disable parallax on mobile
-    }
-
-    if (islandsContainer) {
-      // Use requestAnimationFrame for smooth animations
-      let animationId: number;
-      let mouseX = 0;
-      let mouseY = 0;
-      let isAnimating = false;
-
-      islandsContainer.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        if (!isAnimating) {
-          isAnimating = true;
-          animationId = requestAnimationFrame(updateParallax);
-        }
-      });
-
-      islandsContainer.addEventListener('mouseleave', () => {
-        cancelAnimationFrame(animationId);
-        isAnimating = false;
-        
-        // Reset transform when mouse leaves
-        const parallaxElements = islandsContainer.querySelectorAll('.parallax') as NodeListOf<HTMLElement>;
-        parallaxElements.forEach(element => {
-          element.style.transform = 'translate(0, 0)';
-        });
-      });
-
-      function updateParallax() {
-        if (!isAnimating) return;
-        
-        const { innerWidth, innerHeight } = window;
-        
-        // Calculate mouse position relative to center (-0.5 to 0.5)
-        const x = (mouseX / innerWidth - 0.5);
-        const y = (mouseY / innerHeight - 0.5);
-        
-        // Apply parallax effect to all parallax elements
-        const parallaxElements = islandsContainer.querySelectorAll('.parallax') as NodeListOf<HTMLElement>;
-        
-        parallaxElements.forEach(element => {
-          const depth = parseFloat(element.getAttribute('data-depth') || '0.5');
-          
-          // Calculate movement with depth factor (max 10px)
-          const moveX = Math.max(-10, Math.min(10, x * 20 * depth));
-          const moveY = Math.max(-10, Math.min(10, y * 20 * depth));
-          
-          element.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-        
-        animationId = requestAnimationFrame(updateParallax);
-      }
-    }
-  });
-</script>

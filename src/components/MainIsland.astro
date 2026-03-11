@@ -1,0 +1,103 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<div class={`main-island ${className}`}>
+  <!-- Bottom Layer: Base -->
+  <div class="bottom-layer"></div>
+  
+  <!-- Middle Layers: Dirt -->
+  <div class="dirt-layer"></div>
+  <div class="dirt-layer"></div>
+  
+  <!-- Top Layer: Grass -->
+  <div class="grass-layer"></div>
+  
+  <!-- Tree on top -->
+  <div class="island-tree">
+    <slot></slot>
+  </div>
+</div>
+
+<style>
+  .main-island {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+    animation: floatIsland 6s ease-in-out infinite;
+    transform-origin: center;
+    z-index: 5;
+  }
+
+  /* Island Layers */
+  .bottom-layer {
+    height: 40px;
+    width: 60%;
+    margin: 0 auto;
+    background: #8B5A2B;
+    border: 2px solid #654321;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .dirt-layer {
+    height: 40px;
+    width: 80%;
+    margin: 0 auto;
+    background: #8B5A2B;
+    border: 2px solid #654321;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .grass-layer {
+    height: 40px;
+    width: 100%;
+    background: #7ED957;
+    border: 2px solid #56B33A;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  /* Tree positioning */
+  .island-tree {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  /* Floating Animation */
+  @keyframes floatIsland {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-island {
+      width: 300px;
+    }
+    
+    .bottom-layer { width: 70%; }
+    .dirt-layer { width: 90%; }
+  }
+
+  @media (max-width: 480px) {
+    .main-island {
+      width: 250px;
+    }
+    
+    .bottom-layer { width: 80%; }
+    .dirt-layer { width: 100%; }
+  }
+</style>
