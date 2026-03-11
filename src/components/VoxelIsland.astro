@@ -117,7 +117,7 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
   /* Tree Position */
   .tree {
     position: absolute;
-    bottom: 120px;
+    bottom: 140px;
   }
 
   .tree-left {
@@ -131,9 +131,25 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
   /* House Position */
   .house {
     position: absolute;
-    bottom: 120px;
-    left: 50%;
+    bottom: 140px;
+    left: 55%;
     transform: translateX(-50%);
+  }
+
+  /* Rock Position */
+  .rock {
+    position: absolute;
+    bottom: 140px;
+    left: 30%;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .tree,
+    .house,
+    .rock {
+      transform: scale(0.8);
+    }
   }
 
   /* Maintain Center Alignment */
