@@ -1,0 +1,167 @@
+---
+// ArchipelagoMap component
+// Visual representation of the learning structure
+---
+
+<div class="archipelago-map-section">
+  <div class="container">
+    <h2 class="section-title">Explore an Archipelago of Knowledge</h2>
+    <p class="section-description">
+      Each subject in Dao-Yu-101 is organized as an archipelago of islands.
+      Every island represents a learning topic, and inside each island students complete lessons and activities.
+    </p>
+    
+    <div class="archipelago-grid">
+      <!-- Math Archipelago -->
+      <div class="subject-group">
+        <h3 class="subject-title">Math Archipelago</h3>
+        <div class="island-row">
+          <div class="island-node">Fractions</div>
+          <div class="island-node">Geometry</div>
+          <div class="island-node">Algebra</div>
+          <div class="island-node">Statistics</div>
+        </div>
+      </div>
+      
+      <!-- Science Archipelago -->
+      <div class="subject-group">
+        <h3 class="subject-title">Science Archipelago</h3>
+        <div class="island-row">
+          <div class="island-node">Biology</div>
+          <div class="island-node">Chemistry</div>
+          <div class="island-node">Physics</div>
+          <div class="island-node">Ecology</div>
+        </div>
+      </div>
+      
+      <!-- Language Archipelago -->
+      <div class="subject-group">
+        <h3 class="subject-title">Language Archipelago</h3>
+        <div class="island-row">
+          <div class="island-node">Grammar</div>
+          <div class="island-node">Vocabulary</div>
+          <div class="island-node">Reading</div>
+          <div class="island-node">Writing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .archipelago-map-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #2c3e50;
+    letter-spacing: -0.02em;
+  }
+  
+  .section-description {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 60px;
+    line-height: 1.6;
+  }
+  
+  .archipelago-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .subject-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .subject-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #34495e;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .island-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+  }
+  
+  .island-node {
+    width: 140px;
+    height: 140px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7ED957, #5FAE3E);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    line-height: 1.2;
+  }
+  
+  .island-node:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .section-description {
+      font-size: 1.1rem;
+    }
+    
+    .island-node {
+      width: 120px;
+      height: 120px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+    
+    .section-description {
+      font-size: 1rem;
+    }
+    
+    .island-node {
+      width: 100px;
+      height: 100px;
+      font-size: 0.8rem;
+    }
+  }
+</style>
