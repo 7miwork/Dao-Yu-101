@@ -1,0 +1,123 @@
+---
+interface Props {
+  position?: 'left' | 'center' | 'right'
+  size?: 'small' | 'medium' | 'large'
+}
+
+const { position = 'center', size = 'medium' } = Astro.props
+---
+
+<div class="voxel-house" data-position={position} data-size={size}>
+  <!-- Base -->
+  <div class="house-base">
+    <div class="block wall-block"></div>
+    <div class="block wall-block"></div>
+    <div class="block wall-block"></div>
+  </div>
+  
+  <!-- Roof -->
+  <div class="house-roof">
+    <div class="block roof-block"></div>
+    <div class="block roof-block"></div>
+  </div>
+  
+  <!-- Window -->
+  <div class="window"></div>
+</div>
+
+<style>
+.voxel-house {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Positioning */
+.voxel-house[data-position="left"] {
+  left: 20%;
+  bottom: 25%;
+}
+
+.voxel-house[data-position="center"] {
+  left: 50%;
+  bottom: 20%;
+  transform: translateX(-50%);
+}
+
+.voxel-house[data-position="right"] {
+  right: 20%;
+  bottom: 25%;
+}
+
+/* Size variations */
+.voxel-house[data-size="small"] {
+  transform: scale(0.8) translateX(-50%);
+}
+
+.voxel-house[data-size="medium"] {
+  transform: translateX(-50%);
+}
+
+.voxel-house[data-size="large"] {
+  transform: scale(1.2) translateX(-50%);
+}
+
+/* Base styling */
+.house-base {
+  display: flex;
+  gap: 2px;
+}
+
+.wall-block {
+  width: 12px;
+  height: 12px;
+  background: #c79a63;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Roof styling */
+.house-roof {
+  display: flex;
+  gap: 2px;
+  margin-top: -2px;
+}
+
+.roof-block {
+  width: 12px;
+  height: 12px;
+  background: #8b3f2f;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Window styling */
+.window {
+  width: 6px;
+  height: 6px;
+  background: #333;
+  margin-top: -10px;
+  margin-left: 6px;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .voxel-house {
+    transform: scale(0.7) translateX(-50%);
+  }
+  
+  .wall-block, .roof-block {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .window {
+    width: 5px;
+    height: 5px;
+    margin-left: 5px;
+  }
+}
+</style>

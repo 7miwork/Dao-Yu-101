@@ -1,0 +1,107 @@
+---
+interface Props {
+  position?: 'left' | 'center' | 'right'
+  size?: 'small' | 'medium' | 'large'
+}
+
+const { position = 'center', size = 'medium' } = Astro.props
+---
+
+<div class="voxel-tree" data-position={position} data-size={size}>
+  <!-- Trunk -->
+  <div class="trunk">
+    <div class="block trunk-block"></div>
+    <div class="block trunk-block"></div>
+  </div>
+  
+  <!-- Leaves -->
+  <div class="leaves">
+    <div class="block leaf-block"></div>
+    <div class="block leaf-block"></div>
+    <div class="block leaf-block"></div>
+    <div class="block leaf-block"></div>
+  </div>
+</div>
+
+<style>
+.voxel-tree {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Positioning */
+.voxel-tree[data-position="left"] {
+  left: 15%;
+  bottom: 20%;
+}
+
+.voxel-tree[data-position="center"] {
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-50%);
+}
+
+.voxel-tree[data-position="right"] {
+  right: 15%;
+  bottom: 20%;
+}
+
+/* Size variations */
+.voxel-tree[data-size="small"] {
+  transform: scale(0.8) translateX(-50%);
+}
+
+.voxel-tree[data-size="medium"] {
+  transform: translateX(-50%);
+}
+
+.voxel-tree[data-size="large"] {
+  transform: scale(1.2) translateX(-50%);
+}
+
+/* Trunk styling */
+.trunk {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trunk-block {
+  width: 12px;
+  height: 12px;
+  background: #8b5a2b;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Leaves styling */
+.leaves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: -4px;
+}
+
+.leaf-block {
+  width: 12px;
+  height: 12px;
+  background: #2f9e44;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .voxel-tree {
+    transform: scale(0.7) translateX(-50%);
+  }
+  
+  .trunk-block, .leaf-block {
+    width: 10px;
+    height: 10px;
+  }
+}
+</style>

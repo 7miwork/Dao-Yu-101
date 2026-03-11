@@ -1,0 +1,105 @@
+---
+interface Props {
+  position?: 'left' | 'center' | 'right'
+  size?: 'small' | 'medium' | 'large'
+}
+
+const { position = 'center', size = 'medium' } = Astro.props
+---
+
+<div class="voxel-rock" data-position={position} data-size={size}>
+  <div class="rock-block rock-primary"></div>
+  <div class="rock-block rock-secondary"></div>
+  <div class="rock-block rock-dark"></div>
+</div>
+
+<style>
+.voxel-rock {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+/* Positioning */
+.voxel-rock[data-position="left"] {
+  left: 25%;
+  bottom: 15%;
+}
+
+.voxel-rock[data-position="center"] {
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+}
+
+.voxel-rock[data-position="right"] {
+  right: 25%;
+  bottom: 15%;
+}
+
+/* Size variations */
+.voxel-rock[data-size="small"] {
+  transform: scale(0.8) translateX(-50%);
+}
+
+.voxel-rock[data-size="medium"] {
+  transform: translateX(-50%);
+}
+
+.voxel-rock[data-size="large"] {
+  transform: scale(1.2) translateX(-50%);
+}
+
+/* Rock blocks styling */
+.rock-block {
+  width: 14px;
+  height: 14px;
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.rock-primary {
+  background: #777777;
+  margin-left: 2px;
+}
+
+.rock-secondary {
+  background: #6b6b6b;
+  margin-left: -4px;
+  margin-top: -6px;
+}
+
+.rock-dark {
+  background: #5c5c5c;
+  margin-left: 4px;
+  margin-top: -8px;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .voxel-rock {
+    transform: scale(0.7) translateX(-50%);
+  }
+  
+  .rock-block {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .rock-primary {
+    margin-left: 1px;
+  }
+  
+  .rock-secondary {
+    margin-left: -3px;
+    margin-top: -5px;
+  }
+  
+  .rock-dark {
+    margin-left: 3px;
+    margin-top: -6px;
+  }
+}
+</style>
