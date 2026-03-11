@@ -6,26 +6,20 @@ import Ocean from './Ocean.astro';
 import GameButton from './GameButton.astro';
 ---
 
-<section class="hero-container">
-  <!-- Sky Background -->
-  <div class="sky-background"></div>
-
+<section class="hero">
   <!-- Clouds Layer -->
-  <div class="clouds-container">
+  <div class="clouds">
     <Clouds variant="layer1" />
     <Clouds variant="layer2" />
     <Clouds variant="layer3" />
   </div>
 
   <!-- Main Island -->
-  <div class="main-island-container">
+  <div class="main-island">
     <MainIsland>
       <VoxelTree size={1.2} />
     </MainIsland>
   </div>
-
-  <!-- Ocean Layer -->
-  <Ocean />
 
   <!-- Hero Content -->
   <div class="hero-content">
@@ -38,32 +32,12 @@ import GameButton from './GameButton.astro';
       <GameButton label="Register" href="/register" variant="secondary" />
     </div>
   </div>
+
+  <!-- Ocean Layer -->
+  <Ocean />
 </section>
 
 <style>
   /* Import hero styles */
   @import '../styles/hero.css';
-
-  /* Main Island Container */
-  .main-island-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 6;
-    pointer-events: none;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .main-island-container {
-      top: 45%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .main-island-container {
-      top: 40%;
-    }
-  }
 </style>
