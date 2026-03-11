@@ -1,0 +1,114 @@
+---
+// The Archipelago Learning System component
+---
+
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">The Archipelago Learning System</h2>
+    <div class="content-text">
+      <p>Dao-Yu-101 organizes knowledge like an island world.</p>
+      <p>Each subject becomes an archipelago.</p>
+      <p>Inside each archipelago are islands representing learning topics.</p>
+      <p>Every island contains lessons and activities that help students understand the topic step by step.</p>
+      
+      <div class="structure-explanation">
+        <h3>Simple structure explanation:</h3>
+        <div class="structure-list">
+          <div class="structure-item">Subject → Archipelago</div>
+          <div class="structure-item">Topic → Island</div>
+          <div class="structure-item">Lesson → Activities on the island</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-section {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(248,250,252,0.95), rgba(241,245,249,0.85));
+    position: relative;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1f2937;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .content-text {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+
+  .content-text p {
+    margin-bottom: 20px;
+  }
+
+  .structure-explanation {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 12px;
+    border: 1px solid rgba(148,163,184,0.3);
+  }
+
+  .structure-explanation h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #111827;
+    text-align: left;
+  }
+
+  .structure-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .structure-item {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #059669;
+    background: rgba(16,185,129,0.1);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border-left: 4px solid #059669;
+    text-align: left;
+  }
+
+  @media (max-width: 768px) {
+    .content-section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+    }
+
+    .structure-explanation {
+      padding: 20px 15px;
+    }
+
+    .structure-item {
+      font-size: 1.1rem;
+      padding: 12px 20px;
+    }
+  }
+</style>

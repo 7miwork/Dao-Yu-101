@@ -1,0 +1,122 @@
+---
+// How Lessons Work component
+---
+
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">How Lessons Work</h2>
+    <div class="content-text">
+      <p>Each lesson combines different learning elements to help students understand the topic.</p>
+      <p>Lessons include:</p>
+      
+      <div class="lesson-features">
+        <div class="feature-item">• instructional videos</div>
+        <div class="feature-item">• explanations and learning material</div>
+        <div class="feature-item">• quizzes and multiple choice questions</div>
+        <div class="feature-item">• interactive tasks inside the learning world</div>
+      </div>
+      
+      <p class="process-explanation">Students follow the lesson while exploring the island environment.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-section {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+    position: relative;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .content-text {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #34495e;
+  }
+
+  .content-text p {
+    margin-bottom: 20px;
+  }
+
+  .lesson-features {
+    margin: 30px 0;
+    padding: 30px;
+    background: rgba(52,73,94,0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(52,73,94,0.1);
+  }
+
+  .feature-item {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2980b9;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .feature-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .feature-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .process-explanation {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #7f8c8d;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .content-section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+    }
+
+    .lesson-features {
+      padding: 20px 15px;
+    }
+
+    .feature-item {
+      font-size: 1.1rem;
+      padding-left: 15px;
+    }
+
+    .feature-item::before {
+      font-size: 1.2rem;
+    }
+  }
+</style>

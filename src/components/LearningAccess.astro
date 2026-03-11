@@ -1,0 +1,127 @@
+---
+// Flexible Learning Access component
+---
+
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">Flexible Learning Access</h2>
+    <div class="content-text">
+      <p>Dao-Yu-101 offers different ways to access learning content.</p>
+      
+      <div class="access-options">
+        <div class="access-option">
+          <h3>Single Lessons</h3>
+          <p>Students can purchase individual lessons to learn specific topics.</p>
+        </div>
+        
+        <div class="access-option">
+          <h3>Subscription Access</h3>
+          <p>Subscriptions unlock complete archipelagos and allow students to explore multiple topics and subjects.</p>
+        </div>
+      </div>
+      
+      <p class="access-explanation">This flexible system allows learners to progress at their own pace.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-section {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, rgba(248,250,252,0.95), rgba(241,245,249,0.85));
+    position: relative;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1f2937;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .content-text {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+
+  .content-text p {
+    margin-bottom: 20px;
+  }
+
+  .access-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0;
+  }
+
+  .access-option {
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(148,163,184,0.3);
+    text-align: left;
+  }
+
+  .access-option h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #059669;
+    font-weight: 700;
+  }
+
+  .access-option p {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 0;
+  }
+
+  .access-explanation {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #7f8c8d;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .content-section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .content-text {
+      font-size: 1.1rem;
+    }
+
+    .access-options {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .access-option {
+      padding: 20px 15px;
+    }
+
+    .access-option h3 {
+      font-size: 1.3rem;
+    }
+
+    .access-option p {
+      font-size: 1rem;
+    }
+  }
+</style>
