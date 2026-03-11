@@ -87,6 +87,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: red; /* Debug: Make islands visible */
 }
 
 /* Island Layers */
@@ -101,6 +102,8 @@
   background-color: var(--grass);
   border-radius: 8px 8px 0 0;
   box-shadow: 0 4px 0 var(--shadow);
+  width: 120px; /* Default width */
+  height: 80px; /* Default height */
 }
 
 /* Dirt Layer */
@@ -108,6 +111,8 @@
   background-color: #8B4513;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+  width: 120px; /* Default width */
+  height: 40px; /* Default height */
 }
 
 /* Sand Edge */
