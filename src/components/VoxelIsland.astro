@@ -1,8 +1,4 @@
 ---
-import VoxelTree from './island-details/VoxelTree.astro';
-import VoxelRock from './island-details/VoxelRock.astro';
-import VoxelHouse from './island-details/VoxelHouse.astro';
-
 interface Props {
   id: string;
   x: number;
@@ -17,17 +13,7 @@ interface Props {
 const { id, x, y, z, scale = 1, className = '', showDetails = true, detailLevel = 'foreground' } = Astro.props;
 ---
 <div class={`voxel-island ${className}`} style={`transform: translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`}>
-  <div class="grass-surface">
-    {showDetails && detailLevel !== 'background' && (
-      <>
-        <VoxelTree  position="left"   size="medium" />
-        <VoxelTree  position="right"  size="medium" />
-        <VoxelHouse position="center" size="medium" />
-        <VoxelRock  position="left"   size="small"  />
-        <VoxelRock  position="right"  size="small"  />
-      </>
-    )}
-  </div>
+  <div class="grass-surface"></div>
   <div class="dirt-layer-1"></div>
   <div class="dirt-layer-2"></div>
   <div class="dirt-layer-3"></div>
