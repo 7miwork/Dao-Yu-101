@@ -1,0 +1,90 @@
+---
+---
+
+<div class="language-switcher">
+  <div class="language-selector">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="de">DE</button>
+    <button class="lang-btn" data-lang="zh-tw">ZH-TW</button>
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .language-selector {
+    display: flex;
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    border-radius: 25px;
+    padding: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .lang-btn.active {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+    color: white;
+  }
+
+  .lang-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 2px;
+  }
+
+  /* Game-style border effect */
+  .lang-btn:not(.active)::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .lang-btn:hover::before {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .lang-btn {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+  }
+</style>

@@ -3,20 +3,14 @@
 
 <section class="hero">
   <div class="hero-content">
-    <div class="floating-islands">
-      <div class="island island-1"></div>
-      <div class="island island-2"></div>
-      <div class="island island-3"></div>
-    </div>
-    
     <div class="hero-text">
       <h1 class="title">Dao-Yu-101</h1>
       <p class="tagline">Discover your island adventure</p>
       
       <div class="hero-buttons">
-        <button class="btn-primary">Store</button>
-        <button class="btn-secondary">Login</button>
-        <button class="btn-secondary">Register</button>
+        <button class="btn-primary game-btn">Store</button>
+        <button class="btn-secondary game-btn">Login</button>
+        <button class="btn-secondary game-btn">Register</button>
       </div>
     </div>
   </div>
@@ -25,12 +19,37 @@
 <style>
   .hero {
     min-height: 100vh;
-    background: linear-gradient(180deg, #87CEEB 0%, #E0F7FA 50%, #B2EBF2 100%);
+    background: 
+      linear-gradient(180deg, #74b9ff 0%, #0984e3 40%, #00b894 60%, #00cec9 100%),
+      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg, transparent, rgba(0, 184, 148, 0.3));
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+    z-index: 2;
   }
 
   .hero-content {
@@ -126,12 +145,15 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   .btn-primary:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 25px rgba(231, 76, 60, 0.6);
     background: linear-gradient(135deg, #c0392b, #e74c3c);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 
   .btn-secondary {
@@ -144,12 +166,36 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
   }
 
   .btn-secondary:hover {
     background: #2c3e50;
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(44, 62, 80, 0.4);
+    border-color: #34495e;
+  }
+
+  .game-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .game-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .game-btn:hover::before {
+    left: 100%;
   }
 
   @media (max-width: 768px) {
