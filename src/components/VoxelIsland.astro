@@ -1,0 +1,73 @@
+---
+import VoxelBlock from './VoxelBlock.astro';
+
+interface Props {
+  id: string;
+  x: number;
+  y: number;
+  z: number;
+  scale?: number;
+  className?: string;
+}
+
+const { id, x, y, z, scale = 1, className = '' } = Astro.props;
+---
+
+<div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
+  <!-- Top Layer: Grass -->
+  <VoxelBlock type="grass" size={40} className="island-top" />
+  
+  <!-- Middle Layer: Dirt -->
+  <VoxelBlock type="dirt" size={40} className="island-dirt-1" />
+  <VoxelBlock type="dirt" size={40} className="island-dirt-2" />
+  <VoxelBlock type="dirt" size={40} className="island-dirt-3" />
+  
+  <!-- Bottom Layer: Sand -->
+  <VoxelBlock type="sand" size={40} className="island-bottom" />
+</div>
+
+<style>
+  .voxel-island {
+    position: absolute;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* Positioning for stacked blocks */
+  .voxel-island .voxel-block {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg);
+  }
+
+  /* Layer positioning */
+  .voxel-island .island-top {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg);
+    z-index: 4;
+  }
+
+  .voxel-island .island-dirt-1 {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(20px);
+    z-index: 3;
+  }
+
+  .voxel-island .island-dirt-2 {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(40px);
+    z-index: 2;
+  }
+
+  .voxel-island .island-dirt-3 {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(60px);
+    z-index: 1;
+  }
+
+  .voxel-island .island-bottom {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(80px);
+    z-index: 0;
+  }
+</style>
+
+<script>
+  import VoxelBlock from './VoxelBlock.astro';
+</script>

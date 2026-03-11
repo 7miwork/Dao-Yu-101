@@ -28,6 +28,29 @@
   z-index: 1;
 }
 
+/* Performance Optimizations */
+.voxel-island, .voxel-block {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Layer-specific z-index values */
+.island-layer {
+  z-index: 2;
+}
+
+.island-foreground {
+  z-index: 4;
+}
+
+.island-midground {
+  z-index: 3;
+}
+
+.island-background {
+  z-index: 2;
+}
+
 /* Title and Subtitle Styles */
 .hero-title {
   font-size: 4rem;

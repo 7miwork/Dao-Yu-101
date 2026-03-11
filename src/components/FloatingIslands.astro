@@ -1,4 +1,6 @@
 ---
+import VoxelIsland from './VoxelIsland.astro';
+
 interface Props {
   variant?: 'foreground' | 'midground' | 'background';
 }
@@ -9,56 +11,24 @@ const { variant = 'foreground' } = Astro.props;
 <div class={`island-layer island-${variant}`} data-variant={variant}>
   {variant === 'foreground' && (
     <>
-      <div class="island island-1 foreground-island" style="--delay: 0">
-        <div class="grass-layer" style="width: 120px; height: 80px;"></div>
-        <div class="dirt-layer" style="width: 120px; height: 40px;"></div>
-        <div class="sand-edge"></div>
-      </div>
-      <div class="island island-2 foreground-island" style="--delay: 2">
-        <div class="grass-layer" style="width: 100px; height: 60px;"></div>
-        <div class="dirt-layer" style="width: 100px; height: 30px;"></div>
-        <div class="sand-edge"></div>
-      </div>
+      <VoxelIsland id="island-1" x={-100} y={200} z={100} scale={1.2} className="foreground-island" />
+      <VoxelIsland id="island-2" x={200} y={250} z={80} scale={1.0} className="foreground-island" />
     </>
   )}
   
   {variant === 'midground' && (
     <>
-      <div class="island island-3 midground-island" style="--delay: 1">
-        <div class="grass-layer" style="width: 140px; height: 100px;"></div>
-        <div class="dirt-layer" style="width: 140px; height: 50px;"></div>
-        <div class="sand-edge"></div>
-      </div>
-      <div class="island island-4 midground-island" style="--delay: 3">
-        <div class="grass-layer" style="width: 110px; height: 70px;"></div>
-        <div class="dirt-layer" style="width: 110px; height: 35px;"></div>
-        <div class="sand-edge"></div>
-      </div>
-      <div class="island island-5 midground-island" style="--delay: 5">
-        <div class="grass-layer" style="width: 90px; height: 50px;"></div>
-        <div class="dirt-layer" style="width: 90px; height: 25px;"></div>
-        <div class="sand-edge"></div>
-      </div>
+      <VoxelIsland id="island-3" x={-150} y={150} z={50} scale={0.9} className="midground-island" />
+      <VoxelIsland id="island-4" x={100} y={180} z={40} scale={0.8} className="midground-island" />
+      <VoxelIsland id="island-5" x={250} y={220} z={30} scale={0.7} className="midground-island" />
     </>
   )}
   
   {variant === 'background' && (
     <>
-      <div class="island island-6 background-island" style="--delay: 2">
-        <div class="grass-layer" style="width: 160px; height: 120px;"></div>
-        <div class="dirt-layer" style="width: 160px; height: 60px;"></div>
-        <div class="sand-edge"></div>
-      </div>
-      <div class="island island-7 background-island" style="--delay: 4">
-        <div class="grass-layer" style="width: 130px; height: 90px;"></div>
-        <div class="dirt-layer" style="width: 130px; height: 45px;"></div>
-        <div class="sand-edge"></div>
-      </div>
-      <div class="island island-8 background-island" style="--delay: 6">
-        <div class="grass-layer" style="width: 100px; height: 70px;"></div>
-        <div class="dirt-layer" style="width: 100px; height: 35px;"></div>
-        <div class="sand-edge"></div>
-      </div>
+      <VoxelIsland id="island-6" x={-200} y={80} z={0} scale={0.6} className="background-island" />
+      <VoxelIsland id="island-7" x={50} y={120} z={-20} scale={0.5} className="background-island" />
+      <VoxelIsland id="island-8" x={300} y={100} z={-40} scale={0.4} className="background-island" />
     </>
   )}
 </div>
@@ -71,56 +41,6 @@ const { variant = 'foreground' } = Astro.props;
     width: 100%;
     height: 100%;
     pointer-events: none;
-  }
-
-  .island {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Foreground Islands */
-  .island-1 {
-    top: 60%;
-    left: 10%;
-  }
-
-  .island-2 {
-    top: 70%;
-    right: 15%;
-  }
-
-  /* Midground Islands */
-  .island-3 {
-    top: 40%;
-    left: 20%;
-  }
-
-  .island-4 {
-    top: 50%;
-    left: 60%;
-  }
-
-  .island-5 {
-    top: 60%;
-    right: 30%;
-  }
-
-  /* Background Islands */
-  .island-6 {
-    top: 20%;
-    left: 10%;
-  }
-
-  .island-7 {
-    top: 30%;
-    left: 50%;
-  }
-
-  .island-8 {
-    top: 25%;
-    right: 20%;
   }
 
   /* Layer-specific styles */
@@ -138,32 +58,18 @@ const { variant = 'foreground' } = Astro.props;
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .island {
+    .voxel-island {
       transform: scale(0.7);
     }
-    
-    .island-1 { top: 65%; left: 5%; }
-    .island-2 { top: 75%; right: 10%; }
-    .island-3 { top: 45%; left: 15%; }
-    .island-4 { top: 55%; left: 55%; }
-    .island-5 { top: 65%; right: 25%; }
-    .island-6 { top: 25%; left: 5%; }
-    .island-7 { top: 35%; left: 45%; }
-    .island-8 { top: 30%; right: 15%; }
   }
 
   @media (max-width: 480px) {
-    .island {
+    .voxel-island {
       transform: scale(0.5);
     }
-    
-    .island-1 { top: 70%; left: 0%; }
-    .island-2 { top: 80%; right: 5%; }
-    .island-3 { top: 50%; left: 10%; }
-    .island-4 { top: 60%; left: 50%; }
-    .island-5 { top: 70%; right: 20%; }
-    .island-6 { top: 30%; left: 0%; }
-    .island-7 { top: 40%; left: 40%; }
-    .island-8 { top: 35%; right: 10%; }
   }
 </style>
+
+<script>
+  import VoxelIsland from './VoxelIsland.astro';
+</script>
