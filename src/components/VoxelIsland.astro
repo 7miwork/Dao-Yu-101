@@ -1,5 +1,4 @@
 ---
-import VoxelBlock from './VoxelBlock.astro';
 import VoxelTree from './island-details/VoxelTree.astro';
 import VoxelRock from './island-details/VoxelRock.astro';
 import VoxelHouse from './island-details/VoxelHouse.astro';
@@ -60,51 +59,10 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
 ---
 
 <div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
-  <!-- Island Base Structure -->
-  <div class="island-base">
-    <!-- Bottom Layer: Sand Base -->
-    <div class="island-bottom"></div>
-    
-    <!-- Middle Layer: Dirt Layer -->
-    <div class="island-dirt"></div>
-    
-    <!-- Top Layer: Grass Surface -->
-    <div class="island-grass"></div>
-  </div>
-  
-  <!-- Voxel Blocks for 3D Effect -->
-  <!-- Top Layer: Grass (3x3 blocks) -->
-  <VoxelBlock type="grass" size={20} className="island-top center" />
-  <VoxelBlock type="grass" size={20} className="island-top left" />
-  <VoxelBlock type="grass" size={20} className="island-top right" />
-  <VoxelBlock type="grass" size={20} className="island-top front" />
-  <VoxelBlock type="grass" size={20} className="island-top back" />
-  
-  <!-- Middle Layer: Dirt (5x5 blocks, tapered) -->
-  <VoxelBlock type="dirt" size={20} className="island-dirt center" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt left" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt right" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt front" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt back" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt corner-1" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt corner-2" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt corner-3" />
-  <VoxelBlock type="dirt" size={20} className="island-dirt corner-4" />
-  
-  <!-- Bottom Layer: Sand (7x7 blocks, wider base) -->
-  <VoxelBlock type="sand" size={20} className="island-sand center" />
-  <VoxelBlock type="sand" size={20} className="island-sand left" />
-  <VoxelBlock type="sand" size={20} className="island-sand right" />
-  <VoxelBlock type="sand" size={20} className="island-sand front" />
-  <VoxelBlock type="sand" size={20} className="island-sand back" />
-  <VoxelBlock type="sand" size={20} className="island-sand corner-1" />
-  <VoxelBlock type="sand" size={20} className="island-sand corner-2" />
-  <VoxelBlock type="sand" size={20} className="island-sand corner-3" />
-  <VoxelBlock type="sand" size={20} className="island-sand corner-4" />
-  <VoxelBlock type="sand" size={20} className="island-sand edge-1" />
-  <VoxelBlock type="sand" size={20} className="island-sand edge-2" />
-  <VoxelBlock type="sand" size={20} className="island-sand edge-3" />
-  <VoxelBlock type="sand" size={20} className="island-sand edge-4" />
+  <div class="grass-row"></div>
+  <div class="dirt-row"></div>
+  <div class="dirt-row-small"></div>
+  <div class="dirt-row-tip"></div>
   
   <!-- Environmental Details -->
   {showDetails && maxDetails > 0 && (
@@ -141,89 +99,67 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
   .voxel-island {
     position: relative;
     width: 420px;
-    height: 260px;
+    height: 340px;
     margin: 0 auto;
     transform-style: preserve-3d;
     will-change: transform;
   }
 
-  /* Island Base Structure */
-  .island-base {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .island-bottom {
-    width: 60%;
-    height: 60px;
-    background: #6e4424;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .island-dirt {
-    width: 90%;
-    height: 120px;
-    background: #8b5a2b;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .island-grass {
-    width: 100%;
-    height: 60px;
+  /* Grass Layer */
+  .grass-row {
+    width: 420px;
+    height: 50px;
     background: #7ed957;
     margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Positioning for stacked blocks */
-  .voxel-island .voxel-block {
+    border-bottom: 6px solid #5da63e;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg);
-  }
-
-  /* Layer positioning */
-  .voxel-island .island-top {
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg);
+    top: 0;
+    left: 0;
     z-index: 4;
   }
 
-  .voxel-island .island-dirt {
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(20px);
+  /* Dirt Layer */
+  .dirt-row {
+    width: 360px;
+    height: 80px;
+    background: #8b5a2b;
+    margin: 0 auto;
+    position: absolute;
+    top: 50px;
+    left: 0;
     z-index: 3;
   }
 
-  .voxel-island .island-sand {
-    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(40px);
+  /* Narrow Dirt Layer */
+  .dirt-row-small {
+    width: 240px;
+    height: 80px;
+    background: #7a4b24;
+    margin: 0 auto;
+    position: absolute;
+    top: 130px;
+    left: 0;
     z-index: 2;
   }
 
-  /* Block positioning within layers */
-  .voxel-island .center { transform: translate(-50%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .left { transform: translate(-65%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .right { transform: translate(-35%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .front { transform: translate(-50%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .back { transform: translate(-50%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  
-  .voxel-island .corner-1 { transform: translate(-65%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .corner-2 { transform: translate(-35%, -65%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .corner-3 { transform: translate(-65%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .corner-4 { transform: translate(-35%, -35%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  
-  .voxel-island .edge-1 { transform: translate(-80%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .edge-2 { transform: translate(-20%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .edge-3 { transform: translate(-50%, -80%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
-  .voxel-island .edge-4 { transform: translate(-50%, -20%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+  /* Island Tip */
+  .dirt-row-tip {
+    width: 120px;
+    height: 80px;
+    background: #6e4424;
+    margin: 0 auto;
+    position: absolute;
+    top: 210px;
+    left: 0;
+    z-index: 1;
+  }
+
+  /* Tree positioning */
+  .voxel-island .tree {
+    position: absolute;
+    top: -40px;
+    z-index: 5;
+  }
 
   /* Ensure no hiding rules */
   .voxel-island {
@@ -233,4 +169,3 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
     z-index: 2 !important;
   }
 </style>
-

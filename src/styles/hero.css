@@ -76,14 +76,14 @@
 /* Tablet Optimization (1024px and below) */
 @media (max-width: 1024px) {
   .main-island {
-    transform: translateX(-50%) scale(1.1);
+    transform: translateX(-50%) scale(0.9);
   }
 }
 
 /* Smartphone Optimization (640px and below) */
 @media (max-width: 640px) {
   .main-island {
-    transform: translateX(-50%) scale(0.9);
+    transform: translateX(-50%) scale(0.75);
     top: 10%;
   }
   
