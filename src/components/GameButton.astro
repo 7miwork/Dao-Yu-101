@@ -20,64 +20,63 @@ const { label, href, variant = 'primary' } = Astro.props;
 
 <style>
   .game-button {
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 6px 0 var(--shadow), 0 10px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #5a9e3f;
-    text-decoration: none;
     display: inline-block;
-    min-width: 140px;
+    padding: 16px 32px;
+    background: linear-gradient(#6cc04a, #4a8f33);
+    border: 4px solid #2e5c22;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 6px 0 #2e5c22;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Press Start 2P", monospace;
+    letter-spacing: 1px;
+    font-size: 16px;
+    line-height: 1;
     text-align: center;
+    min-width: 200px;
   }
 
   .game-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 12px rgba(126,217,87,0.6), 0 8px 0 var(--shadow), 0 12px 20px rgba(0, 0, 0, 0.3);
-    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #2e5c22;
   }
 
   .game-button:active {
-    transform: translateY(2px) scale(0.95);
-    box-shadow: 0 2px 0 var(--shadow), 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #2e5c22;
   }
 
   .game-button.secondary {
-    background-color: #4FB3FF;
-    border-color: #3a8cc7;
-    --button-hover: #3a8cc7;
+    background: linear-gradient(#4fb3ff, #3a8cc7);
+    border-color: #2a6b94;
+    box-shadow: 0 6px 0 #2a6b94;
   }
 
   .game-button.secondary:hover {
-    background-color: #3a8cc7;
+    box-shadow: 0 8px 0 #2a6b94;
+  }
+
+  .game-button.secondary:active {
+    box-shadow: 0 2px 0 #2a6b94;
   }
 
   /* Mobile responsive */
   @media (max-width: 768px) {
     .game-button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      min-width: 120px;
+      padding: 14px 28px;
+      font-size: 14px;
+      min-width: 180px;
     }
   }
 
   @media (max-width: 480px) {
     .game-button {
-      padding: 0.7rem 1.2rem;
-      font-size: 0.9rem;
-      min-width: 100px;
-      width: 100%;
-      max-width: 200px;
+      padding: 12px 24px;
+      font-size: 12px;
+      min-width: 160px;
     }
   }
 </style>

@@ -1,0 +1,85 @@
+/* Minecraft UI System Styles */
+
+/* Global Typography */
+body {
+  font-family: "Press Start 2P", monospace;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+/* Minecraft Button Styles */
+.game-button {
+  display: inline-block;
+  padding: 16px 32px;
+  background: linear-gradient(#6cc04a, #4a8f33);
+  border: 4px solid #2e5c22;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 6px 0 #2e5c22;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Press Start 2P", monospace;
+  letter-spacing: 1px;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  min-width: 200px;
+}
+
+/* Button Hover Effect */
+.game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #2e5c22;
+}
+
+/* Button Active State */
+.game-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2e5c22;
+}
+
+/* Secondary Button Variant */
+.game-button.secondary {
+  background: linear-gradient(#4fb3ff, #3a8cc7);
+  border-color: #2a6b94;
+  box-shadow: 0 6px 0 #2a6b94;
+}
+
+.game-button.secondary:hover {
+  box-shadow: 0 8px 0 #2a6b94;
+}
+
+.game-button.secondary:active {
+  box-shadow: 0 2px 0 #2a6b94;
+}
+
+/* Button Container */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .game-button {
+    padding: 14px 28px;
+    font-size: 14px;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-button {
+    padding: 12px 24px;
+    font-size: 12px;
+    min-width: 160px;
+  }
+}
