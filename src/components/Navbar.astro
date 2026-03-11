@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import GameButton from './GameButton.astro';
 ---
 
 <header class="navbar">
@@ -8,11 +9,11 @@ import LanguageSwitcher from './LanguageSwitcher.astro';
       <h1>Dao-Yu-101</h1>
     </div>
     <nav class="nav-menu">
-      <button class="nav-btn game-btn">Store</button>
-      <button class="nav-btn game-btn">Login</button>
-      <button class="nav-btn game-btn">Register</button>
-      <button class="nav-btn">About</button>
-      <button class="nav-btn">FAQ</button>
+      <GameButton label="Store" href="/store" />
+      <GameButton label="Login" href="/login" variant="secondary" />
+      <GameButton label="Register" href="/register" variant="secondary" />
+      <GameButton label="About" href="/about" />
+      <GameButton label="FAQ" href="/faq" />
     </nav>
     <div class="nav-actions">
       <LanguageSwitcher />

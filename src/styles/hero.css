@@ -73,6 +73,69 @@
   text-align: center;
 }
 
+/* Game Button Styles */
+.game-button {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #7ED957, #4CAF50);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 140px;
+  text-align: center;
+}
+
+.game-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(126,217,87,0.8);
+}
+
+.game-button:active {
+  transform: translateY(2px) scale(0.95);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.game-button.secondary {
+  background: linear-gradient(180deg, #4FB3FF, #3A8CC7);
+}
+
+.game-button.secondary:hover {
+  box-shadow: 0 0 16px rgba(79,179,255,0.8);
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  .game-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    min-width: 120px;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .hero-buttons {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    min-width: 100px;
+    width: 100%;
+    max-width: 180px;
+  }
+}
+
 /* Button Container */
 .hero-buttons {
   display: flex;
@@ -80,6 +143,7 @@
   z-index: 10;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 12px;
 }
 
 /* Floating Islands Container */

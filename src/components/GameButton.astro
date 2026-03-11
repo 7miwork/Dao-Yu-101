@@ -1,15 +1,22 @@
 ---
 interface Props {
   label: string;
+  href?: string;
   variant?: 'primary' | 'secondary';
 }
 
-const { label, variant = 'primary' } = Astro.props;
+const { label, href, variant = 'primary' } = Astro.props;
 ---
 
-<button class={`game-button ${variant}`} data-label={label}>
-  {label}
-</button>
+{href ? (
+  <a href={href} class={`game-button ${variant}`} aria-label={label}>
+    {label}
+  </a>
+) : (
+  <button class={`game-button ${variant}`} aria-label={label}>
+    {label}
+  </button>
+)}
 
 <style>
   .game-button {
