@@ -60,6 +60,19 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
 ---
 
 <div class="voxel-island {className}" style="transform: translate3d({x}px, {y}px, {z}px) scale({scale})">
+  <!-- Island Base Structure -->
+  <div class="island-base">
+    <!-- Bottom Layer: Sand Base -->
+    <div class="island-bottom"></div>
+    
+    <!-- Middle Layer: Dirt Layer -->
+    <div class="island-dirt"></div>
+    
+    <!-- Top Layer: Grass Surface -->
+    <div class="island-grass"></div>
+  </div>
+  
+  <!-- Voxel Blocks for 3D Effect -->
   <!-- Top Layer: Grass (3x3 blocks) -->
   <VoxelBlock type="grass" size={20} className="island-top center" />
   <VoxelBlock type="grass" size={20} className="island-top left" />
@@ -126,9 +139,49 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
 
 <style>
   .voxel-island {
-    position: absolute;
+    position: relative;
+    width: 420px;
+    height: 260px;
+    margin: 0 auto;
     transform-style: preserve-3d;
     will-change: transform;
+  }
+
+  /* Island Base Structure */
+  .island-base {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .island-bottom {
+    width: 60%;
+    height: 60px;
+    background: #6e4424;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .island-dirt {
+    width: 90%;
+    height: 120px;
+    background: #8b5a2b;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .island-grass {
+    width: 100%;
+    height: 60px;
+    background: #7ed957;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   /* Positioning for stacked blocks */
@@ -171,5 +224,13 @@ const details = Array.from({ length: totalDetails }, (_, i) => {
   .voxel-island .edge-2 { transform: translate(-20%, -50%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
   .voxel-island .edge-3 { transform: translate(-50%, -80%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
   .voxel-island .edge-4 { transform: translate(-50%, -20%) rotateX(60deg) rotateZ(45deg) translateY(0px); }
+
+  /* Ensure no hiding rules */
+  .voxel-island {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2 !important;
+  }
 </style>
 
