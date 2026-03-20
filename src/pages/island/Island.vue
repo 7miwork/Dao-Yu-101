@@ -140,87 +140,125 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { isIslandUnlocked, unlockIsland, isLessonCompleted, markLessonCompleted } from '../../utils/auth.js'
 
+// Static imports for all island data
+import minecraftBasics from '@/content/islands/minecraft-basics.json'
+import algebra from '@/content/islands/algebra.json'
+import physics from '@/content/islands/physics.json'
+import english from '@/content/islands/english.json'
+import drawing from '@/content/islands/drawing.json'
+import ancient from '@/content/islands/ancient.json'
+
+// Static imports for all lesson data
+import lesson1 from '@/content/lessons/lesson-1.json'
+import lesson2 from '@/content/lessons/lesson-2.json'
+import lesson3 from '@/content/lessons/lesson-3.json'
+import lesson4 from '@/content/lessons/lesson-4.json'
+import lesson5 from '@/content/lessons/lesson-5.json'
+import lesson6 from '@/content/lessons/lesson-6.json'
+import lesson7 from '@/content/lessons/lesson-7.json'
+import lesson8 from '@/content/lessons/lesson-8.json'
+import lesson9 from '@/content/lessons/lesson-9.json'
+import lesson10 from '@/content/lessons/lesson-10.json'
+import lesson11 from '@/content/lessons/lesson-11.json'
+import lesson12 from '@/content/lessons/lesson-12.json'
+import lesson13 from '@/content/lessons/lesson-13.json'
+import lesson14 from '@/content/lessons/lesson-14.json'
+import lesson15 from '@/content/lessons/lesson-15.json'
+import algLesson1 from '@/content/lessons/alg-lesson-1.json'
+import phyLesson1 from '@/content/lessons/phy-lesson-1.json'
+import engLesson1 from '@/content/lessons/eng-lesson-1.json'
+import drawLesson1 from '@/content/lessons/draw-lesson-1.json'
+import ancLesson1 from '@/content/lessons/anc-lesson-1.json'
+
 const route = useRoute()
 const router = useRouter()
 
 const password = ref('')
 const error = ref(false)
 const unlocked = ref(false)
-const islandData = ref({
-  id: '',
-  icon: '🏝️',
-  name: 'Island',
-  description: 'A learning island',
-  password: 'default123',
-  lessons: []
-})
-const lessons = ref([])
+
+// Map island data by ID
+const islandMap = {
+  'minecraft-basics': minecraftBasics,
+  algebra,
+  physics,
+  english,
+  drawing,
+  ancient
+}
+
+// Map lesson data by ID
+const lessonMap = {
+  'lesson-1': lesson1,
+  'lesson-2': lesson2,
+  'lesson-3': lesson3,
+  'lesson-4': lesson4,
+  'lesson-5': lesson5,
+  'lesson-6': lesson6,
+  'lesson-7': lesson7,
+  'lesson-8': lesson8,
+  'lesson-9': lesson9,
+  'lesson-10': lesson10,
+  'lesson-11': lesson11,
+  'lesson-12': lesson12,
+  'lesson-13': lesson13,
+  'lesson-14': lesson14,
+  'lesson-15': lesson15,
+  'alg-lesson-1': algLesson1,
+  'phy-lesson-1': phyLesson1,
+  'eng-lesson-1': engLesson1,
+  'draw-lesson-1': drawLesson1,
+  'anc-lesson-1': ancLesson1
+}
+
+// Map icons for islands
+const islandIconMap = {
+  'minecraft-basics': '⛏️',
+  algebra: '➕',
+  physics: '⚛️',
+  english: '🇬🇧',
+  drawing: '✏️',
+  ancient: '🏛️'
+}
 
 const islandId = computed(() => route.params.id)
 
-// Load island data from JSON files
-async function loadIslandData() {
-  try {
-    const response = await fetch(`/src/content/islands/${islandId.value}.json`)
-    if (response.ok) {
-      const data = await response.json()
-      islandData.value = {
-        id: data.id,
-        icon: '⛏️',
-        name: data.title,
-        description: data.description,
-        password: data.password,
-        lessons: []
-      }
-      
-      // Load lesson data for each lesson ID
-      const lessonPromises = data.lessons.map(async (lessonId) => {
-        const lessonResponse = await fetch(`/src/content/lessons/${lessonId}.json`)
-        if (lessonResponse.ok) {
-          const lessonData = await lessonResponse.json()
-          return {
-            id: lessonData.id,
-            title: lessonData.title,
-            description: lessonData.description
-          }
-        }
-        return null
-      })
-      
-      const loadedLessons = await Promise.all(lessonPromises)
-      lessons.value = loadedLessons.filter(lesson => lesson !== null)
-    } else {
-      islandData.value = {
-        id: islandId.value,
-        icon: '🏝️',
-        name: 'Island Not Found',
-        description: 'This island could not be loaded',
-        password: 'default123',
-        lessons: []
-      }
-      lessons.value = []
+// Get island data from static imports
+const islandData = computed(() => {
+  const data = islandMap[islandId.value]
+  if (data) {
+    return {
+      id: data.id,
+      icon: islandIconMap[data.id] || '📚',
+      name: data.title,
+      description: data.description,
+      password: data.password,
+      lessons: data.lessons || []
     }
-  } catch (error) {
-    console.error('Error loading island:', error)
-    islandData.value = {
-      id: islandId.value,
-      icon: '🏝️',
-      name: 'Error Loading Island',
-      description: 'There was an error loading this island',
-      password: 'default123',
-      lessons: []
-    }
-    lessons.value = []
   }
-}
-
-// Load island data when component mounts or island ID changes
-onMounted(() => {
-  loadIslandData()
+  return {
+    id: islandId.value,
+    icon: '📚',
+    name: 'Island Not Found',
+    description: 'This island could not be loaded',
+    password: 'default123',
+    lessons: []
+  }
 })
 
-watch(islandId, () => {
-  loadIslandData()
+// Get lessons data from static imports
+const lessons = computed(() => {
+  return islandData.value.lessons.map(lessonId => {
+    const lessonData = lessonMap[lessonId]
+    if (lessonData) {
+      return {
+        id: lessonData.id,
+        title: lessonData.title,
+        description: lessonData.description
+      }
+    }
+    return null
+  }).filter(lesson => lesson !== null)
 })
 
 const completedCount = computed(() => {

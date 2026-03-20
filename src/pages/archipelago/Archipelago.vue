@@ -100,87 +100,108 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { isIslandUnlocked } from '../../utils/auth.js'
+
+// Static imports for all archipelago data
+import programming from '@/content/archipelagos/programming.json'
+import mathematics from '@/content/archipelagos/mathematics.json'
+import science from '@/content/archipelagos/science.json'
+import languages from '@/content/archipelagos/languages.json'
+import arts from '@/content/archipelagos/arts.json'
+import history from '@/content/archipelagos/history.json'
+
+// Static imports for all island data
+import minecraftBasics from '@/content/islands/minecraft-basics.json'
+import algebra from '@/content/islands/algebra.json'
+import physics from '@/content/islands/physics.json'
+import english from '@/content/islands/english.json'
+import drawing from '@/content/islands/drawing.json'
+import ancient from '@/content/islands/ancient.json'
 
 const route = useRoute()
 const router = useRouter()
 
-const archipelagoData = ref({
-  id: '',
-  icon: '💻',
-  name: 'Archipelago',
-  description: 'A learning archipelago',
-  islands: []
-})
-const islands = ref([])
+// Map archipelago data by ID
+const archipelagoMap = {
+  programming,
+  mathematics,
+  science,
+  languages,
+  arts,
+  history
+}
+
+// Map island data by ID
+const islandMap = {
+  'minecraft-basics': minecraftBasics,
+  algebra,
+  physics,
+  english,
+  drawing,
+  ancient
+}
+
+// Map icons for archipelagos
+const archipelagoIconMap = {
+  programming: '💻',
+  mathematics: '📐',
+  science: '🔬',
+  languages: '🌍',
+  arts: '🎨',
+  history: '📜'
+}
+
+// Map icons for islands
+const islandIconMap = {
+  'minecraft-basics': '⛏️',
+  algebra: '➕',
+  physics: '⚛️',
+  english: '🇬🇧',
+  drawing: '✏️',
+  ancient: '🏛️'
+}
 
 const archipelagoId = computed(() => route.params.id)
 
-// Load archipelago data from JSON files
-async function loadArchipelagoData() {
-  try {
-    const response = await fetch(`/src/content/archipelagos/${archipelagoId.value}.json`)
-    if (response.ok) {
-      const data = await response.json()
-      archipelagoData.value = {
-        id: data.id,
-        icon: '💻',
-        name: data.title,
-        description: data.description,
-        islands: data.islands || []
-      }
-      
-      // Load island data for each island ID
-      const islandPromises = data.islands.map(async (islandId) => {
-        const islandResponse = await fetch(`/src/content/islands/${islandId}.json`)
-        if (islandResponse.ok) {
-          const islandData = await islandResponse.json()
-          return {
-            id: islandData.id,
-            icon: '⛏️',
-            name: islandData.title,
-            description: islandData.description,
-            lessonCount: islandData.lessons ? islandData.lessons.length : 0,
-            password: islandData.password
-          }
-        }
-        return null
-      })
-      
-      const loadedIslands = await Promise.all(islandPromises)
-      islands.value = loadedIslands.filter(island => island !== null)
-    } else {
-      archipelagoData.value = {
-        id: archipelagoId.value,
-        icon: '💻',
-        name: 'Archipelago Not Found',
-        description: 'This archipelago could not be loaded',
-        islands: []
-      }
-      islands.value = []
+// Get archipelago data from static imports
+const archipelagoData = computed(() => {
+  const data = archipelagoMap[archipelagoId.value]
+  if (data) {
+    return {
+      id: data.id,
+      icon: archipelagoIconMap[data.id] || '📚',
+      name: data.title,
+      description: data.description,
+      islands: data.islands || []
     }
-  } catch (error) {
-    console.error('Error loading archipelago:', error)
-    archipelagoData.value = {
-      id: archipelagoId.value,
-      icon: '💻',
-      name: 'Error Loading Archipelago',
-      description: 'There was an error loading this archipelago',
-      islands: []
-    }
-    islands.value = []
   }
-}
-
-// Load archipelago data when component mounts or archipelago ID changes
-onMounted(() => {
-  loadArchipelagoData()
+  return {
+    id: archipelagoId.value,
+    icon: '📚',
+    name: 'Archipelago Not Found',
+    description: 'This archipelago could not be loaded',
+    islands: []
+  }
 })
 
-watch(archipelagoId, () => {
-  loadArchipelagoData()
+// Get islands data from static imports
+const islands = computed(() => {
+  return archipelagoData.value.islands.map(islandId => {
+    const islandData = islandMap[islandId]
+    if (islandData) {
+      return {
+        id: islandData.id,
+        icon: islandIconMap[islandData.id] || '📚',
+        name: islandData.title,
+        description: islandData.description,
+        lessonCount: islandData.lessons ? islandData.lessons.length : 0,
+        password: islandData.password
+      }
+    }
+    return null
+  }).filter(island => island !== null)
 })
 
 const unlockedCount = computed(() => {

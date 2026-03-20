@@ -90,20 +90,35 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+// Static imports for all lesson data
+import lesson1 from '@/content/lessons/lesson-1.json'
+import lesson2 from '@/content/lessons/lesson-2.json'
+import lesson3 from '@/content/lessons/lesson-3.json'
+import lesson4 from '@/content/lessons/lesson-4.json'
+import lesson5 from '@/content/lessons/lesson-5.json'
+import lesson6 from '@/content/lessons/lesson-6.json'
+import lesson7 from '@/content/lessons/lesson-7.json'
+import lesson8 from '@/content/lessons/lesson-8.json'
+import lesson9 from '@/content/lessons/lesson-9.json'
+import lesson10 from '@/content/lessons/lesson-10.json'
+import lesson11 from '@/content/lessons/lesson-11.json'
+import lesson12 from '@/content/lessons/lesson-12.json'
+import lesson13 from '@/content/lessons/lesson-13.json'
+import lesson14 from '@/content/lessons/lesson-14.json'
+import lesson15 from '@/content/lessons/lesson-15.json'
+import algLesson1 from '@/content/lessons/alg-lesson-1.json'
+import phyLesson1 from '@/content/lessons/phy-lesson-1.json'
+import engLesson1 from '@/content/lessons/eng-lesson-1.json'
+import drawLesson1 from '@/content/lessons/draw-lesson-1.json'
+import ancLesson1 from '@/content/lessons/anc-lesson-1.json'
 
 const route = useRoute()
 const router = useRouter()
 
 const activeTab = ref('text')
-const lessonData = ref({
-  title: 'Lesson',
-  description: 'A learning lesson',
-  content: '<p>Loading lesson content...</p>',
-  prevLesson: null,
-  nextLesson: null
-})
 
 const tabs = [
   { id: 'video', icon: '🎬', name: 'Video' },
@@ -111,67 +126,52 @@ const tabs = [
   { id: 'ai', icon: '🤖', name: 'AI Tutor' }
 ]
 
-const lessonId = computed(() => route.params.id)
-
-// Load lesson data from JSON files
-async function loadLessonData() {
-  try {
-    const response = await fetch(`/src/content/lessons/${lessonId.value}.json`)
-    if (response.ok) {
-      const data = await response.json()
-      lessonData.value = {
-        id: data.id,
-        title: data.title,
-        description: data.description,
-        content: data.content.text,
-        prevLesson: data.prevLesson ? { id: data.prevLesson, title: '' } : null,
-        nextLesson: data.nextLesson ? { id: data.nextLesson, title: '' } : null
-      }
-      
-      // Load previous and next lesson titles
-      if (data.prevLesson) {
-        const prevResponse = await fetch(`/src/content/lessons/${data.prevLesson}.json`)
-        if (prevResponse.ok) {
-          const prevData = await prevResponse.json()
-          lessonData.value.prevLesson.title = prevData.title
-        }
-      }
-      
-      if (data.nextLesson) {
-        const nextResponse = await fetch(`/src/content/lessons/${data.nextLesson}.json`)
-        if (nextResponse.ok) {
-          const nextData = await nextResponse.json()
-          lessonData.value.nextLesson.title = nextData.title
-        }
-      }
-    } else {
-      lessonData.value = {
-        title: 'Lesson Not Found',
-        description: 'This lesson could not be loaded',
-        content: '<p>Lesson content not available.</p>',
-        prevLesson: null,
-        nextLesson: null
-      }
-    }
-  } catch (error) {
-    console.error('Error loading lesson:', error)
-    lessonData.value = {
-      title: 'Error Loading Lesson',
-      description: 'There was an error loading this lesson',
-      content: '<p>Please try again later.</p>',
-      prevLesson: null,
-      nextLesson: null
-    }
-  }
+// Map lesson data by ID
+const lessonMap = {
+  'lesson-1': lesson1,
+  'lesson-2': lesson2,
+  'lesson-3': lesson3,
+  'lesson-4': lesson4,
+  'lesson-5': lesson5,
+  'lesson-6': lesson6,
+  'lesson-7': lesson7,
+  'lesson-8': lesson8,
+  'lesson-9': lesson9,
+  'lesson-10': lesson10,
+  'lesson-11': lesson11,
+  'lesson-12': lesson12,
+  'lesson-13': lesson13,
+  'lesson-14': lesson14,
+  'lesson-15': lesson15,
+  'alg-lesson-1': algLesson1,
+  'phy-lesson-1': phyLesson1,
+  'eng-lesson-1': engLesson1,
+  'draw-lesson-1': drawLesson1,
+  'anc-lesson-1': ancLesson1
 }
 
-// Load lesson data when component mounts or lesson ID changes
-onMounted(() => {
-  loadLessonData()
-})
+const lessonId = computed(() => route.params.id)
 
-watch(lessonId, () => {
-  loadLessonData()
+// Get lesson data from static imports
+const lessonData = computed(() => {
+  const data = lessonMap[lessonId.value]
+  if (data) {
+    return {
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      content: data.content.text,
+      prevLesson: data.prevLesson ? { id: data.prevLesson, title: lessonMap[data.prevLesson]?.title || '' } : null,
+      nextLesson: data.nextLesson ? { id: data.nextLesson, title: lessonMap[data.nextLesson]?.title || '' } : null
+    }
+  }
+  return {
+    title: 'Lesson Not Found',
+    description: 'This lesson could not be loaded',
+    content: '<p>Lesson content not available.</p>',
+    prevLesson: null,
+    nextLesson: null
+  }
 })
 
 const prevLesson = computed(() => lessonData.value.prevLesson)

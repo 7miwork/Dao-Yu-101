@@ -75,52 +75,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
-const archipelagos = ref([])
+// Static imports for all archipelago data
+import programming from '@/content/archipelagos/programming.json'
+import mathematics from '@/content/archipelagos/mathematics.json'
+import science from '@/content/archipelagos/science.json'
+import languages from '@/content/archipelagos/languages.json'
+import arts from '@/content/archipelagos/arts.json'
+import history from '@/content/archipelagos/history.json'
 
-// Load archipelago data from JSON files
-async function loadArchipelagos() {
-  try {
-    // Load all archipelago files
-    const archipelagoFiles = ['programming', 'mathematics', 'science', 'languages', 'arts', 'history']
-    
-    const archipelagoPromises = archipelagoFiles.map(async (id) => {
-      const response = await fetch(`/src/content/archipelagos/${id}.json`)
-      if (response.ok) {
-        const data = await response.json()
-        return {
-          id: data.id,
-          icon: '💻',
-          name: data.title,
-          description: data.description,
-          islandCount: data.islands ? data.islands.length : 0
-        }
-      }
-      return null
-    })
-    
-    const loadedArchipelagos = await Promise.all(archipelagoPromises)
-    archipelagos.value = loadedArchipelagos.filter(archipelago => archipelago !== null)
-  } catch (error) {
-    console.error('Error loading archipelagos:', error)
-    // Fallback to default data if loading fails
-    archipelagos.value = [
-      {
-        id: 'programming',
-        icon: '💻',
-        name: 'Programming',
-        description: 'Learn coding from basics to advanced concepts',
-        islandCount: 1
-      }
-    ]
-  }
+// Map icon for each archipelago
+const iconMap = {
+  programming: '💻',
+  mathematics: '📐',
+  science: '🔬',
+  languages: '🌍',
+  arts: '🎨',
+  history: '📜'
 }
 
-// Load archipelagos when component mounts
-onMounted(() => {
-  loadArchipelagos()
-})
+// Create archipelagos array from static imports
+const archipelagos = ref([
+  programming,
+  mathematics,
+  science,
+  languages,
+  arts,
+  history
+].map(data => ({
+  id: data.id,
+  icon: iconMap[data.id] || '📚',
+  name: data.title,
+  description: data.description,
+  islandCount: data.islands ? data.islands.length : 0
+})))
 
 function getIslandStyle(index) {
   const positions = [
