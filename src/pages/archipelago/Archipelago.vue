@@ -212,7 +212,7 @@ function handleLockedIslandClick(island) {
 }
 </script>
 
-<style scoped>
+<style>
 .island-map-container {
   min-height: 100vh;
   position: relative;
