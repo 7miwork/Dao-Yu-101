@@ -1,0 +1,15 @@
+{
+  "id": "phy-lesson-1",
+  "title": "Introduction to Physics",
+  "description": "What is physics?",
+  "islandId": "physics",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Introduction to Physics</h3><p>Physics is the natural science that studies matter, its motion and behavior through space and time, and the related entities of energy and force.</p><h4>What You'll Learn:</h4><ul><li>Understanding the physical world</li><li>Basic concepts of motion and energy</li><li>Forces and their effects</li><li>Scientific method in physics</li></ul><h4>Key Concepts:</h4><ul><li><strong>Matter</strong> - Anything that has mass and takes up space</li><li><strong>Energy</strong> - The ability to do work</li><li><strong>Force</strong> - A push or pull on an object</li><li><strong>Motion</strong> - Change in position over time</li></ul>",
+    "task": "Identify examples of forces in your daily life"
+  },
+  "mcworld": "physics",
+  "nextLesson": null,
+  "prevLesson": null
+}

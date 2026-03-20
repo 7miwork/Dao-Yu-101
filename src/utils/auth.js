@@ -71,3 +71,58 @@ export function clearAllUnlocks() {
   }
   keysToRemove.forEach(key => localStorage.removeItem(key))
 }
+
+/**
+ * Check if a lesson is completed
+ * @param {string} lessonId - The lesson identifier
+ * @returns {boolean} - Whether the lesson is completed
+ */
+export function isLessonCompleted(lessonId) {
+  return localStorage.getItem(`completed_${lessonId}`) === 'true'
+}
+
+/**
+ * Mark a lesson as completed
+ * @param {string} lessonId - The lesson identifier
+ */
+export function markLessonCompleted(lessonId) {
+  localStorage.setItem(`completed_${lessonId}`, 'true')
+}
+
+/**
+ * Mark a lesson as incomplete (for testing purposes)
+ * @param {string} lessonId - The lesson identifier
+ */
+export function markLessonIncomplete(lessonId) {
+  localStorage.removeItem(`completed_${lessonId}`)
+}
+
+/**
+ * Get all completed lessons
+ * @returns {string[]} - Array of completed lesson IDs
+ */
+export function getCompletedLessons() {
+  const completed = []
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    if (key && key.startsWith('completed_')) {
+      const lessonId = key.replace('completed_', '')
+      completed.push(lessonId)
+    }
+  }
+  return completed
+}
+
+/**
+ * Clear all completed lessons (for testing/reset)
+ */
+export function clearAllCompletions() {
+  const keysToRemove = []
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    if (key && key.startsWith('completed_')) {
+      keysToRemove.push(key)
+    }
+  }
+  keysToRemove.forEach(key => localStorage.removeItem(key))
+}

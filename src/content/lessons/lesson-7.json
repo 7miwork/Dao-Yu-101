@@ -1,0 +1,15 @@
+{
+  "id": "lesson-7",
+  "title": "Introduction to Redstone",
+  "description": "Learn the basics of redstone circuits",
+  "islandId": "minecraft-basics",
+  "order": 7,
+  "content": {
+    "video": null,
+    "text": "<h3>Redstone Basics</h3><p>Redstone is Minecraft's version of electricity. It allows you to create circuits and mechanisms.</p><h4>Redstone Components:</h4><ul><li><strong>Redstone Dust</strong> - Carries power like wires</li><li><strong>Redstone Torch</strong> - Provides power</li><li><strong>Lever</strong> - Toggle switch</li><li><strong>Button</strong> - Momentary switch</li><li><strong>Redstone Repeater</strong> - Extends signal distance</li></ul><h4>Simple Circuit:</h4><ul><li>Place a lever on a block</li><li>Place redstone dust next to it</li><li>Connect to a redstone lamp</li><li>Toggle the lever to turn the lamp on/off</li></ul><h4>Redstone Rules:</h4><ul><li>Power travels up to 15 blocks</li><li>Repeaters extend the signal</li><li>Power can activate doors, pistons, and more</li><li>Circuits can be complex or simple</li></ul>",
+    "task": "Create a simple redstone circuit with a lever, redstone dust, and a redstone lamp."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-8",
+  "prevLesson": "lesson-6"
+}

@@ -5,63 +5,82 @@
 /* Base theme variables */
 :root {
   --transition-speed: 0.3s;
+  --ocean-light: #87CEEB;
+  --ocean-medium: #4682B4;
+  --ocean-dark: #2E5A7E;
 }
 
-/* Island Theme - Nature, soft colors */
+/* Island Theme - Nature, soft colors, rounded shapes */
 .theme-island {
-  --bg-primary: #f0fdf4;
+  --bg-primary: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
   --bg-secondary: #dcfce7;
-  --bg-card: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.95);
   --text-primary: #166534;
   --text-secondary: #15803d;
   --accent: #4ade80;
   --accent-hover: #22c55e;
   --border: #86efac;
   --shadow: rgba(74, 222, 128, 0.2);
+  --ocean-light: #87CEEB;
+  --ocean-medium: #4682B4;
+  --ocean-dark: #2E5A7E;
 }
 
 .theme-island body {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .theme-island .card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 6px var(--shadow);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .theme-island .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
   color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
 }
 
 .theme-island .btn-primary:hover {
-  background: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #16a34a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5);
 }
 
-/* Minecraft Theme - Pixel/block style */
+/* Minecraft Theme - Pixel/block style, earthy colors, square shapes */
 .theme-minecraft {
-  --bg-primary: #87ceeb;
-  --bg-secondary: #90ee90;
-  --bg-card: #f5deb3;
-  --text-primary: #2f4f4f;
-  --text-secondary: #556b2f;
-  --accent: #8b4513;
+  --bg-primary: linear-gradient(135deg, #87CEEB 0%, #90EE90 50%, #F4D03F 100%);
+  --bg-secondary: #90EE90;
+  --bg-card: #F5DEB3;
+  --text-primary: #2F4F4F;
+  --text-secondary: #556B2F;
+  --accent: #8B4513;
   --accent-hover: #654321;
-  --border: #228b22;
+  --border: #228B22;
   --shadow: rgba(139, 69, 19, 0.3);
+  --ocean-light: #87CEEB;
+  --ocean-medium: #4682B4;
+  --ocean-dark: #2E5A7E;
 }
 
 .theme-minecraft body {
-  background: linear-gradient(135deg, #87ceeb 0%, #90ee90 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Courier New', monospace;
+  image-rendering: pixelated;
 }
 
 .theme-minecraft .card {
   background: var(--bg-card);
   border: 4px solid var(--border);
+  border-radius: 0;
   box-shadow: 8px 8px 0 var(--shadow);
   image-rendering: pixelated;
 }
@@ -70,6 +89,10 @@
   background: var(--accent);
   color: white;
   border: 4px solid var(--border);
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .theme-minecraft .btn-primary:hover {
@@ -78,46 +101,69 @@
   box-shadow: 4px 4px 0 var(--shadow);
 }
 
-/* Modern Theme - Clean UI */
+.theme-minecraft .card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--shadow);
+}
+
+/* Modern Theme - Clean minimal UI, professional colors */
 .theme-modern {
-  --bg-primary: #f8fafc;
+  --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   --bg-secondary: #e2e8f0;
-  --bg-card: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.98);
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --accent: #3b82f6;
   --accent-hover: #1d4ed8;
   --border: #cbd5e1;
   --shadow: rgba(59, 130, 246, 0.15);
+  --ocean-light: #87CEEB;
+  --ocean-medium: #4682B4;
+  --ocean-dark: #2E5A7E;
 }
 
 .theme-modern body {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: var(--bg-primary);
   color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .theme-modern .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
+  border-radius: 16px;
   box-shadow: 0 10px 25px var(--shadow);
+  backdrop-filter: blur(20px);
 }
 
 .theme-modern .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
   color: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  font-weight: 600;
+  letter-spacing: 0.025em;
 }
 
 .theme-modern .btn-primary:hover {
-  background: var(--accent-hover);
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+}
+
+.theme-modern .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--shadow);
 }
 
 /* Common component styles */
 .card {
-  @apply rounded-xl p-6 transition-all duration-300;
+  @apply transition-all duration-300 cursor-pointer;
 }
 
 .btn-primary {
-  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer;
+  @apply px-6 py-3 font-semibold transition-all duration-300 cursor-pointer;
 }
 
 .btn-primary:active {
@@ -126,8 +172,8 @@
 
 /* Theme-specific animations */
 .theme-island .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px var(--shadow);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px var(--shadow);
 }
 
 .theme-minecraft .card:hover {
@@ -136,18 +182,189 @@
 }
 
 .theme-modern .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.01);
   box-shadow: 0 20px 40px var(--shadow);
+}
+
+/* Floating animation for islands */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.floating-island {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-island:nth-child(even) {
+  animation: float-delayed 5s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Pulse animations */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px var(--accent);
+    opacity: 1;
+  }
+  50% { 
+    box-shadow: 0 0 40px var(--accent);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { 
+    border-color: var(--accent);
+  }
+  50% { 
+    border-color: var(--accent-hover);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.pulse-border {
+  animation: pulse-border 2s infinite;
+}
+
+/* Wave animations for ocean background */
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes wave-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wave {
+  animation: wave 20s infinite linear;
+}
+
+.wave-reverse {
+  animation: wave-reverse 25s infinite linear;
+}
+
+/* Progress bar animations */
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: progress-shine 2s infinite;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px var(--accent);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .theme-minecraft body {
-    font-size: 10px;
+    font-size: 12px;
   }
   
   .theme-minecraft .card {
     border-width: 2px;
     box-shadow: 4px 4px 0 var(--shadow);
+  }
+  
+  .theme-minecraft .btn-primary {
+    border-width: 2px;
+  }
+  
+  .floating-island {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-island .card,
+  .theme-modern .card {
+    border-radius: 12px;
+  }
+  
+  .theme-minecraft .card {
+    border-radius: 0;
+  }
+  
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-island {
+    animation: none;
+  }
+}
+
+/* Focus states for accessibility */
+.btn-primary:focus,
+.card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-primary:focus:not(:focus-visible),
+.card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-island .card,
+  .theme-modern .card {
+    border-width: 3px;
+  }
+  
+  .theme-minecraft .card {
+    border-width: 6px;
   }
 }

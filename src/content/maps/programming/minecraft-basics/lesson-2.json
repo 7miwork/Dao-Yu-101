@@ -1,0 +1,15 @@
+{
+  "id": "lesson-2",
+  "title": "Breaking and Placing Blocks",
+  "description": "Learn the basics of block manipulation",
+  "islandId": "minecraft-basics",
+  "order": 2,
+  "content": {
+    "video": null,
+    "text": "<h3>Block Basics</h3><p>In Minecraft, everything is made of blocks. Learning to break and place blocks is fundamental to building and creating.</p><h4>Breaking Blocks:</h4><ul><li>Left-click and hold on a block to break it</li><li>Different blocks take different amounts of time to break</li><li>Some blocks require specific tools to break efficiently</li><li>Broken blocks drop as items you can collect</li></ul><h4>Placing Blocks:</h4><ul><li>Select a block from your inventory</li><li>Right-click to place it in the world</li><li>You can place blocks on top of, beside, or against other blocks</li><li>Some blocks have special placement rules</li></ul><h4>Block Types:</h4><ul><li><strong>Natural blocks</strong> - Dirt, stone, wood, sand</li><li><strong>Crafted blocks</strong> - Planks, bricks, glass</li><li><strong>Functional blocks</strong> - Crafting tables, furnaces, chests</li></ul>",
+    "task": "Practice breaking different types of blocks (dirt, wood, stone) and then place them to create a small structure."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-3",
+  "prevLesson": "lesson-1"
+}

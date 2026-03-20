@@ -1,0 +1,15 @@
+{
+  "id": "draw-lesson-1",
+  "title": "Introduction to Drawing",
+  "description": "Getting started with drawing",
+  "islandId": "drawing",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Introduction to Drawing</h3><p>Drawing is a form of visual art in which an artist uses instruments to mark paper or other two-dimensional surfaces to create images.</p><h4>What You'll Learn:</h4><ul><li>Basic drawing techniques</li><li>Understanding shapes and forms</li><li>Shading and light</li><li>Creating your first sketches</li></ul><h4>Key Concepts:</h4><ul><li><strong>Line</strong> - The basic element of drawing</li><li><strong>Shape</strong> - Two-dimensional forms</li><li><strong>Form</strong> - Three-dimensional shapes</li><li><strong>Value</strong> - Lightness or darkness of tones</li></ul>",
+    "task": "Draw basic shapes: circle, square, triangle, and rectangle"
+  },
+  "mcworld": "drawing",
+  "nextLesson": null,
+  "prevLesson": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lesson-3",
+  "title": "Your First Crafting Table",
+  "description": "Learn to craft essential items",
+  "islandId": "minecraft-basics",
+  "order": 3,
+  "content": {
+    "video": null,
+    "text": "<h3>Crafting Basics</h3><p>Crafting is how you create tools, weapons, and other useful items in Minecraft. The crafting table is your most important tool.</p><h4>Making a Crafting Table:</h4><ul><li>Open your inventory (press E)</li><li>Turn wood logs into planks (right-click wood in the 2x2 grid)</li><li>Place 4 planks in the 2x2 grid to make a crafting table</li><li>Place the crafting table in the world</li></ul><h4>Using the Crafting Table:</h4><ul><li>Right-click the crafting table to open the 3x3 crafting grid</li><li>The larger grid allows more complex recipes</li><li>Many items can only be crafted on a crafting table</li></ul><h4>Essential First Crafts:</h4><ul><li><strong>Sticks</strong> - Used for tools and weapons</li><li><strong>Wooden Pickaxe</strong> - For mining stone</li><li><strong>Wooden Sword</strong> - For protection</li><li><strong>Torches</strong> - For lighting areas</li></ul>",
+    "task": "Gather wood, make a crafting table, and craft a wooden pickaxe and wooden sword."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-4",
+  "prevLesson": "lesson-2"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "science",
+  "title": "Science",
+  "description": "Discover the wonders of the natural world",
+  "islands": ["physics"]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "ancient",
+  "title": "Ancient Civilizations",
+  "description": "Explore ancient worlds",
+  "password": "ancient123",
+  "lessons": ["anc-lesson-1"]
+}

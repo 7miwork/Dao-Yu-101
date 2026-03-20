@@ -1,0 +1,15 @@
+{
+  "id": "anc-lesson-1",
+  "title": "Introduction to Ancient Civilizations",
+  "description": "Explore ancient worlds",
+  "islandId": "ancient",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Introduction to Ancient Civilizations</h3><p>Ancient civilizations were complex societies that developed writing, agriculture, government, and monumental architecture.</p><h4>What You'll Learn:</h4><ul><li>Major ancient civilizations</li><li>Their contributions to modern society</li><li>Daily life in ancient times</li><li>Archaeological discoveries</li></ul><h4>Key Civilizations:</h4><ul><li><strong>Mesopotamia</strong> - The cradle of civilization</li><li><strong>Egypt</strong> - Pyramids and pharaohs</li><li><strong>Greece</strong> - Democracy and philosophy</li><li><strong>Rome</strong> - Law and engineering</li></ul>",
+    "task": "Research one ancient civilization and list three of its major achievements"
+  },
+  "mcworld": "ancient",
+  "nextLesson": null,
+  "prevLesson": null
+}

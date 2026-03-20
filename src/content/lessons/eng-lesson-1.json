@@ -1,0 +1,15 @@
+{
+  "id": "eng-lesson-1",
+  "title": "Introduction to English",
+  "description": "Getting started with English",
+  "islandId": "english",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Introduction to English</h3><p>English is a West Germanic language that originated in Anglo-Saxon England and has become the most widely spoken language in the world.</p><h4>What You'll Learn:</h4><ul><li>Basic English grammar and vocabulary</li><li>Reading and writing skills</li><li>Conversation and pronunciation</li><li>English in daily life</li></ul><h4>Key Concepts:</h4><ul><li><strong>Alphabet</strong> - 26 letters from A to Z</li><li><strong>Vowels</strong> - A, E, I, O, U</li><li><strong>Consonants</strong> - All other letters</li><li><strong>Words</strong> - Units of meaning</li></ul>",
+    "task": "Practice writing the English alphabet from A to Z"
+  },
+  "mcworld": "english",
+  "nextLesson": null,
+  "prevLesson": null
+}

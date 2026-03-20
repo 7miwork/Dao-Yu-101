@@ -1,0 +1,15 @@
+{
+  "id": "lesson-11",
+  "title": "Introduction to Armor and Weapons",
+  "description": "Learn to craft and use armor and weapons",
+  "islandId": "minecraft-basics",
+  "order": 11,
+  "content": {
+    "video": null,
+    "text": "<h3>Armor and Weapons</h3><p>Armor protects you from damage, and weapons help you fight mobs and other players.</p><h4>Armor Types:</h4><ul><li><strong>Leather</strong> - Basic protection</li><li><strong>Iron</strong> - Good protection</li><li><strong>Gold</strong> - Fast enchanting</li><li><strong>Diamond</strong> - Best protection</li><li><strong>Netherite</strong> - Ultimate protection</li></ul><h4>Armor Pieces:</h4><ul><li>Helmet - Head protection</li><li>Chestplate - Body protection</li><li>Leggings - Leg protection</li><li>Boots - Foot protection</li></ul><h4>Weapons:</h4><ul><li><strong>Sword</strong> - Melee combat</li><li><strong>Bow</strong> - Ranged combat</li><li><strong>Crossbow</strong> - Ranged combat</li><li><strong>Trident</strong> - Ranged and melee</li></ul><h4>Crafting Tips:</h4><ul><li>Diamond is the best material for tools</li><li>Iron is a good balance of durability and availability</li><li>Always carry a sword for protection</li></ul>",
+    "task": "Craft a full set of iron armor and an iron sword."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-12",
+  "prevLesson": "lesson-10"
+}

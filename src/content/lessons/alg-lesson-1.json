@@ -1,0 +1,15 @@
+{
+  "id": "alg-lesson-1",
+  "title": "Introduction to Algebra",
+  "description": "What is algebra?",
+  "islandId": "algebra",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Introduction to Algebra</h3><p>Algebra is a branch of mathematics that uses symbols and letters to represent numbers and quantities in formulas and equations.</p><h4>What You'll Learn:</h4><ul><li>Understanding variables and constants</li><li>Basic algebraic expressions</li><li>Solving simple equations</li><li>Real-world applications of algebra</li></ul><h4>Key Concepts:</h4><ul><li><strong>Variables</strong> - Letters that represent unknown values</li><li><strong>Constants</strong> - Fixed numerical values</li><li><strong>Expressions</strong> - Combinations of variables and constants</li><li><strong>Equations</strong> - Mathematical statements with equals signs</li></ul>",
+    "task": "Identify variables and constants in the expression: 3x + 5 = 11"
+  },
+  "mcworld": "algebra",
+  "nextLesson": null,
+  "prevLesson": null
+}

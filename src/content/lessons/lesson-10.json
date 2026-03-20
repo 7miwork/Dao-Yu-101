@@ -1,0 +1,17 @@
+{
+  "id": "lesson-10",
+  "title": "Introduction to Scoreboards",
+  "description": "Learn to track player stats and create games",
+  "islandId": "minecraft-basics",
+  "order": 10,
+  "content": {
+    "video": null,
+    "text": "<h3>Scoreboards</h3><p>Scoreboards track player statistics and can be used to create games and competitions.</p><h4>Creating a Scoreboard:</h4><ul><li>Use /scoreboard objectives add</li><li>Choose a name for your objective</li><li>Select a criteria (health, kills, etc.)</li><li>Set a display name</li></ul><h4>Common Criteria:</h4><ul><li><strong>health</strong> - Player health</li><li><strong>playerKillCount</strong> - Player kills</li><li><strong>deathCount</strong> - Player deaths</li><li><strong>dummy</strong> - Custom values</li></ul><h4>Scoreboard Commands:</h4><ul><li>/scoreboard players set - Set a score</li><li>/scoreboard players add - Add to a score</li><li>/scoreboard players remove - Remove from a score</li><li>/scoreboard objectives setdisplay - Display scores</li></ul><h4>Example:</h4><pre><code>/scoreboard objectives add points dummy Points
+/scoreboard objectives setdisplay sidebar points
+/scoreboard players set @s points 10</code></pre>",
+    "task": "Create a scoreboard for tracking points and set your score to 10."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-11",
+  "prevLesson": "lesson-9"
+}

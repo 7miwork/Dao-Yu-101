@@ -1,0 +1,15 @@
+{
+  "id": "lesson-12",
+  "title": "Introduction to Enchanting",
+  "description": "Learn to enchant items for special abilities",
+  "islandId": "minecraft-basics",
+  "order": 12,
+  "content": {
+    "video": null,
+    "text": "<h3>Enchanting</h3><p>Enchanting adds special abilities to your tools, weapons, and armor.</p><h4>Enchanting Setup:</h4><ul><li>Craft an Enchanting Table</li><li>Surround it with bookshelves for better enchantments</li><li>You need lapis lazuli and experience levels</li></ul><h4>Common Enchantments:</h4><ul><li><strong>Sharpness</strong> - More sword damage</li><li><strong>Protection</strong> - Reduces damage taken</li><li><strong>Efficiency</strong> - Faster mining</li><li><strong>Unbreaking</strong> - Items last longer</li><li><strong>Mending</strong> - Repairs with experience</li></ul><h4>Enchanting Tips:</h4><ul><li>Higher level enchantments need more bookshelves</li><li>You can combine enchantments on an anvil</li><li>Some enchantments are mutually exclusive</li><li>Save your best enchantments for diamond gear</li></ul><h4>Experience Levels:</h4><ul><li>Gain experience by mining, killing mobs, and smelting</li><li>Enchanting costs experience levels</li><li>Higher enchantments cost more levels</li></ul>",
+    "task": "Create an enchanting table and surround it with bookshelves. Try enchanting a tool."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-13",
+  "prevLesson": "lesson-11"
+}

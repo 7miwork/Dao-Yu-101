@@ -1,0 +1,15 @@
+{
+  "id": "lesson-1",
+  "title": "Welcome to Minecraft Education",
+  "description": "Getting started with Minecraft Education Edition",
+  "islandId": "minecraft-basics",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Welcome to Minecraft Education!</h3><p>Minecraft Education Edition is a game-based learning platform that promotes creativity, collaboration, and problem-solving.</p><h4>What You'll Learn:</h4><ul><li>How to navigate the Minecraft world</li><li>Basic controls and movement</li><li>Understanding the game interface</li><li>Setting up your first world</li></ul><h4>Getting Started:</h4><p>When you first open Minecraft Education, you'll see the main menu. From here, you can create new worlds, join multiplayer games, or access lesson plans.</p><h4>Key Controls:</h4><ul><li><strong>WASD</strong> - Move around</li><li><strong>Space</strong> - Jump</li><li><strong>Mouse</strong> - Look around</li><li><strong>Left Click</strong> - Break blocks</li><li><strong>Right Click</strong> - Place blocks</li></ul>",
+    "task": "Open Minecraft Education and create a new world. Practice moving around using WASD keys and jumping with Space."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-2",
+  "prevLesson": null
+}

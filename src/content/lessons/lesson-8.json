@@ -1,0 +1,15 @@
+{
+  "id": "lesson-8",
+  "title": "Introduction to Command Blocks",
+  "description": "Learn to use command blocks for automation",
+  "islandId": "minecraft-basics",
+  "order": 8,
+  "content": {
+    "video": null,
+    "text": "<h3>Command Blocks</h3><p>Command blocks allow you to run commands automatically. They're powerful tools for creating custom experiences.</p><h4>Getting Command Blocks:</h4><ul><li>Enable cheats in your world</li><li>Use the command: /give @s command_block</li><li>Place the command block</li><li>Right-click to open its interface</li></ul><h4>Basic Commands:</h4><ul><li><strong>/give</strong> - Give items to players</li><li><strong>/tp</strong> - Teleport players</li><li><strong>/setblock</strong> - Place blocks</li><li><strong>/fill</strong> - Fill areas with blocks</li><li><strong>/say</strong> - Send messages</li></ul><h4>Command Block Types:</h4><ul><li><strong>Impulse</strong> - Runs once when activated</li><li><strong>Chain</strong> - Runs after the previous block</li><li><strong>Repeat</strong> - Runs continuously</li></ul>",
+    "task": "Place a command block and use the /say command to display a message when activated."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-9",
+  "prevLesson": "lesson-7"
+}

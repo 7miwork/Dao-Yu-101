@@ -1,0 +1,7 @@
+{
+  "id": "english",
+  "title": "English",
+  "description": "Master the English language",
+  "password": "english123",
+  "lessons": ["eng-lesson-1"]
+}

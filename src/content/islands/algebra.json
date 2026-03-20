@@ -1,0 +1,7 @@
+{
+  "id": "algebra",
+  "title": "Algebra",
+  "description": "Master algebraic concepts",
+  "password": "algebra123",
+  "lessons": ["alg-lesson-1"]
+}

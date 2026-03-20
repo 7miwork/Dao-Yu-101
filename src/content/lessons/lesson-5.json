@@ -1,0 +1,15 @@
+{
+  "id": "lesson-5",
+  "title": "Building Your First Shelter",
+  "description": "Learn to build a safe place to survive the night",
+  "islandId": "minecraft-basics",
+  "order": 5,
+  "content": {
+    "video": null,
+    "text": "<h3>Building a Shelter</h3><p>When night falls, hostile mobs spawn. A shelter protects you from these dangers.</p><h4>Why Build a Shelter:</h4><ul><li>Zombies, skeletons, and creepers spawn at night</li><li>You need a safe place to sleep</li><li>Storage for your items</li><li>A base for future expansion</li></ul><h4>Simple Shelter Design:</h4><ul><li>Build walls at least 2 blocks high</li><li>Add a roof to prevent mobs from entering</li><li>Include a door for easy access</li><li>Place torches inside for light</li></ul><h4>Building Tips:</h4><ul><li>Collect plenty of materials before nightfall</li><li>Build near your spawn point</li><li>Keep it simple at first</li><li>You can expand later</li></ul>",
+    "task": "Build a small shelter with walls, a roof, a door, and torches before nightfall."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-6",
+  "prevLesson": "lesson-4"
+}

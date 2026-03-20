@@ -44,7 +44,11 @@
       "previous": "Previous Lesson",
       "next": "Next Lesson",
       "back": "Back to Island"
-    }
+    },
+    "completed": "Completed",
+    "current": "Current",
+    "available": "Available",
+    "locked": "Locked"
   },
   "about": {
     "title": "About Dao-Yu-101",
@@ -84,6 +88,7 @@
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",
-    "notFound": "Page not found"
+    "notFound": "Page not found",
+    "back": "Back"
   }
 }

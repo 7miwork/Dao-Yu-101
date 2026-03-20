@@ -1,0 +1,23 @@
+{
+  "id": "lesson-9",
+  "title": "Introduction to Functions",
+  "description": "Learn to create and use functions",
+  "islandId": "minecraft-basics",
+  "order": 9,
+  "content": {
+    "video": null,
+    "text": "<h3>Functions in Minecraft</h3><p>Functions are text files containing multiple commands. They help organize and automate complex tasks.</p><h4>Creating a Function:</h4><ul><li>Open your world folder</li><li>Navigate to datapacks folder</li><li>Create a new folder for your datapack</li><li>Create a function file with .mcfunction extension</li></ul><h4>Function Structure:</h4><ul><li>Each line is a command</li><li>Comments start with #</li><li>Commands run in order</li><li>No need for / at the start</li></ul><h4>Example Function:</h4><pre><code># Give player items
+give @s diamond 5
+give @s iron_ingot 10
+
+# Teleport player
+tp @s 0 64 0
+
+# Display message
+say Welcome to the game!</code></pre><h4>Running Functions:</h4><ul><li>Use /function command</li><li>Can be triggered by command blocks</li><li>Can be called by other functions</li></ul>",
+    "task": "Create a simple function that gives the player some items and displays a welcome message."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-10",
+  "prevLesson": "lesson-8"
+}

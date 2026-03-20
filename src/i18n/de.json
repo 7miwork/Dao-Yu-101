@@ -44,7 +44,11 @@
       "previous": "Vorherige Lektion",
       "next": "Nächste Lektion",
       "back": "Zurück zur Insel"
-    }
+    },
+    "completed": "Abgeschlossen",
+    "current": "Aktuell",
+    "available": "Verfügbar",
+    "locked": "Gesperrt"
   },
   "about": {
     "title": "Über Dao-Yu-101",
@@ -84,6 +88,7 @@
   "common": {
     "loading": "Laden...",
     "error": "Ein Fehler ist aufgetreten",
-    "notFound": "Seite nicht gefunden"
+    "notFound": "Seite nicht gefunden",
+    "back": "Zurück"
   }
 }

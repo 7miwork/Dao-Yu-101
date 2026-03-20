@@ -1,0 +1,7 @@
+{
+  "id": "drawing",
+  "title": "Drawing",
+  "description": "Learn to draw and sketch",
+  "password": "drawing123",
+  "lessons": ["draw-lesson-1"]
+}

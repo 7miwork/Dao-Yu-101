@@ -1,0 +1,15 @@
+{
+  "id": "lesson-6",
+  "title": "Farming and Food",
+  "description": "Learn to grow crops and manage food",
+  "islandId": "minecraft-basics",
+  "order": 6,
+  "content": {
+    "video": null,
+    "text": "<h3>Farming Basics</h3><p>Food is essential for survival. Farming provides a reliable food source.</p><h4>Getting Seeds:</h4><ul><li>Break grass to get seeds</li><li>Find villages with farms</li><li>Some crops drop seeds when harvested</li></ul><h4>Creating a Farm:</h4><ul><li>Till dirt with a hoe to create farmland</li><li>Plant seeds on the farmland</li><li>Water nearby helps crops grow faster</li><li>Wait for crops to mature</li></ul><h4>Common Crops:</h4><ul><li><strong>Wheat</strong> - Used for bread and breeding animals</li><li><strong>Carrots</strong> - Good food source</li><li><strong>Potatoes</strong> - Can be cooked for better food</li><li><strong>Beetroot</strong> - Used for soup and dye</li></ul><h4>Food Tips:</h4><ul><li>Cook food for better hunger restoration</li><li>Keep a variety of food sources</li><li>Don't let your hunger bar reach zero</li></ul>",
+    "task": "Create a small wheat farm and harvest the wheat to make bread."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-7",
+  "prevLesson": "lesson-5"
+}

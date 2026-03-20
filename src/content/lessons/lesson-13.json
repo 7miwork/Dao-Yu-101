@@ -1,0 +1,15 @@
+{
+  "id": "lesson-13",
+  "title": "Introduction to Redstone Circuits",
+  "description": "Learn to create complex redstone mechanisms",
+  "islandId": "minecraft-basics",
+  "order": 13,
+  "content": {
+    "video": null,
+    "text": "<h3>Advanced Redstone</h3><p>Redstone circuits can create complex mechanisms like doors, traps, and automated farms.</p><h4>Redstone Components:</h4><ul><li><strong>Redstone Torch</strong> - Power source</li><li><strong>Redstone Repeater</strong> - Extends signal</li><li><strong>Redstone Comparator</strong> - Compares signals</li><li><strong>Piston</strong> - Pushes blocks</li><li><strong>Sticky Piston</strong> - Pushes and pulls blocks</li></ul><h4>Simple Circuits:</h4><ul><li>AND gate - Both inputs must be on</li><li>OR gate - Either input can be on</li><li>NOT gate - Inverts the signal</li><li>Clock - Repeating signal</li></ul><h4>Building Tips:</h4><ul><li>Plan your circuit before building</li><li>Use repeaters for long distances</li><li>Test each part as you build</li><li>Keep circuits compact</li></ul><h4>Example Projects:</h4><ul><li>Automatic door</li><li>Hidden staircase</li><li>Item sorter</li><li>Trap mechanisms</li></ul>",
+    "task": "Build a simple redstone door that opens when you step on a pressure plate."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-14",
+  "prevLesson": "lesson-12"
+}

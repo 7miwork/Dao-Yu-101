@@ -1,0 +1,15 @@
+{
+  "id": "lesson-15",
+  "title": "Final Project: Your First Creation",
+  "description": "Apply everything you've learned in a final project",
+  "islandId": "minecraft-basics",
+  "order": 15,
+  "content": {
+    "video": null,
+    "text": "<h3>Final Project</h3><p>Congratulations on completing the Minecraft Basics course! Now it's time to put everything together.</p><h4>Project Requirements:</h4><ul><li>Build a structure using different block types</li><li>Include at least one redstone mechanism</li><li>Add proper lighting</li><li>Create a functional area (storage, crafting, etc.)</li></ul><h4>Project Ideas:</h4><ul><li>A medieval castle with a working drawbridge</li><li>A modern house with automatic lights</li><li>A farm with automated harvesting</li><li>A hidden base with secret entrance</li></ul><h4>Steps to Complete:</h4><ul><li>Plan your project on paper first</li><li>Gather all necessary materials</li><li>Build the foundation and walls</li><li>Add redstone mechanisms</li><li>Decorate and add details</li></ul><h4>Tips for Success:</h4><ul><li>Start simple and add complexity</li><li>Test your redstone as you build</li><li>Don't be afraid to experiment</li><li>Have fun and be creative!</li></ul>",
+    "task": "Create your own project that combines building, redstone, and crafting. Share it with others!"
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": null,
+  "prevLesson": "lesson-14"
+}

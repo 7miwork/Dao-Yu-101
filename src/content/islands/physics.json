@@ -1,0 +1,7 @@
+{
+  "id": "physics",
+  "title": "Physics",
+  "description": "Understand the laws of nature",
+  "password": "physics123",
+  "lessons": ["phy-lesson-1"]
+}

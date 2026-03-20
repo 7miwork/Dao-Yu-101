@@ -1,0 +1,15 @@
+{
+  "id": "lesson-14",
+  "title": "Introduction to Building Techniques",
+  "description": "Learn advanced building techniques and styles",
+  "islandId": "minecraft-basics",
+  "order": 14,
+  "content": {
+    "video": null,
+    "text": "<h3>Building Techniques</h3><p>Good building techniques make your creations look better and more impressive.</p><h4>Basic Principles:</h4><ul><li>Use different block types for variety</li><li>Add depth with stairs and slabs</li><li>Create patterns and textures</li><li>Use lighting for atmosphere</li></ul><h4>Building Styles:</h4><ul><li><strong>Medieval</strong> - Stone, wood, and thatch</li><li><strong>Modern</strong> - Clean lines, glass, and concrete</li><li><strong>Fantasy</strong> - Magical and whimsical</li><li><strong>Japanese</strong> - Traditional architecture</li></ul><h4>Advanced Techniques:</h4><ul><li>Use slabs for smooth surfaces</li><li>Create arches with stairs</li><li>Add details with fences and walls</li><li>Use different wood types for contrast</li></ul><h4>Tips for Better Builds:</h4><ul><li>Plan your build before starting</li><li>Start with a foundation</li><li>Add details gradually</li><li>Use reference images</li></ul>",
+    "task": "Build a small house using different block types and add details like windows and a roof."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-15",
+  "prevLesson": "lesson-13"
+}

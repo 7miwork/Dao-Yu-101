@@ -1,0 +1,15 @@
+{
+  "id": "lesson-4",
+  "title": "Mining and Resources",
+  "description": "Learn to gather resources from the world",
+  "islandId": "minecraft-basics",
+  "order": 4,
+  "content": {
+    "video": null,
+    "text": "<h3>Mining Basics</h3><p>Mining is how you gather valuable resources like coal, iron, and diamonds from underground.</p><h4>Mining Tools:</h4><ul><li><strong>Pickaxe</strong> - For mining stone and ores</li><li><strong>Shovel</strong> - For digging dirt, sand, and gravel</li><li><strong>Axe</strong> - For chopping wood quickly</li><li>Different materials have different durability and speed</li></ul><h4>Common Ores:</h4><ul><li><strong>Coal</strong> - Found near surface, used for torches and fuel</li><li><strong>Iron</strong> - Found underground, used for better tools</li><li><strong>Gold</strong> - Found deeper, used for special items</li><li><strong>Diamond</strong> - Very rare, found at deep levels</li></ul><h4>Mining Tips:</h4><ul><li>Always bring torches for light</li><li>Watch out for lava</li><li>Don't dig straight down</li><li>Mark your path to find your way back</li></ul>",
+    "task": "Craft a stone pickaxe and mine until you find coal ore. Make torches with the coal."
+  },
+  "mcworld": "minecraft-basics",
+  "nextLesson": "lesson-5",
+  "prevLesson": "lesson-3"
+}

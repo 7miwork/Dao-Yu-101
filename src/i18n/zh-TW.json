@@ -44,7 +44,11 @@
       "previous": "上一課",
       "next": "下一課",
       "back": "返回島嶼"
-    }
+    },
+    "completed": "已完成",
+    "current": "目前",
+    "available": "可學習",
+    "locked": "已鎖定"
   },
   "about": {
     "title": "關於道宇101",
@@ -84,6 +88,7 @@
   "common": {
     "loading": "載入中...",
     "error": "發生錯誤",
-    "notFound": "找不到頁面"
+    "notFound": "找不到頁面",
+    "back": "返回"
   }
 }

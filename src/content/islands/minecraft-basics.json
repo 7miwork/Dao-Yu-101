@@ -1,16 +1,7 @@
 {
   "id": "minecraft-basics",
-  "name": "Minecraft Basics",
-  "icon": "⛏️",
-  "description": "Learn the fundamentals of Minecraft",
-  "archipelagoId": "programming",
-  "password": "minecraft123",
-  "lessons": [
-    "mc-lesson-1",
-    "mc-lesson-2",
-    "mc-lesson-3",
-    "mc-lesson-4",
-    "mc-lesson-5"
-  ],
-  "worldFile": "/worlds/minecraft-basics.mcworld"
+  "title": "Minecraft Basics",
+  "description": "Introduction to coding with Minecraft Education",
+  "password": "block123",
+  "lessons": ["lesson-1", "lesson-2", "lesson-3", "lesson-4", "lesson-5", "lesson-6", "lesson-7", "lesson-8", "lesson-9", "lesson-10", "lesson-11", "lesson-12", "lesson-13", "lesson-14", "lesson-15"]
 }
