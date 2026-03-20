@@ -247,29 +247,15 @@ function handleLockedIslandClick(island) {
 /* ✅ FIXED GRID */
 .islands-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+  max-width: 1600px;
   margin: 0 auto;
-}
-
-/* Responsive */
-@media (min-width: 640px) {
-  .islands-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .islands-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* CARD */
 .island-card {
-  max-width: 260px;
-  margin: 0 auto;
+  width: 100%;
   transition: 0.3s;
 }
 
