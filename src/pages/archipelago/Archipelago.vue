@@ -400,9 +400,9 @@ function handleLockedIslandClick(island) {
 .islands-container {
   position: relative;
   width: 100%;
-  max-width: 1000px;
-  height: 600px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 /* Connection Lines */
@@ -433,8 +433,9 @@ function handleLockedIslandClick(island) {
 .island-node {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 200px;
+  width: 220px;
   transition: all 0.4s ease;
+  margin: 1rem;
 }
 
 .island-node.unlocked {
@@ -452,14 +453,21 @@ function handleLockedIslandClick(island) {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .island-link:hover {
   transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .island-locked:hover {
   transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Island Visual */
@@ -534,24 +542,31 @@ function handleLockedIslandClick(island) {
   text-align: center;
   background: var(--bg-card, rgba(255, 255, 255, 0.95));
   border-radius: 15px;
-  padding: 1rem;
+  padding: 1.25rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .island-name {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   color: var(--text-primary, #166534);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .island-description {
-  font-size: 0.8rem;
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
   color: var(--text-secondary, #15803d);
-  line-height: 1.3;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
 .island-stats {
@@ -612,7 +627,11 @@ function handleLockedIslandClick(island) {
 @media (max-width: 1024px) {
   .islands-container {
     height: auto;
-    min-height: 800px;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
   }
   
   .island-node {
@@ -621,7 +640,7 @@ function handleLockedIslandClick(island) {
     top: auto !important;
     transform: none;
     width: 100%;
-    margin-bottom: 2rem;
+    margin: 0;
   }
   
   .connection-lines {
@@ -638,6 +657,12 @@ function handleLockedIslandClick(island) {
 }
 
 @media (max-width: 768px) {
+  .islands-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
   .map-header {
     flex-direction: column;
     gap: 1rem;
@@ -701,6 +726,11 @@ function handleLockedIslandClick(island) {
 }
 
 @media (max-width: 480px) {
+  .islands-container {
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
   .back-button {
     padding: 0.5rem 1rem;
   }
