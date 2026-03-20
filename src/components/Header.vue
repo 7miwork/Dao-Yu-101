@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
         <router-link to="/" class="flex items-center gap-3">
-          <img src="/Dao-Yu-101/logo/logo.svg" alt="Dao-Yu-101 Logo" class="h-8 md:h-10 w-auto" />
+          <img src="/logo/logo.svg" alt="Dao-Yu-101 Logo" class="h-8 md:h-10 w-auto" />
           <span class="font-bold text-xl">Dao-Yu-101</span>
         </router-link>
 
