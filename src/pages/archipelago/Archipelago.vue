@@ -244,18 +244,23 @@ function handleLockedIslandClick(island) {
   padding: 2rem;
 }
 
-/* ✅ FIXED GRID */
+/* FLEXBASIERTER RESPONSIVER CONTAINER */
 .islands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 3rem;
-  max-width: 1600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 1.5rem;
+  width: 100%;
 }
 
 /* CARD */
 .island-card {
   width: 100%;
+  max-width: 220px;
+  position: static;
   transition: 0.3s;
 }
 
