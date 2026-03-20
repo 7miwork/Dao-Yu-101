@@ -1,0 +1,13 @@
+{
+  "id": "mc-lesson-2",
+  "title": "Crafting Basics",
+  "description": "Learn essential crafting recipes",
+  "islandId": "minecraft-basics",
+  "order": 2,
+  "content": {
+    "video": null,
+    "text": "<h3>Crafting in Minecraft</h3><p>Crafting is one of the most important mechanics in Minecraft. It allows you to create tools, weapons, armor, and many other items.</p><h4>The Crafting Grid:</h4><p>The basic crafting grid is 2x2, accessible from your inventory. For more complex recipes, you'll need a Crafting Table (3x3 grid).</p><h4>Essential First Recipes:</h4><ul><li><strong>Crafting Table</strong> - 4 wooden planks</li><li><strong>Sticks</strong> - 2 wooden planks (vertical)</li><li><strong>Wooden Pickaxe</strong> - 3 planks + 2 sticks</li><li><strong>Wooden Sword</strong> - 2 planks + 1 stick</li></ul><h4>Tips:</h4><p>Always craft a Crafting Table first! It opens up many more crafting possibilities.</p>"
+  },
+  "nextLesson": "mc-lesson-3",
+  "prevLesson": "mc-lesson-1"
+}

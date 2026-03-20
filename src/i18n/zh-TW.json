@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "首頁",
+    "about": "關於",
+    "shop": "商店"
+  },
+  "home": {
+    "hero": {
+      "title": "歡迎來到道宇101",
+      "subtitle": "探索知識的群島",
+      "cta": "開始學習"
+    },
+    "intro": {
+      "title": "全新的學習方式",
+      "description": "道宇101是一個現代化的學習平台，將教育轉變為一場冒險。穿越知識的群島，發現智慧的島嶼，解鎖拓展視野的課程。"
+    },
+    "archipelagos": {
+      "title": "探索群島",
+      "viewAll": "查看全部"
+    }
+  },
+  "archipelago": {
+    "islands": "島嶼",
+    "lessons": "課程"
+  },
+  "island": {
+    "password": {
+      "title": "輸入密碼",
+      "placeholder": "輸入島嶼密碼",
+      "submit": "解鎖",
+      "error": "密碼錯誤，請再試一次。"
+    },
+    "lessons": "課程",
+    "locked": "此島嶼已鎖定。請輸入密碼以存取課程。"
+  },
+  "lesson": {
+    "content": {
+      "title": "課程內容",
+      "video": "影片",
+      "text": "文字",
+      "aiTutor": "AI導師（即將推出）"
+    },
+    "navigation": {
+      "previous": "上一課",
+      "next": "下一課",
+      "back": "返回島嶼"
+    }
+  },
+  "about": {
+    "title": "關於道宇101",
+    "description": "道宇101是一個創新的學習平台，旨在使教育變得有趣且易於接觸。我們的群島結構讓學習者能夠以非線性、探索驅動的方式探索知識。",
+    "features": {
+      "title": "特色",
+      "list": [
+        "多語言支援",
+        "主題自訂",
+        "互動式課程",
+        "Minecraft整合",
+        "AI驅動的導師系統"
+      ]
+    },
+    "mission": {
+      "title": "我們的使命",
+      "description": "透過創造一個適應每位學習者旅程的沉浸式學習體驗，來實現教育的民主化。"
+    }
+  },
+  "shop": {
+    "title": "商店",
+    "comingSoon": "即將推出",
+    "description": "我們的商店正在建設中。很快您就可以購買學習材料、Minecraft世界和獨家內容。"
+  },
+  "themes": {
+    "title": "主題",
+    "island": "島嶼",
+    "minecraft": "Minecraft",
+    "modern": "現代"
+  },
+  "language": {
+    "title": "語言",
+    "en": "English",
+    "de": "Deutsch",
+    "zh-TW": "繁體中文"
+  },
+  "common": {
+    "loading": "載入中...",
+    "error": "發生錯誤",
+    "notFound": "找不到頁面"
+  }
+}

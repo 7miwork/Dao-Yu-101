@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "shop": "Shop"
+  },
+  "home": {
+    "hero": {
+      "title": "Willkommen bei Dao-Yu-101",
+      "subtitle": "Erkunde die Archipele des Wissens",
+      "cta": "Jetzt lernen"
+    },
+    "intro": {
+      "title": "Eine neue Art zu lernen",
+      "description": "Dao-Yu-101 ist eine moderne Lernplattform, die Bildung in ein Abenteuer verwandelt. Navigiere durch Archipele des Wissens, entdecke Inseln der Weisheit und schalte Lektionen frei, die deinen Horizont erweitern."
+    },
+    "archipelagos": {
+      "title": "Archipele erkunden",
+      "viewAll": "Alle anzeigen"
+    }
+  },
+  "archipelago": {
+    "islands": "Inseln",
+    "lessons": "Lektionen"
+  },
+  "island": {
+    "password": {
+      "title": "Passwort eingeben",
+      "placeholder": "Insel-Passwort eingeben",
+      "submit": "Entsperren",
+      "error": "Falsches Passwort. Bitte versuche es erneut."
+    },
+    "lessons": "Lektionen",
+    "locked": "Diese Insel ist gesperrt. Gib das Passwort ein, um auf die Lektionen zuzugreifen."
+  },
+  "lesson": {
+    "content": {
+      "title": "Lektionsinhalt",
+      "video": "Video",
+      "text": "Text",
+      "aiTutor": "KI-Tutor (Demnächst)"
+    },
+    "navigation": {
+      "previous": "Vorherige Lektion",
+      "next": "Nächste Lektion",
+      "back": "Zurück zur Insel"
+    }
+  },
+  "about": {
+    "title": "Über Dao-Yu-101",
+    "description": "Dao-Yu-101 ist eine innovative Lernplattform, die darauf ausgelegt ist, Bildung ansprechend und zugänglich zu machen. Unsere archipelbasierte Struktur ermöglicht es Lernenden, Wissen auf nicht-lineare, entdeckungsgesteuerte Weise zu erkunden.",
+    "features": {
+      "title": "Funktionen",
+      "list": [
+        "Mehrsprachige Unterstützung",
+        "Theme-Anpassung",
+        "Interaktive Lektionen",
+        "Minecraft-Integration",
+        "KI-gestütztes Tutoring"
+      ]
+    },
+    "mission": {
+      "title": "Unsere Mission",
+      "description": "Bildung zu demokratisieren, indem wir ein immersives Lernerlebnis schaffen, das sich an die Reise jedes Lernenden anpasst."
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "comingSoon": "Demnächst",
+    "description": "Unser Shop ist im Aufbau. Bald kannst du Lernmaterialien, Minecraft-Welten und exklusive Inhalte kaufen."
+  },
+  "themes": {
+    "title": "Theme",
+    "island": "Insel",
+    "minecraft": "Minecraft",
+    "modern": "Modern"
+  },
+  "language": {
+    "title": "Sprache",
+    "en": "English",
+    "de": "Deutsch",
+    "zh-TW": "繁體中文"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "notFound": "Seite nicht gefunden"
+  }
+}

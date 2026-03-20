@@ -1,0 +1,89 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "shop": "Shop"
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to Dao-Yu-101",
+      "subtitle": "Explore the Archipelagos of Knowledge",
+      "cta": "Start Learning"
+    },
+    "intro": {
+      "title": "A New Way to Learn",
+      "description": "Dao-Yu-101 is a modern learning platform that transforms education into an adventure. Navigate through archipelagos of knowledge, discover islands of wisdom, and unlock lessons that expand your horizons."
+    },
+    "archipelagos": {
+      "title": "Explore Archipelagos",
+      "viewAll": "View All"
+    }
+  },
+  "archipelago": {
+    "islands": "Islands",
+    "lessons": "lessons"
+  },
+  "island": {
+    "password": {
+      "title": "Enter Password",
+      "placeholder": "Enter island password",
+      "submit": "Unlock",
+      "error": "Incorrect password. Please try again."
+    },
+    "lessons": "Lessons",
+    "locked": "This island is locked. Enter the password to access lessons."
+  },
+  "lesson": {
+    "content": {
+      "title": "Lesson Content",
+      "video": "Video",
+      "text": "Text",
+      "aiTutor": "AI Tutor (Coming Soon)"
+    },
+    "navigation": {
+      "previous": "Previous Lesson",
+      "next": "Next Lesson",
+      "back": "Back to Island"
+    }
+  },
+  "about": {
+    "title": "About Dao-Yu-101",
+    "description": "Dao-Yu-101 is an innovative learning platform designed to make education engaging and accessible. Our archipelago-based structure allows learners to explore knowledge in a non-linear, discovery-driven way.",
+    "features": {
+      "title": "Features",
+      "list": [
+        "Multi-language support",
+        "Theme customization",
+        "Interactive lessons",
+        "Minecraft integration",
+        "AI-powered tutoring"
+      ]
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To democratize education by creating an immersive learning experience that adapts to each learner's journey."
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "comingSoon": "Coming Soon",
+    "description": "Our shop is under construction. Soon you'll be able to purchase learning materials, Minecraft worlds, and exclusive content."
+  },
+  "themes": {
+    "title": "Theme",
+    "island": "Island",
+    "minecraft": "Minecraft",
+    "modern": "Modern"
+  },
+  "language": {
+    "title": "Language",
+    "en": "English",
+    "de": "Deutsch",
+    "zh-TW": "繁體中文"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "notFound": "Page not found"
+  }
+}

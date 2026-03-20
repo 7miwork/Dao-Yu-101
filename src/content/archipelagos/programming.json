@@ -1,0 +1,13 @@
+{
+  "id": "programming",
+  "name": "Programming",
+  "icon": "💻",
+  "description": "Learn coding from basics to advanced concepts",
+  "islands": [
+    "minecraft-basics",
+    "python-intro",
+    "web-dev",
+    "game-dev",
+    "data-structures"
+  ]
+}

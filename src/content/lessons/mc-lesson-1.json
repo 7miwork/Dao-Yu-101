@@ -1,0 +1,13 @@
+{
+  "id": "mc-lesson-1",
+  "title": "Introduction to Minecraft",
+  "description": "Getting started with Minecraft",
+  "islandId": "minecraft-basics",
+  "order": 1,
+  "content": {
+    "video": null,
+    "text": "<h3>Welcome to Minecraft!</h3><p>Minecraft is a sandbox video game where players can build, explore, and survive in a blocky, procedurally-generated 3D world.</p><h4>What You'll Learn:</h4><ul><li>Basic game controls and movement</li><li>Understanding the Minecraft world</li><li>Day and night cycle</li><li>Basic survival skills</li></ul><h4>Getting Started:</h4><p>When you first spawn in Minecraft, you'll appear in a random location in the world. Your first task is to gather basic resources and find shelter before nightfall.</p><h4>Key Controls:</h4><ul><li><strong>WASD</strong> - Move</li><li><strong>Space</strong> - Jump</li><li><strong>Left Click</strong> - Break blocks</li><li><strong>Right Click</strong> - Place blocks</li><li><strong>E</strong> - Open inventory</li></ul>"
+  },
+  "nextLesson": "mc-lesson-2",
+  "prevLesson": null
+}

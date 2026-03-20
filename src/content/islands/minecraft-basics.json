@@ -1,0 +1,16 @@
+{
+  "id": "minecraft-basics",
+  "name": "Minecraft Basics",
+  "icon": "⛏️",
+  "description": "Learn the fundamentals of Minecraft",
+  "archipelagoId": "programming",
+  "password": "minecraft123",
+  "lessons": [
+    "mc-lesson-1",
+    "mc-lesson-2",
+    "mc-lesson-3",
+    "mc-lesson-4",
+    "mc-lesson-5"
+  ],
+  "worldFile": "/worlds/minecraft-basics.mcworld"
+}

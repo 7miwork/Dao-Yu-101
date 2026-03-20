@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base theme variables */
+:root {
+  --transition-speed: 0.3s;
+}
+
+/* Island Theme - Nature, soft colors */
+.theme-island {
+  --bg-primary: #f0fdf4;
+  --bg-secondary: #dcfce7;
+  --bg-card: #ffffff;
+  --text-primary: #166534;
+  --text-secondary: #15803d;
+  --accent: #4ade80;
+  --accent-hover: #22c55e;
+  --border: #86efac;
+  --shadow: rgba(74, 222, 128, 0.2);
+}
+
+.theme-island body {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: var(--text-primary);
+}
+
+.theme-island .card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px var(--shadow);
+}
+
+.theme-island .btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.theme-island .btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Minecraft Theme - Pixel/block style */
+.theme-minecraft {
+  --bg-primary: #87ceeb;
+  --bg-secondary: #90ee90;
+  --bg-card: #f5deb3;
+  --text-primary: #2f4f4f;
+  --text-secondary: #556b2f;
+  --accent: #8b4513;
+  --accent-hover: #654321;
+  --border: #228b22;
+  --shadow: rgba(139, 69, 19, 0.3);
+}
+
+.theme-minecraft body {
+  background: linear-gradient(135deg, #87ceeb 0%, #90ee90 100%);
+  color: var(--text-primary);
+  font-family: 'Press Start 2P', cursive;
+}
+
+.theme-minecraft .card {
+  background: var(--bg-card);
+  border: 4px solid var(--border);
+  box-shadow: 8px 8px 0 var(--shadow);
+  image-rendering: pixelated;
+}
+
+.theme-minecraft .btn-primary {
+  background: var(--accent);
+  color: white;
+  border: 4px solid var(--border);
+}
+
+.theme-minecraft .btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+/* Modern Theme - Clean UI */
+.theme-modern {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #1d4ed8;
+  --border: #cbd5e1;
+  --shadow: rgba(59, 130, 246, 0.15);
+}
+
+.theme-modern body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: var(--text-primary);
+}
+
+.theme-modern .card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+.theme-modern .btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.theme-modern .btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Common component styles */
+.card {
+  @apply rounded-xl p-6 transition-all duration-300;
+}
+
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Theme-specific animations */
+.theme-island .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px var(--shadow);
+}
+
+.theme-minecraft .card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--shadow);
+}
+
+.theme-modern .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--shadow);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-minecraft body {
+    font-size: 10px;
+  }
+  
+  .theme-minecraft .card {
+    border-width: 2px;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+}
