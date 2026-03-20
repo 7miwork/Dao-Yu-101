@@ -27,28 +27,18 @@
         {{ $t('archipelago.islands') }}
       </h2>
       
-      <div class="islands-container">
-        <!-- Connection Lines SVG -->
-        <svg class="connection-lines" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
-          <path 
-            v-for="(connection, index) in connections"
-            :key="index"
-            :d="connection.path"
-            class="connection-path"
-            :class="{ 'unlocked': connection.unlocked }"
-          />
-        </svg>
-
+      <div class="islands-grid">
         <!-- Islands -->
         <div 
           v-for="(island, index) in islands"
           :key="island.id"
-          class="island-node"
+          class="island-card"
           :class="{ 
             'unlocked': isIslandUnlocked(island.id),
-            'locked': !isIslandUnlocked(island.id)
+            'locked': !isIslandUnlocked(island.id),
+            'offset-up': index % 3 === 1,
+            'offset-down': index % 3 === 2
           }"
-          :style="getIslandPosition(index)"
         >
           <router-link 
             v-if="isIslandUnlocked(island.id)"
@@ -100,7 +90,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { isIslandUnlocked } from '../../utils/auth.js'
 
@@ -212,56 +202,6 @@ const progressPercentage = computed(() => {
   if (islands.value.length === 0) return 0
   return (unlockedCount.value / islands.value.length) * 100
 })
-
-const connections = computed(() => {
-  const islandPositions = getIslandPositions()
-  const connections = []
-  
-  for (let i = 0; i < islandPositions.length - 1; i++) {
-    const current = islandPositions[i]
-    const next = islandPositions[i + 1]
-    const currentIsland = islands.value[i]
-    const nextIsland = islands.value[i + 1]
-    
-    const path = `M ${current.x} ${current.y} Q ${(current.x + next.x) / 2} ${Math.min(current.y, next.y) - 50} ${next.x} ${next.y}`
-    
-    connections.push({
-      path,
-      unlocked: isIslandUnlocked(currentIsland?.id) && isIslandUnlocked(nextIsland?.id)
-    })
-  }
-  
-  return connections
-})
-
-function getIslandPositions() {
-  const count = islands.value.length
-  const positions = []
-  
-  for (let i = 0; i < count; i++) {
-    const angle = (i / count) * Math.PI * 2 - Math.PI / 2
-    const radius = 200
-    const centerX = 500
-    const centerY = 300
-    
-    positions.push({
-      x: centerX + Math.cos(angle) * radius,
-      y: centerY + Math.sin(angle) * radius
-    })
-  }
-  
-  return positions
-}
-
-function getIslandPosition(index) {
-  const positions = getIslandPositions()
-  const pos = positions[index]
-  
-  return {
-    left: `${(pos.x / 1000) * 100}%`,
-    top: `${(pos.y / 600) * 100}%`
-  }
-}
 
 function handleLockedIslandClick(island) {
   router.push(`/island/${island.id}`)
@@ -397,52 +337,37 @@ function handleLockedIslandClick(island) {
   color: var(--text-primary, #fff);
 }
 
-.islands-container {
-  position: relative;
-  width: 100%;
+/* Islands Grid Layout */
+.islands-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
-/* Connection Lines */
-.connection-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Island Card */
+.island-card {
   width: 100%;
-  height: 100%;
-  pointer-events: none;
+  max-width: 280px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
-.connection-path {
-  fill: none;
-  stroke: var(--border, rgba(255, 255, 255, 0.3));
-  stroke-width: 3;
-  stroke-dasharray: 10 5;
-  transition: all 0.5s ease;
+.island-card.offset-up {
+  transform: translateY(-1rem);
 }
 
-.connection-path.unlocked {
-  stroke: var(--accent, #4ade80);
-  stroke-dasharray: none;
-  stroke-width: 4;
+.island-card.offset-down {
+  transform: translateY(1rem);
 }
 
-/* Island Nodes */
-.island-node {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  transition: all 0.4s ease;
-  margin: 1rem;
-}
-
-.island-node.unlocked {
+.island-card.unlocked {
   z-index: 10;
 }
 
-.island-node.locked {
+.island-card.locked {
   z-index: 5;
   opacity: 0.7;
 }
@@ -453,28 +378,30 @@ function handleLockedIslandClick(island) {
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .island-link:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .island-locked:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Island Visual */
 .island-visual {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto 1rem;
 }
 
@@ -483,11 +410,11 @@ function handleLockedIslandClick(island) {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 40px;
+  width: 80px;
+  height: 30px;
   background: var(--bg-card, rgba(255, 255, 255, 0.9));
   border-radius: 50%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .island-visual .island-icon {
@@ -495,7 +422,7 @@ function handleLockedIslandClick(island) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3rem;
+  font-size: 2.5rem;
   z-index: 2;
 }
 
@@ -504,8 +431,8 @@ function handleLockedIslandClick(island) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: var(--accent, #4ade80);
   opacity: 0;
@@ -553,7 +480,7 @@ function handleLockedIslandClick(island) {
 }
 
 .island-name {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--text-primary, #166534);
@@ -561,7 +488,7 @@ function handleLockedIslandClick(island) {
 }
 
 .island-description {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   opacity: 0.9;
   margin-bottom: 0.75rem;
   color: var(--text-secondary, #15803d);
@@ -624,111 +551,82 @@ function handleLockedIslandClick(island) {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .islands-container {
-    height: auto;
-    min-height: auto;
-    display: grid;
+@media (min-width: 768px) {
+  .islands-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 2rem;
+    gap: 2.5rem;
   }
   
-  .island-node {
-    position: relative;
-    left: auto !important;
-    top: auto !important;
-    transform: none;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .connection-lines {
-    display: none;
-  }
-  
-  .archipelago-title {
-    font-size: 2rem;
-  }
-  
-  .title-icon {
-    font-size: 2.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .islands-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-  
-  .map-header {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  .archipelago-title {
-    font-size: 1.75rem;
-  }
-  
-  .title-icon {
-    font-size: 2rem;
-  }
-  
-  .archipelago-description {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-  }
-  
-  .islands-section {
-    padding: 1rem;
+  .island-card {
+    max-width: 300px;
   }
   
   .island-visual {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
   }
   
   .island-base {
-    width: 80px;
-    height: 30px;
+    width: 90px;
+    height: 35px;
   }
   
   .island-visual .island-icon {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
   
   .island-pulse {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .islands-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
   }
   
-  .island-info {
-    padding: 0.75rem;
+  .island-card {
+    max-width: 320px;
   }
   
-  .island-name {
-    font-size: 1rem;
+  .island-visual {
+    width: 120px;
+    height: 120px;
   }
   
-  .island-description {
-    font-size: 0.75rem;
+  .island-base {
+    width: 100px;
+    height: 40px;
   }
   
-  .progress-section {
-    padding: 1rem;
+  .island-visual .island-icon {
+    font-size: 3rem;
+  }
+  
+  .island-pulse {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .archipelago-title {
+    font-size: 3rem;
+  }
+  
+  .title-icon {
+    font-size: 3.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .islands-container {
-    gap: 1rem;
-    padding: 1rem;
+  .islands-grid {
+    gap: 1.5rem;
+    padding: 0.5rem;
+  }
+  
+  .island-card {
+    max-width: 260px;
   }
   
   .back-button {
@@ -766,6 +664,18 @@ function handleLockedIslandClick(island) {
   .island-pulse {
     width: 50px;
     height: 50px;
+  }
+  
+  .island-info {
+    padding: 1rem;
+  }
+  
+  .island-name {
+    font-size: 1rem;
+  }
+  
+  .island-description {
+    font-size: 0.75rem;
   }
 }
 </style>
