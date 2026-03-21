@@ -50,86 +50,117 @@
 
     <!-- Lesson Path -->
     <section v-else class="lesson-path-section">
-      <h2 class="section-title">
-        {{ $t('island.lessons') }}
-      </h2>
-      
-      <div class="path-container">
-        <!-- Path Line SVG -->
-        <svg class="path-line" viewBox="0 0 100 800" preserveAspectRatio="xMidYMid meet">
-          <path 
-            d="M 50 0 Q 80 100 50 200 Q 20 300 50 400 Q 80 500 50 600 Q 20 700 50 800"
-            class="path-curve"
-            fill="none"
-            stroke="var(--accent, #4ade80)"
-            stroke-width="3"
-            stroke-dasharray="10 5"
-          />
-        </svg>
-
-        <!-- Lessons -->
-        <div 
-          v-for="(lesson, index) in lessons"
-          :key="lesson.id"
-          class="lesson-node"
-          :class="{ 
-            'completed': isLessonCompleted(lesson.id),
-            'current': isCurrentLesson(lesson.id),
-            'locked': !isLessonAccessible(lesson.id)
-          }"
-          :style="getLessonPosition(index)"
-        >
-          <router-link 
-            v-if="isLessonAccessible(lesson.id)"
-            :to="`/lesson/${lesson.id}`"
-            class="lesson-link"
+      <!-- Basics Island - New Lesson System -->
+      <div v-if="islandId === 'basics'" class="max-w-5xl mx-auto px-6 py-12">
+        <h1 class="text-3xl font-bold mb-4" style="color: var(--text)">
+          {{ basicsData.title }}
+        </h1>
+        <p class="text-lg mb-8" style="color: var(--text-secondary)">
+          {{ basicsData.description }}
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div 
+            v-for="lesson in basicsData.lessons" 
+            :key="lesson.id"
+            class="bg-white/10 backdrop-blur rounded-2xl p-4 hover:scale-105 transition cursor-pointer"
           >
-            <div class="lesson-visual">
-              <div class="lesson-circle">
-                <span class="lesson-number">{{ index + 1 }}</span>
-                <div v-if="isLessonCompleted(lesson.id)" class="completion-badge">✓</div>
-              </div>
-              <div v-if="isCurrentLesson(lesson.id)" class="current-pulse"></div>
-            </div>
-            <div class="lesson-info">
-              <h3 class="lesson-title">{{ lesson.title }}</h3>
-              <p class="lesson-description">{{ lesson.description }}</p>
-              <div class="lesson-status">
-                <span v-if="isLessonCompleted(lesson.id)" class="status completed">
-                  {{ $t('lesson.completed') }}
-                </span>
-                <span v-else-if="isCurrentLesson(lesson.id)" class="status current">
-                  {{ $t('lesson.current') }}
-                </span>
-                <span v-else class="status available">
-                  {{ $t('lesson.available') }}
-                </span>
-              </div>
-            </div>
-          </router-link>
-          
-          <div v-else class="lesson-locked">
-            <div class="lesson-visual">
-              <div class="lesson-circle locked">
-                <span class="lock-icon">🔒</span>
-              </div>
-            </div>
-            <div class="lesson-info">
-              <h3 class="lesson-title">{{ lesson.title }}</h3>
-              <p class="lesson-description">{{ $t('lesson.locked') }}</p>
-            </div>
+            <h3 class="text-lg font-semibold mb-2" style="color: var(--text)">
+              {{ lesson.title }}
+            </h3>
+            <span 
+              class="inline-block px-3 py-1 rounded-full text-sm font-medium"
+              :class="lesson.type === 'video' ? 'bg-blue-500/20 text-blue-300' : 'bg-green-500/20 text-green-300'"
+            >
+              {{ lesson.type }}
+            </span>
           </div>
         </div>
       </div>
 
-      <!-- Progress Indicator -->
-      <div class="progress-section">
-        <div class="progress-bar">
-          <div class="progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+      <!-- Other Islands - Original Lesson System -->
+      <div v-else>
+        <h2 class="section-title">
+          {{ $t('island.lessons') }}
+        </h2>
+        
+        <div class="path-container">
+          <!-- Path Line SVG -->
+          <svg class="path-line" viewBox="0 0 100 800" preserveAspectRatio="xMidYMid meet">
+            <path 
+              d="M 50 0 Q 80 100 50 200 Q 20 300 50 400 Q 80 500 50 600 Q 20 700 50 800"
+              class="path-curve"
+              fill="none"
+              stroke="var(--accent, #4ade80)"
+              stroke-width="3"
+              stroke-dasharray="10 5"
+            />
+          </svg>
+
+          <!-- Lessons -->
+          <div 
+            v-for="(lesson, index) in lessons"
+            :key="lesson.id"
+            class="lesson-node"
+            :class="{ 
+              'completed': isLessonCompleted(lesson.id),
+              'current': isCurrentLesson(lesson.id),
+              'locked': !isLessonAccessible(lesson.id)
+            }"
+            :style="getLessonPosition(index)"
+          >
+            <router-link 
+              v-if="isLessonAccessible(lesson.id)"
+              :to="`/lesson/${lesson.id}`"
+              class="lesson-link"
+            >
+              <div class="lesson-visual">
+                <div class="lesson-circle">
+                  <span class="lesson-number">{{ index + 1 }}</span>
+                  <div v-if="isLessonCompleted(lesson.id)" class="completion-badge">✓</div>
+                </div>
+                <div v-if="isCurrentLesson(lesson.id)" class="current-pulse"></div>
+              </div>
+              <div class="lesson-info">
+                <h3 class="lesson-title">{{ lesson.title }}</h3>
+                <p class="lesson-description">{{ lesson.description }}</p>
+                <div class="lesson-status">
+                  <span v-if="isLessonCompleted(lesson.id)" class="status completed">
+                    {{ $t('lesson.completed') }}
+                  </span>
+                  <span v-else-if="isCurrentLesson(lesson.id)" class="status current">
+                    {{ $t('lesson.current') }}
+                  </span>
+                  <span v-else class="status available">
+                    {{ $t('lesson.available') }}
+                  </span>
+                </div>
+              </div>
+            </router-link>
+            
+            <div v-else class="lesson-locked">
+              <div class="lesson-visual">
+                <div class="lesson-circle locked">
+                  <span class="lock-icon">🔒</span>
+                </div>
+              </div>
+              <div class="lesson-info">
+                <h3 class="lesson-title">{{ lesson.title }}</h3>
+                <p class="lesson-description">{{ $t('lesson.locked') }}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="progress-text">
-          {{ completedCount }} / {{ lessons.length }} {{ $t('island.lessons') }} {{ $t('lesson.completed') }}
-        </p>
+
+        <!-- Progress Indicator -->
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div class="progress-fill" :style="{ width: progressPercentage + '%' }"></div>
+          </div>
+          <p class="progress-text">
+            {{ completedCount }} / {{ lessons.length }} {{ $t('island.lessons') }} {{ $t('lesson.completed') }}
+          </p>
+        </div>
       </div>
     </section>
   </div>
@@ -147,6 +178,9 @@ import physics from '@/content/islands/physics.json'
 import english from '@/content/islands/english.json'
 import drawing from '@/content/islands/drawing.json'
 import ancient from '@/content/islands/ancient.json'
+
+// Lesson data
+import basicsData from '@/data/lessons/basics.json'
 
 // Static imports for all lesson data
 import lesson1 from '@/content/lessons/lesson-1.json'

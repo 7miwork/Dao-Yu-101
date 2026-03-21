@@ -1,0 +1,16 @@
+{
+  "title": "Minecraft MakeCode Basics",
+  "description": "Learn block coding with Minecraft Education.",
+  "lessons": [
+    {
+      "id": "lesson-1",
+      "title": "Introduction to MakeCode",
+      "type": "video"
+    },
+    {
+      "id": "lesson-2",
+      "title": "First Blocks",
+      "type": "practice"
+    }
+  ]
+}
