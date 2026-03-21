@@ -2,42 +2,38 @@
  * Authentication utilities for island password protection
  */
 
-// Default passwords (safe for build)
-let passwords = {
-  basics: "1234",
-  "coming-soon": "locked"
-}
-
-// Try to load from public file (optional override)
-try {
-  const res = await fetch('/Dao-Yu-101/passwords.example.json')
-  if (res.ok) {
-    passwords = await res.json()
+/**
+ * Load passwords from public file or use defaults
+ * @returns {Promise<Object>} - Passwords object
+ */
+export async function loadPasswords() {
+  let passwords = {
+    basics: "1234",
+    "coming-soon": "locked"
   }
-} catch (e) {
-  console.log("Using default passwords")
+
+  try {
+    const res = await fetch('/Dao-Yu-101/passwords.example.json')
+    if (res.ok) {
+      passwords = await res.json()
+    }
+  } catch (e) {
+    console.log("Using default passwords")
+  }
+
+  return passwords
 }
 
 /**
  * Check password for an island
  * @param {string} islandId - The island identifier
  * @param {string} inputPassword - The password entered by user
- * @returns {boolean} - Whether the password is correct
+ * @returns {Promise<boolean>} - Whether the password is correct
  */
-export function checkPassword(islandId, inputPassword) {
-  // Normalize islandId: lowercase and trim spaces
+export async function checkPassword(islandId, inputPassword) {
+  const passwords = await loadPasswords()
   const id = islandId.toLowerCase().trim()
-  
-  // Debug log
-  console.log("Checking password for:", id, "Expected:", passwords[id])
-  
-  const correctPassword = passwords[id]
-  if (!correctPassword) {
-    return false
-  }
-  
-  // Trim input password before comparison
-  return inputPassword.trim() === correctPassword
+  return passwords[id] === inputPassword.trim()
 }
 
 /**
