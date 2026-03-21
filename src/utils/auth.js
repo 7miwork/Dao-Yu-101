@@ -2,36 +2,15 @@
  * Authentication utilities for island password protection
  */
 
-/**
- * Load passwords from public file or use defaults
- * @returns {Promise<Object>} - Passwords object
- */
-export async function loadPasswords() {
-  let passwords = {
-    basics: "1234",
-    "coming-soon": "locked"
-  }
-
-  try {
-    const res = await fetch('/Dao-Yu-101/passwords.example.json')
-    if (res.ok) {
-      passwords = await res.json()
-    }
-  } catch (e) {
-    console.log("Using default passwords")
-  }
-
-  return passwords
-}
+import passwords from '../data/passwords.json'
 
 /**
  * Check password for an island
  * @param {string} islandId - The island identifier
  * @param {string} inputPassword - The password entered by user
- * @returns {Promise<boolean>} - Whether the password is correct
+ * @returns {boolean} - Whether the password is correct
  */
-export async function checkPassword(islandId, inputPassword) {
-  const passwords = await loadPasswords()
+export function checkPassword(islandId, inputPassword) {
   const id = islandId.toLowerCase().trim()
   return passwords[id] === inputPassword.trim()
 }

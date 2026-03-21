@@ -298,8 +298,8 @@ function isCurrentLesson(lessonId) {
   return isLessonCompleted(previousLesson.id) && !isLessonCompleted(lessonId)
 }
 
-async function handleUnlock() {
-  if (await checkPassword(islandId.value, password.value)) {
+function handleUnlock() {
+  if (checkPassword(islandId.value, password.value)) {
     unlockIsland(islandId.value)
     unlocked.value = true
     error.value = false
