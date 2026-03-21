@@ -37,10 +37,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, inject } from 'vue'
 
 const isOpen = ref(false)
-const currentTheme = ref('island')
+
+// Inject theme state and setter from App.vue
+const currentTheme = inject('currentTheme')
+const setThemeFromApp = inject('setTheme')
 
 const themes = [
   { id: 'island', icon: '🏝️' },
@@ -54,17 +57,9 @@ const currentThemeIcon = computed(() => {
 })
 
 function setTheme(themeId) {
-  currentTheme.value = themeId
-  localStorage.setItem('theme', themeId)
-  document.body.className = `theme-${themeId}`
+  setThemeFromApp(themeId)
   isOpen.value = false
 }
-
-onMounted(() => {
-  const savedTheme = localStorage.getItem('theme') || 'island'
-  currentTheme.value = savedTheme
-  document.body.className = `theme-${savedTheme}`
-})
 </script>
 
 <style scoped>

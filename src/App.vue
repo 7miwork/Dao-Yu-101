@@ -7,18 +7,29 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { ref, computed, onMounted, provide } from 'vue'
 import MainLayout from './layouts/MainLayout.vue'
 
-const themeClass = computed(() => {
-  const theme = localStorage.getItem('theme') || 'island'
-  return `theme-${theme}`
-})
+// Reactive theme state
+const currentTheme = ref(localStorage.getItem('theme') || 'island')
+
+// Computed theme class
+const themeClass = computed(() => `theme-${currentTheme.value}`)
+
+// Function to update theme
+function setTheme(themeId) {
+  currentTheme.value = themeId
+  localStorage.setItem('theme', themeId)
+  document.body.className = `theme-${themeId}`
+}
+
+// Provide theme state and setter to child components
+provide('currentTheme', currentTheme)
+provide('setTheme', setTheme)
 
 onMounted(() => {
   // Apply saved theme on mount
-  const savedTheme = localStorage.getItem('theme') || 'island'
-  document.body.className = `theme-${savedTheme}`
+  document.body.className = `theme-${currentTheme.value}`
 })
 </script>
 
