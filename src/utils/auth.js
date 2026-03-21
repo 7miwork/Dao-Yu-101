@@ -2,21 +2,22 @@
  * Authentication utilities for island password protection
  */
 
-// Load passwords from local file with fallback to example
-let passwords = {}
+// Load example passwords as default (safe for build)
+import examplePasswords from '@/secure/passwords.example.json'
 
-try {
-  // Try to load local passwords first
-  const localPasswords = await import('@/secure/passwords.local.json')
-  passwords = localPasswords.default || localPasswords
-} catch (error) {
+let passwords = examplePasswords
+
+// In development, try to load local passwords (optional override)
+if (import.meta.env.DEV) {
   try {
-    // Fallback to example passwords
-    const examplePasswords = await import('@/secure/passwords.example.json')
-    passwords = examplePasswords.default || examplePasswords
-  } catch (fallbackError) {
-    console.warn('No password files found, using empty passwords')
-    passwords = {}
+    const res = await fetch('/src/secure/passwords.local.json')
+    if (res.ok) {
+      const localPasswords = await res.json()
+      passwords = { ...examplePasswords, ...localPasswords }
+    }
+  } catch (e) {
+    // Fallback to example passwords (expected in production)
+    console.debug('Local passwords not available, using example passwords')
   }
 }
 
