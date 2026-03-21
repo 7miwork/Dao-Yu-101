@@ -10,7 +10,7 @@ let passwords = examplePasswords
 // In development, try to load local passwords (optional override)
 if (import.meta.env.DEV) {
   try {
-    const res = await fetch('/src/secure/passwords.local.json')
+    const res = await fetch('/Dao-Yu-101/passwords.example.json')
     if (res.ok) {
       const localPasswords = await res.json()
       passwords = { ...examplePasswords, ...localPasswords }
