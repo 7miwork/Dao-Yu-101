@@ -28,11 +28,19 @@ if (import.meta.env.DEV) {
  * @returns {boolean} - Whether the password is correct
  */
 export function checkPassword(islandId, inputPassword) {
-  const correctPassword = passwords[islandId]
+  // Normalize islandId: lowercase and trim spaces
+  const id = islandId.toLowerCase().trim()
+  
+  // Debug log
+  console.log("Checking password for:", id, "Expected:", passwords[id])
+  
+  const correctPassword = passwords[id]
   if (!correctPassword) {
     return false
   }
-  return inputPassword === correctPassword
+  
+  // Trim input password before comparison
+  return inputPassword.trim() === correctPassword
 }
 
 /**
