@@ -1,104 +1,116 @@
 <template>
-  <div class="island-map-container">
+  <div class="min-h-screen relative overflow-x-hidden">
     <!-- Ocean Background -->
-    <div class="ocean-background">
-      <div class="wave wave-1"></div>
-      <div class="wave wave-2"></div>
-    </div>
-
-    <!-- Header -->
-    <div class="map-header">
-      <router-link to="/" class="back-button">
-        <span class="back-icon">←</span>
-        <span class="back-text">{{ $t('common.back') }}</span>
-      </router-link>
-
-      <div class="header-content">
-        <h1 class="archipelago-title">
-          <span class="title-icon">{{ archipelagoData.icon }}</span>
-          <span class="title-text">{{ archipelagoData.name }}</span>
-        </h1>
-        <p class="archipelago-description">
-          {{ archipelagoData.description }}
-        </p>
+    <div class="fixed inset-0 -z-10" style="background: var(--bg)">
+      <div class="absolute inset-0 opacity-10">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
       </div>
     </div>
 
-    <!-- Islands -->
-    <section class="islands-section">
-      <h2 class="section-title">
-        {{ $t('archipelago.islands') }}
-      </h2>
-
-      <div class="islands-grid">
-        <div
-          v-for="island in islands"
-          :key="island.id"
-          class="island-card"
-          :class="{
-            unlocked: isIslandUnlocked(island.id),
-            locked: !isIslandUnlocked(island.id)
-          }"
+    <!-- Header Section -->
+    <section class="py-12 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6">
+        <!-- Back Button -->
+        <router-link 
+          to="/" 
+          class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+          style="background: var(--card-bg); color: var(--text)"
         >
-          <!-- Unlocked -->
-          <router-link
-            v-if="isIslandUnlocked(island.id)"
-            :to="`/island/${island.id}`"
-            class="island-link"
-          >
-            <div class="island-visual">
-              <div class="island-base"></div>
-              <div class="island-icon">{{ island.icon }}</div>
-              <div class="island-pulse"></div>
-            </div>
+          <span>←</span>
+          <span>{{ $t('common.back') }}</span>
+        </router-link>
 
-            <div class="island-info">
-              <h3 class="island-name">{{ island.name }}</h3>
-              <p class="island-description">{{ island.description }}</p>
+        <!-- Header Content -->
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg" style="color: var(--text)">
+            <span class="mr-3">{{ archipelagoData.icon }}</span>
+            <span>{{ archipelagoData.name }}</span>
+          </h1>
+          <p class="text-lg md:text-xl max-w-2xl mx-auto" style="color: var(--text-secondary)">
+            {{ archipelagoData.description }}
+          </p>
+        </div>
+      </div>
+    </section>
 
-              <div class="island-stats">
-                <span class="stat">
-                  📖 {{ island.lessonCount }} {{ $t('archipelago.lessons') }}
-                </span>
-              </div>
-            </div>
-          </router-link>
+    <!-- Islands Section -->
+    <section class="py-12 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12" style="color: var(--text)">
+          {{ $t('archipelago.islands') }}
+        </h2>
 
-          <!-- Locked -->
+        <div class="flex flex-wrap justify-center gap-10">
           <div
-            v-else
-            class="island-locked"
-            @click="handleLockedIslandClick(island)"
+            v-for="island in islands"
+            :key="island.id"
+            class="w-full max-w-xs"
           >
-            <div class="island-visual locked">
-              <div class="island-base"></div>
-              <div class="island-icon">🔒</div>
-              <div class="lock-overlay"></div>
-            </div>
+            <!-- Unlocked Island -->
+            <router-link
+              v-if="isIslandUnlocked(island.id)"
+              :to="`/island/${island.id}`"
+              class="block card rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <div class="text-center mb-4">
+                <div class="text-5xl mb-2">{{ island.icon }}</div>
+              </div>
+              <div class="text-center">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--text)">
+                  {{ island.name }}
+                </h3>
+                <p class="text-sm mb-4" style="color: var(--text-secondary)">
+                  {{ island.description }}
+                </p>
+                <div class="flex items-center justify-center gap-2 text-sm" style="color: var(--text-secondary)">
+                  <span>📖</span>
+                  <span>{{ island.lessonCount }} {{ $t('archipelago.lessons') }}</span>
+                </div>
+              </div>
+            </router-link>
 
-            <div class="island-info">
-              <h3 class="island-name">{{ island.name }}</h3>
-              <p class="island-description">{{ $t('island.locked') }}</p>
+            <!-- Locked Island -->
+            <div
+              v-else
+              class="card rounded-2xl p-6 cursor-pointer transition-all duration-300 hover:scale-105"
+              @click="handleLockedIslandClick(island)"
+            >
+              <div class="text-center mb-4">
+                <div class="text-5xl mb-2">🔒</div>
+              </div>
+              <div class="text-center">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--text)">
+                  {{ island.name }}
+                </h3>
+                <p class="text-sm" style="color: var(--text-secondary)">
+                  {{ $t('island.locked') }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Progress -->
-    <div class="progress-section">
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          :style="{ width: progressPercentage + '%' }"
-        ></div>
+    <!-- Progress Section -->
+    <section class="py-12 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6">
+        <div class="max-w-2xl mx-auto">
+          <div class="rounded-full h-3 overflow-hidden" style="background: var(--card-bg)">
+            <div
+              class="h-full rounded-full transition-all duration-500"
+              :style="{ width: progressPercentage + '%', background: 'var(--primary)' }"
+            ></div>
+          </div>
+          <p class="text-center mt-4" style="color: var(--text-secondary)">
+            {{ unlockedCount }} / {{ islands.length }}
+            {{ $t('archipelago.islands') }}
+            {{ $t('archipelago.unlocked') }}
+          </p>
+        </div>
       </div>
-      <p class="progress-text">
-        {{ unlockedCount }} / {{ islands.length }}
-        {{ $t('archipelago.islands') }}
-        {{ $t('archipelago.unlocked') }}
-      </p>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -212,99 +224,33 @@ function handleLockedIslandClick(island) {
 }
 </script>
 
-<style>
-.island-map-container {
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+<style scoped>
+/* Wave animations */
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 40%;
+  animation: wave 25s infinite linear;
 }
 
-/* Ocean */
-.ocean-background {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(#87ceeb, #4682b4, #2e5a7e);
-  z-index: -1;
+.wave-1 {
+  top: -150%;
+  left: -50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation-duration: 25s;
 }
 
-/* Header */
-.map-header {
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
+.wave-2 {
+  top: -145%;
+  left: -45%;
+  background: rgba(255, 255, 255, 0.05);
+  animation-duration: 30s;
+  animation-direction: reverse;
 }
 
-.archipelago-title {
-  font-size: 2.5rem;
-  color: white;
-}
-
-/* SECTION */
-.islands-section {
-  padding: 2rem;
-}
-
-/* FLEXBASIERTER RESPONSIVER CONTAINER */
-.islands-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  width: 100%;
-}
-
-/* CARD */
-.island-card {
-  width: 100%;
-  max-width: 220px;
-  position: static;
-  transition: 0.3s;
-}
-
-.island-card:hover {
-  transform: scale(1.05);
-}
-
-/* SIMPLE CARD STYLE */
-.island-link,
-.island-locked {
-  display: block;
-  padding: 1rem;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.2);
-}
-
-/* VISUAL */
-.island-visual {
-  text-align: center;
-  font-size: 2rem;
-}
-
-/* INFO */
-.island-info {
-  text-align: center;
-  background: white;
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-/* PROGRESS */
-.progress-section {
-  padding: 2rem;
-  max-width: 600px;
-  margin: auto;
-}
-
-.progress-bar {
-  height: 10px;
-  background: #ccc;
-}
-
-.progress-fill {
-  height: 100%;
-  background: #4ade80;
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
