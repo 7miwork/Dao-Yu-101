@@ -17,7 +17,8 @@
   },
   "archipelago": {
     "islands": "Islands",
-    "lessons": "lessons"
+    "lessons": "lessons",
+    "unlocked": "unlocked"
   },
   "island": {
     "password": {

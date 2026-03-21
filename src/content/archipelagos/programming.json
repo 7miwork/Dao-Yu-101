@@ -1,6 +1,9 @@
 {
   "id": "programming",
-  "title": "Programming",
-  "description": "Learn coding through Minecraft",
-  "islands": ["minecraft-basics"]
+  "title": "Programming Archipelago",
+  "description": "Learn programming through Minecraft Education",
+  "islands": [
+    "basics",
+    "coming-soon"
+  ]
 }

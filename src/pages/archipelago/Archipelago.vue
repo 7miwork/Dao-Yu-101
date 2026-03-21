@@ -126,12 +126,8 @@ import languages from '@/content/archipelagos/languages.json'
 import arts from '@/content/archipelagos/arts.json'
 import history from '@/content/archipelagos/history.json'
 
-import minecraftBasics from '@/content/islands/minecraft-basics.json'
-import algebra from '@/content/islands/algebra.json'
-import physics from '@/content/islands/physics.json'
-import english from '@/content/islands/english.json'
-import drawing from '@/content/islands/drawing.json'
-import ancient from '@/content/islands/ancient.json'
+import basics from '@/content/islands/basics.json'
+import comingSoon from '@/content/islands/coming-soon.json'
 
 const route = useRoute()
 const router = useRouter()
@@ -146,12 +142,8 @@ const archipelagoMap = {
 }
 
 const islandMap = {
-  'minecraft-basics': minecraftBasics,
-  algebra,
-  physics,
-  english,
-  drawing,
-  ancient
+  basics,
+  'coming-soon': comingSoon
 }
 
 const archipelagoIconMap = {
@@ -164,12 +156,8 @@ const archipelagoIconMap = {
 }
 
 const islandIconMap = {
-  'minecraft-basics': '⛏️',
-  algebra: '➕',
-  physics: '⚛️',
-  english: '🇬🇧',
-  drawing: '✏️',
-  ancient: '🏛️'
+  basics: '📚',
+  'coming-soon': '🔒'
 }
 
 const archipelagoId = computed(() => route.params.id)

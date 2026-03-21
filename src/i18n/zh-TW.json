@@ -17,7 +17,8 @@
   },
   "archipelago": {
     "islands": "島嶼",
-    "lessons": "課程"
+    "lessons": "課程",
+    "unlocked": "已解鎖"
   },
   "island": {
     "password": {

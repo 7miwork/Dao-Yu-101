@@ -17,7 +17,8 @@
   },
   "archipelago": {
     "islands": "Inseln",
-    "lessons": "Lektionen"
+    "lessons": "Lektionen",
+    "unlocked": "freigeschaltet"
   },
   "island": {
     "password": {
