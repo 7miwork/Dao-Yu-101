@@ -5,19 +5,30 @@
 /* Base theme variables */
 :root {
   --transition-speed: 0.3s;
+  --bg: white;
+  --text: black;
+  --card-bg: #f5f5f5;
+  --primary: #3b82f6;
   --ocean-light: #87CEEB;
   --ocean-medium: #4682B4;
   --ocean-dark: #2E5A7E;
 }
 
+/* Global body styles */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* Island Theme - Soft colors, rounded corners, playful look */
 .theme-island {
-  --bg-primary: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  --bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%);
+  --text: #0c4a6e;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --primary: #38bdf8;
   --bg-secondary: #bae6fd;
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --text-primary: #0c4a6e;
   --text-secondary: #0369a1;
-  --accent: #38bdf8;
   --accent-hover: #0ea5e9;
   --border: #7dd3fc;
   --shadow: rgba(56, 189, 248, 0.25);
@@ -29,13 +40,13 @@
 }
 
 .theme-island body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .theme-island .card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: var(--border-width) solid var(--border);
   border-radius: var(--border-radius);
   box-shadow: 0 8px 32px var(--shadow);
@@ -63,12 +74,12 @@
 
 /* Minecraft Theme - Pixel/block style, earthy colors, sharp edges */
 .theme-minecraft {
-  --bg-primary: linear-gradient(180deg, #87CEEB 0%, #6B8E23 50%, #8B4513 100%);
+  --bg: linear-gradient(180deg, #87CEEB 0%, #6B8E23 50%, #8B4513 100%);
+  --text: #2F4F4F;
+  --card-bg: #D2B48C;
+  --primary: #8B4513;
   --bg-secondary: #6B8E23;
-  --bg-card: #D2B48C;
-  --text-primary: #2F4F4F;
   --text-secondary: #556B2F;
-  --accent: #8B4513;
   --accent-hover: #654321;
   --border: #228B22;
   --shadow: none;
@@ -80,14 +91,14 @@
 }
 
 .theme-minecraft body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Press Start 2P', 'Courier New', monospace;
   image-rendering: pixelated;
 }
 
 .theme-minecraft .card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: var(--border-width) solid var(--border);
   border-radius: var(--border-radius);
   box-shadow: none;
@@ -122,12 +133,12 @@
 
 /* Modern Theme - Clean white/gray palette, subtle shadows, minimal look */
 .theme-modern {
-  --bg-primary: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --bg: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --text: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.98);
+  --primary: #6366f1;
   --bg-secondary: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.98);
-  --text-primary: #0f172a;
   --text-secondary: #475569;
-  --accent: #6366f1;
   --accent-hover: #4f46e5;
   --border: #e2e8f0;
   --shadow: rgba(99, 102, 241, 0.1);
@@ -139,13 +150,13 @@
 }
 
 .theme-modern body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .theme-modern .card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: var(--border-width) solid var(--border);
   border-radius: var(--border-radius);
   box-shadow: 0 1px 3px var(--shadow);

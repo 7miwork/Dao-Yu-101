@@ -52,4 +52,13 @@ body {
 .theme-modern {
   transition: all 0.3s ease;
 }
+
+/* Remove hardcoded colors - use CSS variables */
+button {
+  color: var(--text);
+}
+
+a {
+  color: var(--primary);
+}
 </style>

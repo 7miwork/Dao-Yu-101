@@ -11,7 +11,7 @@
     <div 
       v-if="isOpen"
       class="absolute right-0 mt-2 w-48 rounded-lg shadow-lg border z-50"
-      :style="{ background: 'var(--bg-card)', borderColor: 'var(--border)' }"
+      :style="{ background: 'var(--card-bg)', borderColor: 'var(--border)' }"
     >
       <div class="py-2">
         <button
@@ -64,6 +64,6 @@ function setTheme(themeId) {
 
 <style scoped>
 button {
-  color: var(--text-primary);
+  color: var(--text);
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen relative overflow-x-hidden">
     <!-- Ocean Background -->
-    <div class="fixed inset-0 bg-gradient-to-b from-sky-400 via-blue-500 to-blue-800 -z-10">
+    <div class="fixed inset-0 -z-10" style="background: var(--bg)">
       <div class="absolute inset-0 opacity-10">
         <div class="wave wave-1"></div>
         <div class="wave wave-2"></div>
@@ -11,15 +11,15 @@
     <!-- Hero Section -->
     <section class="py-16 relative z-10">
       <div class="max-w-screen-xl mx-auto px-6 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 drop-shadow-lg" style="color: var(--text)">
           {{ $t('home.title') }}
         </h1>
-        <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
+        <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto" style="color: var(--text-secondary)">
           {{ $t('home.subtitle') }}
         </p>
         <router-link 
           to="/archipelago/programming" 
-          class="inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+          class="btn-primary inline-block font-semibold px-8 py-4 rounded-full text-lg"
         >
           {{ $t('home.start_button') }}
         </router-link>
@@ -29,7 +29,7 @@
     <!-- Archipelagos Preview Section -->
     <section class="py-16 relative z-10">
       <div class="max-w-screen-xl mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 drop-shadow-lg" style="color: var(--text)">
           {{ $t('home.archipelagos.title') }}
         </h2>
         
@@ -43,15 +43,15 @@
               :to="`/archipelago/${archipelago.id}`"
               class="block group"
             >
-              <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-white/30 transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+              <div class="card rounded-2xl p-6">
                 <div class="text-5xl mb-4">{{ archipelago.icon }}</div>
-                <h3 class="text-xl font-bold text-green-800 mb-2">
+                <h3 class="text-xl font-bold mb-2" style="color: var(--text)">
                   {{ archipelago.name }}
                 </h3>
-                <p class="text-green-700 text-sm mb-4 line-clamp-2">
+                <p class="text-sm mb-4 line-clamp-2" style="color: var(--text-secondary)">
                   {{ archipelago.description }}
                 </p>
-                <div class="flex items-center gap-2 text-green-600 text-sm">
+                <div class="flex items-center gap-2 text-sm" style="color: var(--text-secondary)">
                   <span>🏝️</span>
                   <span>{{ archipelago.islandCount }} {{ $t('archipelago.islands') }}</span>
                 </div>
@@ -65,11 +65,11 @@
     <!-- About Section -->
     <section class="py-16 relative z-10">
       <div class="max-w-screen-xl mx-auto px-6">
-        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6 text-center">
+        <div class="card rounded-2xl p-8 md:p-12 max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center" style="color: var(--text)">
             {{ $t('home.about_title') }}
           </h2>
-          <p class="text-lg text-green-700 leading-relaxed text-center">
+          <p class="text-lg leading-relaxed text-center" style="color: var(--text-secondary)">
             {{ $t('home.about') }}
           </p>
         </div>
