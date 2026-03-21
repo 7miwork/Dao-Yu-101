@@ -3,14 +3,94 @@
   "description": "Learn block coding with Minecraft Education.",
   "lessons": [
     {
-      "id": "lesson-1",
-      "title": "Introduction to MakeCode",
-      "type": "video"
+      "id": 1,
+      "title": "Welcome to Minecraft Education – Controls and Code-Builder",
+      "phase": "Getting Started",
+      "duration": "60 min"
     },
     {
-      "id": "lesson-2",
-      "title": "First Blocks",
-      "type": "practice"
+      "id": 2,
+      "title": "Basic Commands for the Agent",
+      "phase": "Getting Started",
+      "duration": "60 min"
+    },
+    {
+      "id": 3,
+      "title": "Build a Simple Path or Road with the Agent",
+      "phase": "Getting Started",
+      "duration": "60 min"
+    },
+    {
+      "id": 4,
+      "title": "Repeat Loops – Making the Agent Build a Wall",
+      "phase": "Loops & Repetition",
+      "duration": "60 min"
+    },
+    {
+      "id": 5,
+      "title": "Nested Loops – Build a Floor or Grid Pattern",
+      "phase": "Loops & Repetition",
+      "duration": "60 min"
+    },
+    {
+      "id": 6,
+      "title": "Loop Challenge – Build a Pyramid with the Agent",
+      "phase": "Loops & Repetition",
+      "duration": "60 min"
+    },
+    {
+      "id": 7,
+      "title": "If/Else – The Agent Reacts to the World",
+      "phase": "Conditionals & Logic",
+      "duration": "60 min"
+    },
+    {
+      "id": 8,
+      "title": "Conditionals + Movement – Agent Avoids Obstacles",
+      "phase": "Conditionals & Logic",
+      "duration": "60 min"
+    },
+    {
+      "id": 9,
+      "title": "Combined Challenge – Agent Navigates a Simple Maze",
+      "phase": "Conditionals & Logic",
+      "duration": "60 min"
+    },
+    {
+      "id": 10,
+      "title": "Design a Farm with the Agent Using Loops",
+      "phase": "Creative Builds",
+      "duration": "60 min"
+    },
+    {
+      "id": 11,
+      "title": "Build a Village House Using Loops and Functions",
+      "phase": "Creative Builds",
+      "duration": "60 min"
+    },
+    {
+      "id": 12,
+      "title": "Creative Build – Code a Bridge Over Water",
+      "phase": "Creative Builds",
+      "duration": "60 min"
+    },
+    {
+      "id": 13,
+      "title": "Final Project – Village Planning: Design 3 Buildings",
+      "phase": "Final Project",
+      "duration": "60 min"
+    },
+    {
+      "id": 14,
+      "title": "Final Project – Village Build: Code the 3 Buildings",
+      "phase": "Final Project",
+      "duration": "60 min"
+    },
+    {
+      "id": 15,
+      "title": "Final Project – Connect the Village: Roads and Village Square",
+      "phase": "Final Project",
+      "duration": "60 min"
     }
   ]
 }

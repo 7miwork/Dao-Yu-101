@@ -59,21 +59,21 @@
           {{ basicsData.description }}
         </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           <div 
-            v-for="lesson in basicsData.lessons" 
+            v-for="lesson in lessons" 
             :key="lesson.id"
             class="bg-white/10 backdrop-blur rounded-2xl p-4 hover:scale-105 transition cursor-pointer"
           >
             <h3 class="text-lg font-semibold mb-2" style="color: var(--text)">
-              {{ lesson.title }}
+              Lesson {{ lesson.id }}
             </h3>
-            <span 
-              class="inline-block px-3 py-1 rounded-full text-sm font-medium"
-              :class="lesson.type === 'video' ? 'bg-blue-500/20 text-blue-300' : 'bg-green-500/20 text-green-300'"
-            >
-              {{ lesson.type }}
-            </span>
+            <p class="text-sm mb-2" style="color: var(--text-secondary)">
+              {{ lesson.title }}
+            </p>
+            <div class="text-xs opacity-70" style="color: var(--text-secondary)">
+              {{ lesson.phase }} • {{ lesson.duration }}
+            </div>
           </div>
         </div>
       </div>
@@ -282,6 +282,9 @@ const islandData = computed(() => {
 
 // Get lessons data from static imports
 const lessons = computed(() => {
+  if (islandId.value === 'basics') {
+    return basicsData.lessons
+  }
   return islandData.value.lessons.map(lessonId => {
     const lessonData = lessonMap[lessonId]
     if (lessonData) {
