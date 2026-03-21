@@ -5,15 +5,11 @@
     "shop": "Shop"
   },
   "home": {
-    "hero": {
-      "title": "Welcome to Dao-Yu-101",
-      "subtitle": "Explore the Archipelagos of Knowledge",
-      "cta": "Start Learning"
-    },
-    "intro": {
-      "title": "A New Way to Learn",
-      "description": "Dao-Yu-101 is a modern learning platform that transforms education into an adventure. Navigate through archipelagos of knowledge, discover islands of wisdom, and unlock lessons that expand your horizons."
-    },
+    "title": "Dao-Yu-101",
+    "subtitle": "Explore the Archipelagos of Knowledge",
+    "start_button": "Start Learning",
+    "about_title": "About Dao-Yu-101",
+    "about": "Dao-Yu-101 is a modern learning platform that transforms education into an adventure. Navigate through archipelagos of knowledge, discover islands of wisdom, and unlock lessons that expand your horizons.",
     "archipelagos": {
       "title": "Explore Archipelagos",
       "viewAll": "View All"

@@ -5,15 +5,11 @@
     "shop": "Shop"
   },
   "home": {
-    "hero": {
-      "title": "Willkommen bei Dao-Yu-101",
-      "subtitle": "Erkunde die Archipele des Wissens",
-      "cta": "Jetzt lernen"
-    },
-    "intro": {
-      "title": "Eine neue Art zu lernen",
-      "description": "Dao-Yu-101 ist eine moderne Lernplattform, die Bildung in ein Abenteuer verwandelt. Navigiere durch Archipele des Wissens, entdecke Inseln der Weisheit und schalte Lektionen frei, die deinen Horizont erweitern."
-    },
+    "title": "Dao-Yu-101",
+    "subtitle": "Erkunde die Archipele des Wissens",
+    "start_button": "Jetzt lernen",
+    "about_title": "Über Dao-Yu-101",
+    "about": "Dao-Yu-101 ist eine moderne Lernplattform, die Bildung in ein Abenteuer verwandelt. Navigiere durch Archipele des Wissens, entdecke Inseln der Weisheit und schalte Lektionen frei, die deinen Horizont erweitern.",
     "archipelagos": {
       "title": "Archipele erkunden",
       "viewAll": "Alle anzeigen"

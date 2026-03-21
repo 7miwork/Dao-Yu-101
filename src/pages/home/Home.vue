@@ -1,74 +1,78 @@
 <template>
-  <div class="world-map-container">
+  <div class="min-h-screen relative overflow-x-hidden">
     <!-- Ocean Background -->
-    <div class="ocean-background">
-      <div class="wave wave-1"></div>
-      <div class="wave wave-2"></div>
-      <div class="wave wave-3"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-sky-400 via-blue-500 to-blue-800 -z-10">
+      <div class="absolute inset-0 opacity-10">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+      </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1 class="hero-title">
-          {{ $t('home.hero.title') }}
+    <section class="py-16 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+          {{ $t('home.title') }}
         </h1>
-        <p class="hero-subtitle">
-          {{ $t('home.hero.subtitle') }}
+        <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
+          {{ $t('home.subtitle') }}
         </p>
         <router-link 
           to="/archipelago/programming" 
-          class="btn-primary hero-cta"
+          class="inline-block bg-white text-blue-600 font-semibold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
         >
-          {{ $t('home.hero.cta') }}
+          {{ $t('home.start_button') }}
         </router-link>
       </div>
     </section>
 
-    <!-- Archipelagos as Floating Islands -->
-    <section class="archipelagos-section">
-      <h2 class="section-title">
-        {{ $t('home.archipelagos.title') }}
-      </h2>
-      
-      <div class="islands-map">
-        <div 
-          v-for="(archipelago, index) in archipelagos"
-          :key="archipelago.id"
-          class="floating-island"
-          :class="`island-${index + 1}`"
-          :style="getIslandStyle(index)"
-        >
-          <router-link 
-            :to="`/archipelago/${archipelago.id}`"
-            class="island-link"
+    <!-- Archipelagos Preview Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12 drop-shadow-lg">
+          {{ $t('home.archipelagos.title') }}
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div 
+            v-for="archipelago in archipelagos"
+            :key="archipelago.id"
+            class="floating-island"
           >
-            <div class="island-content">
-              <div class="island-icon">{{ archipelago.icon }}</div>
-              <h3 class="island-name">{{ archipelago.name }}</h3>
-              <p class="island-description">{{ archipelago.description }}</p>
-              <div class="island-stats">
-                <span class="stat">
-                  <span class="stat-icon">🏝️</span>
-                  {{ archipelago.islandCount }} {{ $t('archipelago.islands') }}
-                </span>
+            <router-link 
+              :to="`/archipelago/${archipelago.id}`"
+              class="block group"
+            >
+              <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-white/30 transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                <div class="text-5xl mb-4">{{ archipelago.icon }}</div>
+                <h3 class="text-xl font-bold text-green-800 mb-2">
+                  {{ archipelago.name }}
+                </h3>
+                <p class="text-green-700 text-sm mb-4 line-clamp-2">
+                  {{ archipelago.description }}
+                </p>
+                <div class="flex items-center gap-2 text-green-600 text-sm">
+                  <span>🏝️</span>
+                  <span>{{ archipelago.islandCount }} {{ $t('archipelago.islands') }}</span>
+                </div>
               </div>
-            </div>
-            <div class="island-glow"></div>
-          </router-link>
+            </router-link>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Intro Section -->
-    <section class="intro-section">
-      <div class="intro-content">
-        <h2 class="intro-title">
-          {{ $t('home.intro.title') }}
-        </h2>
-        <p class="intro-description">
-          {{ $t('home.intro.description') }}
-        </p>
+    <!-- About Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-screen-xl mx-auto px-6">
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6 text-center">
+            {{ $t('home.about_title') }}
+          </h2>
+          <p class="text-lg text-green-700 leading-relaxed text-center">
+            {{ $t('home.about') }}
+          </p>
+        </div>
       </div>
     </section>
   </div>
@@ -110,70 +114,31 @@ const archipelagos = ref([
   description: data.description,
   islandCount: data.islands ? data.islands.length : 0
 })))
-
-function getIslandStyle(index) {
-  const positions = [
-    { top: '10%', left: '15%' },
-    { top: '25%', left: '60%' },
-    { top: '45%', left: '25%' },
-    { top: '35%', left: '75%' },
-    { top: '60%', left: '50%' },
-    { top: '70%', left: '20%' }
-  ]
-  return positions[index] || positions[0]
-}
 </script>
 
 <style scoped>
-.world-map-container {
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Ocean Background */
-.ocean-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, 
-    var(--ocean-light, #87CEEB) 0%, 
-    var(--ocean-medium, #4682B4) 50%, 
-    var(--ocean-dark, #2E5A7E) 100%);
-  z-index: -2;
-}
-
+/* Simplified wave animations */
 .wave {
   position: absolute;
   width: 200%;
   height: 200%;
-  background: transparent;
   border-radius: 40%;
-  animation: wave 20s infinite linear;
+  animation: wave 25s infinite linear;
 }
 
 .wave-1 {
   top: -150%;
   left: -50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation-duration: 20s;
+  background: rgba(255, 255, 255, 0.08);
+  animation-duration: 25s;
 }
 
 .wave-2 {
-  top: -140%;
-  left: -40%;
-  background: rgba(255, 255, 255, 0.08);
-  animation-duration: 25s;
-  animation-direction: reverse;
-}
-
-.wave-3 {
   top: -145%;
   left: -45%;
   background: rgba(255, 255, 255, 0.05);
   animation-duration: 30s;
+  animation-direction: reverse;
 }
 
 @keyframes wave {
@@ -181,299 +146,25 @@ function getIslandStyle(index) {
   100% { transform: rotate(360deg); }
 }
 
-/* Hero Section */
-.hero-section {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 4rem 2rem;
-  min-height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  max-width: 800px;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--text-primary, #fff);
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  opacity: 0.9;
-  margin-bottom: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  color: var(--text-primary, #fff);
-}
-
-.hero-cta {
-  display: inline-block;
-  font-size: 1.25rem;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.hero-cta:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-}
-
-/* Archipelagos Section */
-.archipelagos-section {
-  position: relative;
-  z-index: 1;
-  padding: 2rem;
-  min-height: 80vh;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: var(--text-primary, #fff);
-}
-
-.islands-map {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Floating Islands */
+/* Floating island animation */
 .floating-island {
-  position: absolute;
-  width: 280px;
   animation: float 6s ease-in-out infinite;
 }
 
-.floating-island:nth-child(odd) {
-  animation-delay: -3s;
-}
-
 .floating-island:nth-child(even) {
-  animation-delay: -1.5s;
+  animation-delay: -3s;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-10px); }
 }
 
-.island-link {
-  display: block;
-  text-decoration: none;
-  position: relative;
-  transition: all 0.4s ease;
-}
-
-.island-link:hover {
-  transform: scale(1.1);
-}
-
-.island-link:hover .island-glow {
-  opacity: 1;
-  transform: scale(1.2);
-}
-
-.island-content {
-  background: var(--bg-card, rgba(255, 255, 255, 0.95));
-  border-radius: 20px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--border, rgba(255, 255, 255, 0.3));
-  transition: all 0.3s ease;
-}
-
-.island-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  width: 120%;
-  height: 120%;
-  background: radial-gradient(circle, var(--accent, #4ade80) 0%, transparent 70%);
-  opacity: 0;
-  transition: all 0.4s ease;
-  z-index: -1;
-  border-radius: 50%;
-}
-
-.island-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.island-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary, #166534);
-}
-
-.island-description {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-  color: var(--text-secondary, #15803d);
-  line-height: 1.4;
-}
-
-.island-stats {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.85rem;
-  opacity: 0.7;
-  color: var(--text-secondary, #15803d);
-}
-
-.stat-icon {
-  font-size: 1rem;
-}
-
-/* Intro Section */
-.intro-section {
-  position: relative;
-  z-index: 1;
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.intro-content {
-  max-width: 700px;
-  margin: 0 auto;
-  background: var(--bg-card, rgba(255, 255, 255, 0.9));
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-}
-
-.intro-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary, #166534);
-}
-
-.intro-description {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  opacity: 0.9;
-  color: var(--text-secondary, #15803d);
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .islands-map {
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 1rem;
-  }
-  
-  .floating-island {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    width: 100%;
-    animation: none;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.25rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .islands-map {
-    grid-template-columns: 1fr;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .island-content {
-    padding: 1.5rem;
-  }
-  
-  .island-icon {
-    font-size: 3rem;
-  }
-  
-  .island-name {
-    font-size: 1.25rem;
-  }
-  
-  .intro-content {
-    padding: 2rem;
-  }
-  
-  .intro-title {
-    font-size: 1.5rem;
-  }
-  
-  .intro-description {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-section {
-    padding: 2rem 1rem;
-  }
-  
-  .archipelagos-section {
-    padding: 1rem;
-  }
-  
-  .intro-section {
-    padding: 2rem 1rem;
-  }
-  
-  .hero-cta {
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-  }
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
