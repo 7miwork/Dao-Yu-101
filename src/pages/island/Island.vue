@@ -138,7 +138,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { isIslandUnlocked, unlockIsland, isLessonCompleted, markLessonCompleted } from '../../utils/auth.js'
+import { isIslandUnlocked, unlockIsland, isLessonCompleted, markLessonCompleted, checkPassword } from '../../utils/auth.js'
 
 // Static imports for all island data
 import minecraftBasics from '@/content/islands/minecraft-basics.json'
@@ -299,7 +299,7 @@ function isCurrentLesson(lessonId) {
 }
 
 function handleUnlock() {
-  if (password.value === islandData.value.password) {
+  if (checkPassword(islandId.value, password.value)) {
     unlockIsland(islandId.value)
     unlocked.value = true
     error.value = false
