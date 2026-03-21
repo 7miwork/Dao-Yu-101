@@ -2,23 +2,20 @@
  * Authentication utilities for island password protection
  */
 
-// Load example passwords as default (safe for build)
-import examplePasswords from '@/secure/passwords.example.json'
+// Default passwords (safe for build)
+let passwords = {
+  basics: "1234",
+  "coming-soon": "locked"
+}
 
-let passwords = examplePasswords
-
-// In development, try to load local passwords (optional override)
-if (import.meta.env.DEV) {
-  try {
-    const res = await fetch('/Dao-Yu-101/passwords.example.json')
-    if (res.ok) {
-      const localPasswords = await res.json()
-      passwords = { ...examplePasswords, ...localPasswords }
-    }
-  } catch (e) {
-    // Fallback to example passwords (expected in production)
-    console.debug('Local passwords not available, using example passwords')
+// Try to load from public file (optional override)
+try {
+  const res = await fetch('/Dao-Yu-101/passwords.example.json')
+  if (res.ok) {
+    passwords = await res.json()
   }
+} catch (e) {
+  console.log("Using default passwords")
 }
 
 /**
