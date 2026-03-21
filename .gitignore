@@ -25,3 +25,6 @@ npm-debug.log*
 
 # Cache
 .cache/
+
+# Local password file (not tracked by git)
+src/secure/passwords.local.json

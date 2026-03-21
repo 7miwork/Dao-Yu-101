@@ -2,6 +2,38 @@
  * Authentication utilities for island password protection
  */
 
+// Load passwords from local file with fallback to example
+let passwords = {}
+
+try {
+  // Try to load local passwords first
+  const localPasswords = await import('@/secure/passwords.local.json')
+  passwords = localPasswords.default || localPasswords
+} catch (error) {
+  try {
+    // Fallback to example passwords
+    const examplePasswords = await import('@/secure/passwords.example.json')
+    passwords = examplePasswords.default || examplePasswords
+  } catch (fallbackError) {
+    console.warn('No password files found, using empty passwords')
+    passwords = {}
+  }
+}
+
+/**
+ * Check password for an island
+ * @param {string} islandId - The island identifier
+ * @param {string} inputPassword - The password entered by user
+ * @returns {boolean} - Whether the password is correct
+ */
+export function checkPassword(islandId, inputPassword) {
+  const correctPassword = passwords[islandId]
+  if (!correctPassword) {
+    return false
+  }
+  return inputPassword === correctPassword
+}
+
 /**
  * Check if an island is unlocked
  * @param {string} islandId - The island identifier
