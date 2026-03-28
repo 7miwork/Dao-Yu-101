@@ -1,22 +1,35 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Mail, Lock, ArrowRight } from "lucide-react";
+import { BookOpen, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { authService, DEMO_ACCOUNTS } from "@/lib/auth-service";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate login
-    setTimeout(() => {
+    setError("");
+
+    const response = await authService.login(email, password);
+    if (response.success) {
       setLocation("/dashboard");
-    }, 1000);
+    } else {
+      setError(response.error || "Login failed");
+      setLoading(false);
+    }
+  };
+
+  const quickLogin = (role: string) => {
+    const account = DEMO_ACCOUNTS[role];
+    setEmail(account.email);
+    setPassword(account.password);
   };
 
   return (
@@ -34,6 +47,13 @@ export default function Login() {
         <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-xl">
           <h1 className="text-2xl font-bold text-white mb-2">Welcome Back</h1>
           <p className="text-purple-300 mb-8">Sign in to continue your learning journey</p>
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <span className="text-red-200 text-sm">{error}</span>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
@@ -88,21 +108,57 @@ export default function Login() {
             </Button>
           </form>
 
-          {/* Divider */}
+          {/* Demo Accounts Section */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-purple-500/20"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-slate-900/50 text-purple-400">Or continue with</span>
+              <span className="px-2 bg-slate-900/50 text-purple-400">Demo Accounts</span>
             </div>
           </div>
 
-          {/* Social Login */}
-          <div className="grid grid-cols-3 gap-4">
-            <Button variant="outline" className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10">Google</Button>
-            <Button variant="outline" className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10">GitHub</Button>
-            <Button variant="outline" className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10">Apple</Button>
+          {/* Quick Login Buttons */}
+          <div className="grid grid-cols-2 gap-3 mb-8">
+            <Button
+              type="button"
+              onClick={() => quickLogin("student")}
+              variant="outline"
+              className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10 text-sm"
+            >
+              Student
+            </Button>
+            <Button
+              type="button"
+              onClick={() => quickLogin("teacher")}
+              variant="outline"
+              className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10 text-sm"
+            >
+              Teacher
+            </Button>
+            <Button
+              type="button"
+              onClick={() => quickLogin("parent")}
+              variant="outline"
+              className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10 text-sm"
+            >
+              Parent
+            </Button>
+            <Button
+              type="button"
+              onClick={() => quickLogin("admin")}
+              variant="outline"
+              className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10 text-sm"
+            >
+              Admin
+            </Button>
+          </div>
+
+          {/* Demo Credentials Info */}
+          <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg text-xs text-blue-200">
+            <p className="font-semibold mb-2">Demo Credentials:</p>
+            <p>Password: <span className="font-mono">demo1234</span></p>
+            <p className="mt-2 text-blue-300">Click any role above to auto-fill credentials</p>
           </div>
 
           {/* Sign Up Link */}

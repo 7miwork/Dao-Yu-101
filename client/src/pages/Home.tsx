@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { BookOpen, Zap, Users, Trophy, ArrowRight, Globe } from "lucide-react";
 import { useState } from "react";
+import { useLocation } from "wouter";
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const [, setLocation] = useLocation();
 
   const features = [
     {
@@ -44,7 +46,7 @@ export default function Home() {
             <a href="#" className="text-purple-200 hover:text-white transition">Pricing</a>
             <a href="#" className="text-purple-200 hover:text-white transition">About</a>
           </div>
-          <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0">Sign In</Button>
+          <Button onClick={() => setLocation("/login")} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0">Sign In</Button>
         </div>
       </nav>
 
@@ -59,11 +61,11 @@ export default function Home() {
               Join millions of students on their learning journey with Dao-Yu, the next-generation EdTech platform that makes education engaging, interactive, and rewarding.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg">
+              <Button onClick={() => setLocation("/register")} className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg">
                 Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button variant="outline" className="border-purple-400/30 text-purple-200 hover:bg-purple-500/10 px-8 py-6 text-lg">
-                Watch Demo
+              <Button onClick={() => setLocation("/courses")} variant="outline" className="border-purple-400/30 text-purple-200 hover:bg-purple-500/10 px-8 py-6 text-lg">
+                Explore Courses
               </Button>
             </div>
             <div className="flex items-center gap-8 pt-8">
@@ -158,7 +160,7 @@ export default function Home() {
               onChange={(e) => setEmail(e.target.value)}
               className="px-6 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 w-full sm:w-auto"
             />
-            <Button className="bg-white text-blue-600 hover:bg-gray-100 border-0 px-8 py-3 font-semibold w-full sm:w-auto">
+            <Button onClick={() => setLocation("/register")} className="bg-white text-blue-600 hover:bg-gray-100 border-0 px-8 py-3 font-semibold w-full sm:w-auto">
               Start Learning Now
             </Button>
           </div>
