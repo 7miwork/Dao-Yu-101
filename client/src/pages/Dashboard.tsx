@@ -5,6 +5,8 @@ import { BookOpen, Users, TrendingUp, Award, LogOut, Settings } from "lucide-rea
 import { useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { authService, User } from "@/lib/auth-service";
+import { useI18n } from "@/contexts/I18nContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const data = [
   { name: "Mon", value: 400 },
@@ -27,6 +29,7 @@ export default function Dashboard() {
   const [, setLocation] = useLocation();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useI18n();
 
   useEffect(() => {
     const currentUser = authService.getCurrentUser();
@@ -73,13 +76,14 @@ export default function Dashboard() {
                 <p className="text-xs text-purple-300 capitalize">{user.role}</p>
               </div>
             </div>
+            <LanguageSwitcher />
             <Button
               onClick={handleLogout}
               variant="outline"
               className="border-purple-500/30 text-purple-200 hover:bg-purple-500/10"
             >
               <LogOut className="w-4 h-4 mr-2" />
-              Logout
+              {t("common.logout")}
             </Button>
           </div>
         </div>
