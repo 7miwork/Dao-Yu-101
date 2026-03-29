@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { ChevronLeft, Zap, BookOpen } from "lucide-react";
+import { ChevronLeft, Zap, BookOpen, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/contexts/I18nContext";
 
@@ -19,6 +19,7 @@ interface Archipelago {
   name: string;
   emoji: string;
   color: string;
+  lightColor: string;
   islands: Island[];
   x: number;
   y: number;
@@ -29,7 +30,8 @@ const archipelagos: Archipelago[] = [
     id: 1,
     name: "Mathematics Kingdom",
     emoji: "🏝️",
-    color: "from-amber-500 to-orange-500",
+    color: "#f59e0b",
+    lightColor: "#fef3c7",
     x: 20,
     y: 30,
     islands: [
@@ -43,7 +45,8 @@ const archipelagos: Archipelago[] = [
     id: 2,
     name: "English Literature",
     emoji: "📚",
-    color: "from-blue-500 to-cyan-500",
+    color: "#3b82f6",
+    lightColor: "#dbeafe",
     x: 60,
     y: 25,
     islands: [
@@ -57,7 +60,8 @@ const archipelagos: Archipelago[] = [
     id: 3,
     name: "Science Lab",
     emoji: "🔬",
-    color: "from-green-500 to-emerald-500",
+    color: "#10b981",
+    lightColor: "#d1fae5",
     x: 40,
     y: 70,
     islands: [
@@ -71,7 +75,8 @@ const archipelagos: Archipelago[] = [
     id: 4,
     name: "History Voyage",
     emoji: "⚓",
-    color: "from-purple-500 to-pink-500",
+    color: "#a855f7",
+    lightColor: "#f3e8ff",
     x: 75,
     y: 60,
     islands: [
@@ -85,7 +90,8 @@ const archipelagos: Archipelago[] = [
     id: 5,
     name: "Art Studio",
     emoji: "🎨",
-    color: "from-red-500 to-rose-500",
+    color: "#ef4444",
+    lightColor: "#fee2e2",
     x: 85,
     y: 35,
     islands: [
@@ -100,12 +106,26 @@ const archipelagos: Archipelago[] = [
 export default function ArchipelagoMap() {
   const [, setLocation] = useLocation();
   const [selectedArchipelago, setSelectedArchipelago] = useState<Archipelago | null>(null);
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [hoveredArchipelago, setHoveredArchipelago] = useState<number | null>(null);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; opacity: number }>>([]);
   const { t } = useI18n();
+
+  // Generate floating particles
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newParticle = {
+        id: Math.random(),
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        opacity: 0.5,
+      };
+      setParticles((prev) => [...prev.slice(-20), newParticle]);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleArchipelagoClick = (archipelago: Archipelago) => {
     setSelectedArchipelago(archipelago);
-    setZoomLevel(2);
   };
 
   const handleIslandClick = (island: Island) => {
@@ -114,79 +134,152 @@ export default function ArchipelagoMap() {
 
   const handleBack = () => {
     setSelectedArchipelago(null);
-    setZoomLevel(1);
-  };
-
-  const getViewBox = () => {
-    if (selectedArchipelago) {
-      return `0 0 100 100`;
-    }
-    return `0 0 100 100`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 overflow-hidden relative">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse animation-delay-2000"></div>
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute w-1 h-1 bg-white rounded-full animate-float"
+            style={{
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              opacity: particle.opacity,
+              animation: `float ${3 + Math.random() * 2}s ease-in-out infinite`,
+            }}
+          ></div>
+        ))}
+      </div>
+
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-white/20">
+      <div className="sticky top-0 z-40 bg-gradient-to-b from-slate-900/95 to-slate-900/50 backdrop-blur-xl border-b border-purple-500/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {selectedArchipelago ? (
             <>
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleBack}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+                  className="p-2 hover:bg-purple-500/20 rounded-lg transition duration-300"
                 >
-                  <ChevronLeft className="w-6 h-6 text-gray-900 dark:text-white" />
+                  <ChevronLeft className="w-6 h-6 text-white" />
                 </button>
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                     {selectedArchipelago.emoji} {selectedArchipelago.name}
                   </h1>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-purple-300">
                     {selectedArchipelago.islands.length} Topics
                   </p>
                 </div>
               </div>
             </>
           ) : (
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">🗺️ Your Learning World</h1>
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-8 h-8 text-purple-400" />
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                🗺️ Your Learning World
+              </h1>
+            </div>
           )}
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
         {!selectedArchipelago ? (
           // World Map View
-          <div className="space-y-6">
-            <div className="bg-gradient-to-b from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-3xl p-8 border-2 border-cyan-200 dark:border-cyan-800 shadow-xl">
+          <div className="space-y-8">
+            {/* Interactive SVG Map */}
+            <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 rounded-3xl p-8 border border-purple-500/30 shadow-2xl backdrop-blur-sm">
               <svg
-                className="w-full h-96 bg-gradient-to-b from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30 rounded-2xl"
-                viewBox={getViewBox()}
+                className="w-full h-96 bg-gradient-to-b from-cyan-900/20 to-purple-900/20 rounded-2xl"
+                viewBox="0 0 100 100"
                 preserveAspectRatio="xMidYMid meet"
               >
-                {/* Water pattern */}
                 <defs>
+                  {/* Gradients */}
+                  <radialGradient id="waterGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.1" />
+                  </radialGradient>
+
+                  {/* Glow filter */}
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  {/* Wave pattern */}
                   <pattern id="waves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M0,10 Q5,5 10,10 T20,10" stroke="rgba(59,130,246,0.1)" fill="none" strokeWidth="0.5" />
+                    <path
+                      d="M0,10 Q5,5 10,10 T20,10"
+                      stroke="rgba(59,130,246,0.2)"
+                      fill="none"
+                      strokeWidth="0.5"
+                    />
                   </pattern>
                 </defs>
+
+                {/* Water background */}
+                <rect width="100" height="100" fill="url(#waterGradient)" />
                 <rect width="100" height="100" fill="url(#waves)" />
 
-                {/* Archipelagos */}
+                {/* Archipelagos with enhanced visuals */}
                 {archipelagos.map((arch) => (
-                  <g key={arch.id} onClick={() => handleArchipelagoClick(arch)} className="cursor-pointer">
-                    {/* Archipelago shadow */}
-                    <circle cx={arch.x} cy={arch.y + 1} r="6" fill="rgba(0,0,0,0.1)" />
-
-                    {/* Archipelago circle */}
+                  <g
+                    key={arch.id}
+                    onClick={() => handleArchipelagoClick(arch)}
+                    onMouseEnter={() => setHoveredArchipelago(arch.id)}
+                    onMouseLeave={() => setHoveredArchipelago(null)}
+                    className="cursor-pointer transition-transform duration-300"
+                    style={{
+                      transform:
+                        hoveredArchipelago === arch.id ? "scale(1.15)" : "scale(1)",
+                      transformOrigin: `${arch.x}% ${arch.y}%`,
+                    }}
+                  >
+                    {/* Glow halo */}
                     <circle
                       cx={arch.x}
                       cy={arch.y}
-                      r="6"
-                      fill={arch.color.split(" ")[0].replace("from-", "")}
-                      className="hover:r-7 transition"
-                      opacity="0.8"
+                      r={hoveredArchipelago === arch.id ? 9 : 7}
+                      fill={arch.color}
+                      opacity={hoveredArchipelago === arch.id ? 0.4 : 0.2}
+                      className="transition-all duration-300"
+                    />
+
+                    {/* Outer ring */}
+                    <circle
+                      cx={arch.x}
+                      cy={arch.y}
+                      r={hoveredArchipelago === arch.id ? 6.5 : 5.5}
+                      fill="none"
+                      stroke={arch.color}
+                      strokeWidth="0.5"
+                      opacity={hoveredArchipelago === arch.id ? 1 : 0.6}
+                      className="transition-all duration-300"
+                    />
+
+                    {/* Main archipelago circle */}
+                    <circle
+                      cx={arch.x}
+                      cy={arch.y}
+                      r={hoveredArchipelago === arch.id ? 5 : 4}
+                      fill={arch.color}
+                      filter="url(#glow)"
+                      className="transition-all duration-300"
                     />
 
                     {/* Archipelago emoji */}
@@ -194,22 +287,24 @@ export default function ArchipelagoMap() {
                       x={arch.x}
                       y={arch.y + 1}
                       textAnchor="middle"
-                      fontSize="4"
+                      fontSize={hoveredArchipelago === arch.id ? "4.5" : "4"}
                       fill="white"
                       fontWeight="bold"
-                      className="pointer-events-none"
+                      className="pointer-events-none transition-all duration-300"
                     >
                       {arch.emoji}
                     </text>
 
-                    {/* Label */}
+                    {/* Label with better styling */}
                     <text
                       x={arch.x}
-                      y={arch.y + 14}
+                      y={arch.y + 13}
                       textAnchor="middle"
-                      fontSize="2.5"
-                      fill="rgba(0,0,0,0.7)"
-                      className="pointer-events-none font-bold"
+                      fontSize="2"
+                      fill="white"
+                      fontWeight="600"
+                      className="pointer-events-none"
+                      opacity={hoveredArchipelago === arch.id ? 1 : 0.8}
                     >
                       {arch.name.split(" ")[0]}
                     </text>
@@ -218,7 +313,7 @@ export default function ArchipelagoMap() {
               </svg>
             </div>
 
-            {/* Archipelago Cards */}
+            {/* Archipelago Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {archipelagos.map((arch) => {
                 const completedIslands = arch.islands.filter((i) => i.completed).length;
@@ -230,42 +325,46 @@ export default function ArchipelagoMap() {
                   <button
                     key={arch.id}
                     onClick={() => handleArchipelagoClick(arch)}
-                    className="card-modern p-6 text-left hover:shadow-xl transition-all hover:scale-105 group"
+                    className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 hover:scale-105 overflow-hidden"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="text-4xl">{arch.emoji}</div>
-                      <span className="text-xs font-bold text-white bg-indigo-600 px-3 py-1 rounded-full">
-                        {completedIslands}/{arch.islands.length}
-                      </span>
-                    </div>
+                    {/* Gradient overlay on hover */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                      style={{ backgroundColor: arch.color }}
+                    ></div>
 
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{arch.name}</h3>
+                    <div className="relative z-10 space-y-4">
+                      <div className="flex items-start justify-between">
+                        <div className="text-5xl drop-shadow-lg">{arch.emoji}</div>
+                        <span className="text-xs font-bold text-white bg-gradient-to-r from-purple-600 to-blue-600 px-3 py-1 rounded-full shadow-lg">
+                          {completedIslands}/{arch.islands.length}
+                        </span>
+                      </div>
 
-                    <div className="space-y-3">
                       <div>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">Progress</span>
-                          <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
-                            {avgProgress}%
-                          </span>
+                        <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+                          {arch.name}
+                        </h3>
+                        <p className="text-xs text-purple-200 mt-1">{arch.islands.length} Topics</p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-purple-300 font-medium">Progress</span>
+                          <span className="text-sm font-bold text-cyan-400">{avgProgress}%</span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden border border-purple-500/20">
                           <div
-                            className="bg-gradient-to-r from-indigo-500 to-blue-500 h-2 rounded-full transition-all"
+                            className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-500 shadow-lg shadow-purple-500/50"
                             style={{ width: `${avgProgress}%` }}
                           ></div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                        <BookOpen className="w-4 h-4" />
-                        <span>{arch.islands.length} Topics</span>
-                      </div>
+                      <Button className="w-full mt-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group-hover:shadow-xl">
+                        Explore
+                      </Button>
                     </div>
-
-                    <Button className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white group-hover:shadow-lg transition">
-                      Explore
-                    </Button>
                   </button>
                 );
               })}
@@ -273,19 +372,32 @@ export default function ArchipelagoMap() {
           </div>
         ) : (
           // Archipelago Detail View
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* Archipelago Map */}
-            <div className="bg-gradient-to-b from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-3xl p-8 border-2 border-cyan-200 dark:border-cyan-800 shadow-xl">
+            <div className="bg-gradient-to-b from-slate-800/50 to-slate-900/50 rounded-3xl p-8 border border-purple-500/30 shadow-2xl backdrop-blur-sm">
               <svg
-                className="w-full h-96 bg-gradient-to-b from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30 rounded-2xl"
+                className="w-full h-96 bg-gradient-to-b from-cyan-900/20 to-purple-900/20 rounded-2xl"
                 viewBox="0 0 100 100"
                 preserveAspectRatio="xMidYMid meet"
               >
                 <defs>
+                  <filter id="islandGlow">
+                    <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
                   <pattern id="waves2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M0,10 Q5,5 10,10 T20,10" stroke="rgba(59,130,246,0.1)" fill="none" strokeWidth="0.5" />
+                    <path
+                      d="M0,10 Q5,5 10,10 T20,10"
+                      stroke="rgba(59,130,246,0.2)"
+                      fill="none"
+                      strokeWidth="0.5"
+                    />
                   </pattern>
                 </defs>
+                <rect width="100" height="100" fill="url(#waterGradient)" />
                 <rect width="100" height="100" fill="url(#waves2)" />
 
                 {/* Islands */}
@@ -293,24 +405,31 @@ export default function ArchipelagoMap() {
                   <g
                     key={island.id}
                     onClick={() => handleIslandClick(island)}
-                    className="cursor-pointer"
+                    className="cursor-pointer transition-transform duration-300 hover:scale-125"
+                    style={{ transformOrigin: `${island.x}% ${island.y}%` }}
                   >
-                    {/* Island shadow */}
-                    <circle cx={island.x} cy={island.y + 1} r="4" fill="rgba(0,0,0,0.1)" />
-
-                    {/* Island */}
+                    {/* Glow halo */}
                     <circle
                       cx={island.x}
                       cy={island.y}
-                      r="4"
+                      r="5"
                       fill={island.completed ? "#10b981" : "#f59e0b"}
-                      className="hover:r-5 transition"
+                      opacity="0.3"
+                    />
+
+                    {/* Island circle */}
+                    <circle
+                      cx={island.x}
+                      cy={island.y}
+                      r="3.5"
+                      fill={island.completed ? "#10b981" : "#f59e0b"}
+                      filter="url(#islandGlow)"
                     />
 
                     {/* Island emoji */}
                     <text
                       x={island.x}
-                      y={island.y + 1}
+                      y={island.y + 0.5}
                       textAnchor="middle"
                       fontSize="2"
                       fill="white"
@@ -320,17 +439,17 @@ export default function ArchipelagoMap() {
                       {island.emoji}
                     </text>
 
-                    {/* Label */}
-                    <text
-                      x={island.x}
-                      y={island.y + 10}
-                      textAnchor="middle"
-                      fontSize="1.5"
-                      fill="rgba(0,0,0,0.6)"
-                      className="pointer-events-none"
-                    >
-                      {island.name.split(" ")[0]}
-                    </text>
+                    {/* Completion indicator */}
+                    {island.completed && (
+                      <circle
+                        cx={island.x + 3}
+                        cy={island.y - 3}
+                        r="1.2"
+                        fill="#10b981"
+                        stroke="white"
+                        strokeWidth="0.3"
+                      />
+                    )}
                   </g>
                 ))}
               </svg>
@@ -342,46 +461,76 @@ export default function ArchipelagoMap() {
                 <button
                   key={island.id}
                   onClick={() => handleIslandClick(island)}
-                  className="card-modern p-6 text-left hover:shadow-xl transition-all hover:scale-105 group"
+                  className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 hover:scale-105 overflow-hidden"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-4xl">{island.emoji}</div>
-                    {island.completed && <span className="text-green-500 text-2xl">✓</span>}
-                  </div>
+                  {/* Gradient overlay */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                    style={{
+                      backgroundColor: island.completed ? "#10b981" : "#f59e0b",
+                    }}
+                  ></div>
 
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{island.name}</h3>
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-start justify-between">
+                      <div className="text-5xl drop-shadow-lg">{island.emoji}</div>
+                      {island.completed && (
+                        <span className="text-2xl text-green-400">✓</span>
+                      )}
+                    </div>
 
-                  <div className="space-y-3">
                     <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">Progress</span>
-                        <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                      <h3 className="text-lg font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+                        {island.name}
+                      </h3>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-purple-300 font-medium">Progress</span>
+                        <span className="text-sm font-bold text-cyan-400">
                           {island.progress}%
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-slate-700/50 rounded-full h-2.5 overflow-hidden border border-purple-500/20">
                         <div
-                          className="bg-gradient-to-r from-indigo-500 to-blue-500 h-2 rounded-full transition-all"
+                          className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 rounded-full transition-all duration-500 shadow-lg shadow-purple-500/50"
                           style={{ width: `${island.progress}%` }}
                         ></div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                      <Zap className="w-4 h-4 text-amber-500" />
+                    <div className="flex items-center gap-2 text-sm text-purple-300">
+                      <Zap className="w-4 h-4 text-amber-400" />
                       <span>+50 XP per lesson</span>
                     </div>
-                  </div>
 
-                  <Button className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white group-hover:shadow-lg transition">
-                    {island.completed ? "Review" : "Start Learning"}
-                  </Button>
+                    <Button className="w-full mt-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg hover:shadow-purple-500/50 transition-all duration-300 group-hover:shadow-xl">
+                      {island.completed ? "Review" : "Start Learning"}
+                    </Button>
+                  </div>
                 </button>
               ))}
             </div>
           </div>
         )}
       </div>
+
+      {/* CSS for animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+      `}</style>
     </div>
   );
 }
