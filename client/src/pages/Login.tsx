@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
+import { BookOpen, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { authService, DEMO_ACCOUNTS } from "@/lib/auth-service";
@@ -10,6 +10,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [, setLocation] = useLocation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -17,14 +18,11 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login form submitted with:", email, password);
     setLoading(true);
     setError("");
 
     const response = await authService.login(email, password);
-    console.log("Login response:", response);
     if (response.success) {
-      console.log("Login successful, navigating to dashboard");
       setLocation("/dashboard");
     } else {
       setError(response.error || "Login failed");
@@ -33,15 +31,12 @@ export default function Login() {
   };
 
   const quickLogin = async (role: string) => {
-    console.log("Quick login for role:", role);
     const account = DEMO_ACCOUNTS[role];
     setLoading(true);
     setError("");
 
     const response = await authService.login(account.email, account.password);
-    console.log("Quick login response:", response);
     if (response.success) {
-      console.log("Quick login successful, navigating to dashboard");
       setLocation("/dashboard");
     } else {
       setError(response.error || "Login failed");
@@ -50,140 +45,146 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-      <div className="absolute top-4 right-4">
-        <LanguageSwitcher />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950 flex items-center justify-center p-4">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-200 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-200 dark:bg-blue-900/20 rounded-full blur-3xl opacity-20"></div>
       </div>
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-600 rounded-lg flex items-center justify-center">
-            <BookOpen className="w-7 h-7 text-white" />
+
+      <div className="w-full max-w-md relative z-10">
+        {/* Header */}
+        <div className="text-center mb-8 animate-fadeInUp">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-2xl mb-4 shadow-lg">
+            <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t("common.appName")}</span>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dao-Yu</h1>
+          <p className="text-gray-600 dark:text-gray-400">{t("login.welcomeBack")}</p>
         </div>
 
-        {/* Card */}
-        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-xl">
-          <h1 className="text-2xl font-bold text-white mb-2">{t("login.welcomeBack")}</h1>
-          <p className="text-purple-300 mb-8">{t("login.signInContinue")}</p>
+        {/* Language Switcher */}
+        <div className="flex justify-end mb-4">
+          <LanguageSwitcher />
+        </div>
 
-          {error && (
-            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <span className="text-red-200 text-sm">{error}</span>
-            </div>
-          )}
+        {/* Error Message */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-start gap-3 animate-scaleIn">
+            <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+            <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
+          </div>
+        )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
+        {/* Login Form */}
+        <form onSubmit={handleSubmit} className="card-modern p-8 mb-6 animate-slideInRight">
+          <div className="space-y-5">
+            {/* Email Field */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">{t("login.emailAddress")}</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("login.email")}</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 w-5 h-5 text-purple-400 pointer-events-none" />
-                <Input
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
                   type="email"
-                  placeholder={t("login.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="you@example.com"
+                  className="input-modern pl-10"
                   required
                 />
               </div>
             </div>
 
-            {/* Password */}
+            {/* Password Field */}
             <div>
-              <label className="block text-sm font-medium text-purple-200 mb-2">{t("login.password")}</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t("login.password")}</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 w-5 h-5 text-purple-400 pointer-events-none" />
-                <Input
-                  type="password"
-                  placeholder={t("login.passwordPlaceholder")}
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 bg-slate-700/50 border-purple-500/30 text-white placeholder-purple-400/50 focus:border-purple-500 focus:ring-purple-500"
+                  placeholder="••••••••"
+                  className="input-modern pl-10 pr-10"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
+            {/* Remember & Forgot */}
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4 rounded border-purple-500/30 bg-slate-700/50" />
-                <span className="text-purple-300">{t("login.rememberMe")}</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-indigo-600" />
+                <span className="text-gray-600 dark:text-gray-400">{t("login.rememberMe")}</span>
               </label>
-              <a href="#" className="text-blue-400 hover:text-blue-300 transition">{t("login.forgotPassword")}</a>
+              <a href="#" className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium">
+                {t("login.forgotPassword")}
+              </a>
             </div>
 
             {/* Submit Button */}
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 py-6 text-lg font-semibold disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white py-3 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {loading ? t("login.signingIn") : t("login.signInButton")}
-              {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  {t("login.signingIn")}
+                </>
+              ) : (
+                <>
+                  {t("login.signIn")}
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </Button>
-          </form>
+          </div>
+        </form>
 
-          {/* Demo Accounts Section - Fixed overlay issue */}
-          <div className="my-8 text-center">
-            <div className="relative">
-              <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent"></div>
-              <div className="relative inline-block bg-slate-900/50 px-4">
-                <span className="text-purple-400 text-sm font-medium">{t("login.demoAccounts")}</span>
-              </div>
+        {/* Demo Accounts */}
+        <div className="mb-6">
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300 dark:border-gray-700"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white dark:bg-slate-900 text-gray-600 dark:text-gray-400">{t("login.demoAccounts")}</span>
             </div>
           </div>
 
-          {/* Quick Login Buttons */}
-          <div className="grid grid-cols-2 gap-3 mb-8">
-            <Button
-              type="button"
-              disabled={loading}
-              onClick={() => quickLogin("student")}
-              className="bg-gradient-to-r from-blue-500/80 to-purple-600/80 hover:from-blue-600 hover:to-purple-700 text-white border-0 text-sm disabled:opacity-50"
-            >
-              {loading ? "..." : t("login.student")}
-            </Button>
-            <Button
-              type="button"
-              disabled={loading}
-              onClick={() => quickLogin("teacher")}
-              className="bg-gradient-to-r from-green-500/80 to-emerald-600/80 hover:from-green-600 hover:to-emerald-700 text-white border-0 text-sm disabled:opacity-50"
-            >
-              {loading ? "..." : t("login.teacher")}
-            </Button>
-            <Button
-              type="button"
-              disabled={loading}
-              onClick={() => quickLogin("parent")}
-              className="bg-gradient-to-r from-orange-500/80 to-amber-600/80 hover:from-orange-600 hover:to-amber-700 text-white border-0 text-sm disabled:opacity-50"
-            >
-              {loading ? "..." : t("login.parent")}
-            </Button>
-            <Button
-              type="button"
-              disabled={loading}
-              onClick={() => quickLogin("admin")}
-              className="bg-gradient-to-r from-red-500/80 to-pink-600/80 hover:from-red-600 hover:to-pink-700 text-white border-0 text-sm disabled:opacity-50"
-            >
-              {loading ? "..." : t("login.admin")}
-            </Button>
+          <div className="grid grid-cols-2 gap-3">
+            {Object.entries(DEMO_ACCOUNTS).map(([role, account]) => (
+              <button
+                key={role}
+                onClick={() => quickLogin(role)}
+                disabled={loading}
+                className="p-3 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                <div className="capitalize font-semibold text-gray-900 dark:text-white">{role}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{account.email}</div>
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* Demo Credentials Info */}
-          <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg text-xs text-blue-200">
-            <p className="font-semibold mb-2">{t("login.demoCredentials")}:</p>
-            <p>{t("login.demoPassword")}: <span className="font-mono">demo1234</span></p>
-            <p className="mt-2 text-blue-300">{t("login.clickAnyRole")}</p>
-          </div>
-
-          {/* Sign Up Link */}
-          <p className="text-center text-purple-300 mt-8">
-            {t("login.noAccount")} <a href="/register" className="text-blue-400 hover:text-blue-300 font-semibold transition">{t("login.signUp")}</a>
+        {/* Sign Up Link */}
+        <div className="text-center">
+          <p className="text-gray-600 dark:text-gray-400">
+            {t("login.noAccount")}{" "}
+            <button
+              onClick={() => setLocation("/register")}
+              className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold transition-colors"
+            >
+              {t("login.signUp")}
+            </button>
           </p>
         </div>
       </div>
