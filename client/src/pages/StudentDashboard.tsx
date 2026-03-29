@@ -67,13 +67,14 @@ export default function StudentDashboard({ user }: { user: User }) {
 
           <nav className="space-y-2">
             {[
-              { icon: <Home className="w-5 h-5" />, label: "Home", active: true },
-              { icon: <Map className="w-5 h-5" />, label: "Archipelago", active: false },
-              { icon: <Trophy className="w-5 h-5" />, label: "Achievements", active: false },
-              { icon: <Users className="w-5 h-5" />, label: "Friends", active: false },
+              { icon: <Home className="w-5 h-5" />, label: "Home", active: true, href: "/dashboard" },
+              { icon: <Map className="w-5 h-5" />, label: "Archipelago", active: false, href: "/archipelago" },
+              { icon: <Trophy className="w-5 h-5" />, label: "Achievements", active: false, href: "#" },
+              { icon: <Users className="w-5 h-5" />, label: "Friends", active: false, href: "#" },
             ].map((item, idx) => (
               <button
                 key={idx}
+                onClick={() => item.href !== "#" && setLocation(item.href)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
                   item.active
                     ? "bg-white/20 text-white"
