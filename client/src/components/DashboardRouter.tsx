@@ -36,7 +36,7 @@ export default function DashboardRouter() {
 
   // Route to gamified student interface
   if (user.role === "student") {
-    return <StudentDashboard user={user} />;
+    return <StudentDashboard />;
   }
 
   // Route to professional dashboard for all other roles

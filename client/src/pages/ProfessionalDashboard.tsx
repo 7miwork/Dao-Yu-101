@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { BookOpen, LogOut, Users, TrendingUp, Award, Menu, X, BarChart3, Settings, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { LogOut, Menu, X, BarChart3, Users, Settings, Bell, TrendingUp, Award } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { authService, User } from "@/lib/auth-service";
 import { useI18n } from "@/contexts/I18nContext";
@@ -46,170 +45,206 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
 
   const getMenuItems = (role: string) => {
     const baseItems = [
-      { icon: <BarChart3 className="w-5 h-5" />, label: "Overview", active: true },
-      { icon: <Users className="w-5 h-5" />, label: "Users", active: false },
-      { icon: <TrendingUp className="w-5 h-5" />, label: "Analytics", active: false },
-      { icon: <Settings className="w-5 h-5" />, label: "Settings", active: false },
+      { icon: "📊", label: "Overview", active: true },
+      { icon: "👥", label: "Users", active: false },
+      { icon: "📈", label: "Analytics", active: false },
+      { icon: "⚙️", label: "Settings", active: false },
     ];
-
-    if (role === "teacher") {
-      return [
-        { icon: <Users className="w-5 h-5" />, label: "My Classes", active: true },
-        { icon: <TrendingUp className="w-5 h-5" />, label: "Student Progress", active: false },
-        { icon: <BookOpen className="w-5 h-5" />, label: "Assignments", active: false },
-        { icon: <Bell className="w-5 h-5" />, label: "Notifications", active: false },
-      ];
-    }
-
-    if (role === "parent") {
-      return [
-        { icon: <Users className="w-5 h-5" />, label: "My Children", active: true },
-        { icon: <TrendingUp className="w-5 h-5" />, label: "Progress Reports", active: false },
-        { icon: <Bell className="w-5 h-5" />, label: "Alerts", active: false },
-        { icon: <Settings className="w-5 h-5" />, label: "Settings", active: false },
-      ];
-    }
-
     return baseItems;
   };
 
-  const menuItems = getMenuItems(user.role);
-
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: "#f8f9fa" }}>
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 md:hidden bg-black/50" onClick={() => setSidebarOpen(false)}></div>
+        <div
+          className="fixed inset-0 z-40 md:hidden bg-black/50"
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-64 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-gray-800 z-50 transform transition-transform md:translate-x-0 ${
+        className={`fixed left-0 top-0 h-screen w-64 z-50 transform transition-transform md:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{
+          backgroundColor: "#ffffff",
+          borderRight: "1px solid #e5e7eb",
+          boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
+        }}
       >
-        <div className="p-6 border-b border-gray-200 dark:border-gray-800">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <span className="text-lg font-bold text-gray-900 dark:text-white">Dao-Yu</span>
-              <p className="text-xs text-gray-600 dark:text-gray-400 capitalize">{user.role}</p>
-            </div>
-          </div>
-        </div>
-
-        <nav className="p-4 space-y-2">
-          {menuItems.map((item, idx) => (
-            <button
-              key={idx}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                item.active
-                  ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
-                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-              }`}
+        <div className="p-6">
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-8">
+            <div
+              className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold"
+              style={{ backgroundColor: "#3b82f6" }}
             >
-              {item.icon}
-              <span className="font-medium">{item.label}</span>
-            </button>
-          ))}
-        </nav>
+              📚
+            </div>
+            <span className="text-xl font-bold text-gray-900">Dao-Yu</span>
+          </div>
 
-        <div className="absolute bottom-6 left-6 right-6 space-y-3">
-          <Button
-            onClick={handleLogout}
-            className="w-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 border-0"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </Button>
+          {/* Navigation */}
+          <nav className="space-y-1 mb-8">
+            {getMenuItems(user.role).map((item, idx) => (
+              <button
+                key={idx}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition text-gray-700 hover:bg-gray-50"
+                style={{
+                  backgroundColor: item.active ? "#f3f4f6" : "transparent",
+                  borderLeft: item.active ? "3px solid #3b82f6" : "3px solid transparent",
+                }}
+              >
+                <span className="text-xl">{item.icon}</span>
+                <span className="font-medium">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Bottom Actions */}
+          <div className="absolute bottom-6 left-6 right-6 space-y-3">
+            <LanguageSwitcher />
+            <button
+              onClick={handleLogout}
+              className="w-full px-4 py-3 rounded-lg font-medium flex items-center gap-2 transition"
+              style={{
+                backgroundColor: "#fee2e2",
+                color: "#dc2626",
+              }}
+            >
+              <LogOut className="w-4 h-4" />
+              Logout
+            </button>
+          </div>
         </div>
       </aside>
 
       {/* Main Content */}
       <main className="md:ml-64">
-        {/* Header */}
-        <header className="sticky top-0 z-40 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-slate-900 shadow-sm">
+        {/* Top Navigation */}
+        <nav
+          className="sticky top-0 z-40 border-b"
+          style={{
+            backgroundColor: "#ffffff",
+            borderColor: "#e5e7eb",
+            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
+          }}
+        >
           <div className="px-6 py-4 flex items-center justify-between">
+            {/* Left */}
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="md:hidden text-gray-900 dark:text-white"
+                className="md:hidden text-gray-700 hover:text-gray-900"
               >
                 {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{getRoleLabel(user.role)}</h1>
+              <h1 className="text-2xl font-bold text-gray-900">{getRoleLabel(user.role)}</h1>
             </div>
+
+            {/* Right */}
             <div className="flex items-center gap-4">
-              <LanguageSwitcher />
-              <img src={user.avatar} alt={user.firstName} className="w-10 h-10 rounded-full shadow-md" />
+              <button className="p-2 rounded-lg hover:bg-gray-100 transition">
+                <Bell className="w-5 h-5 text-gray-600" />
+              </button>
+              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-900">{user.firstName}</p>
+                  <p className="text-xs text-gray-500 capitalize">{user.role}</p>
+                </div>
+                <img
+                  src={user.avatar}
+                  alt={user.firstName}
+                  className="w-10 h-10 rounded-full"
+                />
+              </div>
             </div>
           </div>
-        </header>
+        </nav>
 
-        {/* Content */}
-        <div className="p-6 max-w-7xl">
-          {/* Welcome Section */}
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Welcome back, {user.firstName}!
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              {user.role === "teacher" && "Manage your classes and track student progress"}
-              {user.role === "parent" && "Monitor your children's learning journey"}
-              {user.role === "admin" && "Oversee platform operations and user management"}
-            </p>
-          </div>
-
+        {/* Page Content */}
+        <div className="p-6 md:p-8">
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             {[
-              { label: "Active Users", value: "1,234", color: "from-blue-500 to-cyan-500" },
-              { label: "Courses", value: "45", color: "from-indigo-500 to-purple-500" },
-              { label: "Completion Rate", value: "78%", color: "from-green-500 to-emerald-500" },
-              { label: "Avg. Score", value: "82%", color: "from-orange-500 to-red-500" },
+              { label: "Total Students", value: "2,450", icon: "👥", color: "#3b82f6" },
+              { label: "Active Courses", value: "12", icon: "📚", color: "#10b981" },
+              { label: "Avg. Performance", value: "78%", icon: "📈", color: "#f59e0b" },
+              { label: "Completion Rate", value: "85%", icon: "✓", color: "#8b5cf6" },
             ].map((stat, idx) => (
-              <div key={idx} className="card-modern p-6">
-                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">{stat.label}</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stat.value}</p>
+              <div
+                key={idx}
+                className="rounded-xl p-6 border transition hover:shadow-lg"
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderColor: "#e5e7eb",
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-3xl">{stat.icon}</span>
+                  <span
+                    className="text-xs font-bold px-2 py-1 rounded"
+                    style={{
+                      backgroundColor: `${stat.color}20`,
+                      color: stat.color,
+                    }}
+                  >
+                    +12%
+                  </span>
+                </div>
+                <p className="text-gray-600 text-sm mb-1">{stat.label}</p>
+                <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               </div>
             ))}
           </div>
 
-          {/* Charts Section */}
+          {/* Charts Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            {/* Activity Chart */}
-            <div className="lg:col-span-2 card-modern p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Weekly Activity</h3>
+            {/* Weekly Activity */}
+            <div
+              className="lg:col-span-2 rounded-xl p-6 border"
+              style={{
+                backgroundColor: "#ffffff",
+                borderColor: "#e5e7eb",
+              }}
+            >
+              <h3 className="text-lg font-bold text-gray-900 mb-6">Weekly Activity</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={weeklyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
-                  <XAxis dataKey="name" stroke="rgba(0,0,0,0.5)" />
-                  <YAxis stroke="rgba(0,0,0,0.5)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                  <XAxis dataKey="name" stroke="#6b7280" />
+                  <YAxis stroke="#6b7280" />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "rgba(255,255,255,0.95)",
-                      border: "1px solid rgba(0,0,0,0.1)",
+                      backgroundColor: "#ffffff",
+                      border: "1px solid #e5e7eb",
                       borderRadius: "8px",
                     }}
                   />
-                  <Bar dataKey="value" fill="#6366f1" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="value" fill="#3b82f6" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             {/* Performance Distribution */}
-            <div className="card-modern p-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Performance</h3>
+            <div
+              className="rounded-xl p-6 border"
+              style={{
+                backgroundColor: "#ffffff",
+                borderColor: "#e5e7eb",
+              }}
+            >
+              <h3 className="text-lg font-bold text-gray-900 mb-6">Performance</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
                     data={performanceData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={50}
-                    outerRadius={80}
+                    innerRadius={60}
+                    outerRadius={100}
                     paddingAngle={2}
                     dataKey="value"
                   >
@@ -217,34 +252,54 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
+                  <Tooltip />
                 </PieChart>
               </ResponsiveContainer>
-              <div className="mt-4 space-y-2 text-sm">
+              <div className="mt-4 space-y-2">
                 {performanceData.map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between">
+                  <div key={idx} className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
-                      <span className="text-gray-600 dark:text-gray-400">{item.name}</span>
+                      <div
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      />
+                      <span className="text-gray-600">{item.name}</span>
                     </div>
-                    <span className="font-semibold text-gray-900 dark:text-white">{item.value}%</span>
+                    <span className="font-bold text-gray-900">{item.value}%</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "View Reports", description: "Access detailed analytics" },
-              { title: "Manage Users", description: "Add or edit user accounts" },
-              { title: "Settings", description: "Configure preferences" },
-            ].map((action, idx) => (
-              <button key={idx} className="card-modern p-6 text-left hover:shadow-lg transition">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{action.title}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{action.description}</p>
-              </button>
-            ))}
+          {/* Recent Activity */}
+          <div
+            className="rounded-xl p-6 border"
+            style={{
+              backgroundColor: "#ffffff",
+              borderColor: "#e5e7eb",
+            }}
+          >
+            <h3 className="text-lg font-bold text-gray-900 mb-6">Recent Activity</h3>
+            <div className="space-y-4">
+              {[
+                { action: "New assignment created", time: "2 hours ago", icon: "📝" },
+                { action: "Student completed quiz", time: "4 hours ago", icon: "✓" },
+                { action: "Course updated", time: "1 day ago", icon: "📚" },
+                { action: "New student enrolled", time: "2 days ago", icon: "👤" },
+              ].map((activity, idx) => (
+                <div key={idx} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl">{activity.icon}</span>
+                    <div>
+                      <p className="text-gray-900 font-medium">{activity.action}</p>
+                      <p className="text-gray-500 text-sm">{activity.time}</p>
+                    </div>
+                  </div>
+                  <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">View</button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </main>
