@@ -83,7 +83,7 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
             >
               📚
             </div>
-            <span className="text-xl font-bold text-gray-900">Dao-Yu</span>
+            <span className="text-xl font-bold text-gray-900">Dao-Yu-101</span>
           </div>
 
           {/* Navigation */}

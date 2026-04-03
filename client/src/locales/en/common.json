@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "Dao-Yu",
+    "appName": "Dao-Yu-101",
     "language": "Language",
     "logout": "Logout",
     "settings": "Settings",
@@ -13,9 +13,9 @@
     "signIn": "Sign In",
     "exploreCourses": "Explore Courses"
   },
-  "home": {
+    "home": {
     "heroTitle": "Learning Reimagined Through Gamification",
-    "heroDescription": "Join millions of students on their learning journey with Dao-Yu, the next-generation EdTech platform that makes education engaging, interactive, and rewarding.",
+    "heroDescription": "Join millions of students on their learning journey with Dao-Yu-101, the next-generation EdTech platform that makes education engaging, interactive, and rewarding.",
     "getStarted": "Get Started Free",
     "watchDemo": "Watch Demo",
     "activeStudents": "Active Students",
@@ -32,7 +32,7 @@
     "globalLearning": "Global Learning",
     "globalDescription": "Learn in English, German, or Traditional Chinese with full internationalization support.",
     "readyToTransform": "Ready to Transform Your Learning?",
-    "joinThousands": "Join thousands of students already learning with Dao-Yu",
+    "joinThousands": "Join thousands of students already learning with Dao-Yu-101",
     "enterEmail": "Enter your email",
     "startLearning": "Start Learning Now"
   },
@@ -95,7 +95,33 @@
     "quickActions": "Quick Actions",
     "exploreCourses": "Explore Courses",
     "viewProgress": "View Progress",
-    "recentCourses": "Recent Courses"
+    "recentCourses": "Recent Courses",
+    "studentDashboard": "Student Dashboard",
+    "teacherDashboard": "Teacher Dashboard",
+    "parentPortal": "Parent Portal",
+    "adminConsole": "Admin Console",
+    "overview": "Overview",
+    "users": "Users",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "lessonsCompleted": "Lessons Completed",
+    "islandsUnlocked": "Islands Unlocked",
+    "achievements": "Achievements",
+    "badgesEarned": "badges earned",
+    "recentActivity": "Recent Activity",
+    "continueLearning": "Continue Learning",
+    "viewLeaderboard": "View Leaderboard",
+    "resumeAdventure": "Resume your adventure on the archipelago",
+    "seeRanking": "See where you rank among students",
+    "welcomeToArchipelago": "Welcome to Archipelago",
+    "yourLearningJourney": "Your learning journey starts here. Explore islands, complete lessons, and unlock new worlds!",
+    "exploreArchipelago": "EXPLORE ARCHIPELAGO",
+    "totalLessons": "of 150 total lessons",
+    "totalIslands": "of 10 islands",
+    "completedLesson": "Completed",
+    "xpReward": "XP",
+    "recentActivityDescription": "Your recent learning activities and achievements"
   },
   "courses": {
     "allCourses": "All Courses",

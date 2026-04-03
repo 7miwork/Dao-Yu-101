@@ -64,10 +64,9 @@ export default function StudentDashboard() {
         style={{ backgroundColor: '#1a1a2e', borderRight: '3px solid #ffeb3b' }}
       >
         <div className="p-6">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="text-2xl">⛏️</div>
+          <div className="flex items-center gap-3 mb-8">            <span className="text-xl">⛏️</span>
             <span className="text-xl font-bold text-white" style={{ textShadow: '2px 2px 0 rgba(0,0,0,0.5)' }}>
-              DAO-YU
+              DAO-YU-101
             </span>
           </div>
 
