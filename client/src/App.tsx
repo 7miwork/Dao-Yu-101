@@ -11,6 +11,7 @@ import DashboardRouter from "./components/DashboardRouter";
 import Courses from "./pages/Courses";
 import ArchipelagoMap from "./pages/ArchipelagoMap";
 import LessonPage from "./pages/LessonPage";
+import MinecraftLessonPage from "./pages/MinecraftLessonPage";
 
 function Router() {
   return (
@@ -20,7 +21,8 @@ function Router() {
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
       <Route path={"/archipelago"} component={ArchipelagoMap} />
-      <Route path={"/lesson/:id"} component={LessonPage} />
+      <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
+      <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
