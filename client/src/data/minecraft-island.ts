@@ -31,6 +31,55 @@ export interface QuizQuestion {
   explanation: string;
 }
 
+// Placeholder lessons for other islands
+export const PLACEHOLDER_LESSONS: Lesson[] = [
+  {
+    id: 2,
+    title: 'Python Basics - Coming Soon',
+    description: 'Learn Python programming fundamentals',
+    phase: 'getting-started',
+    duration: 60,
+    difficulty: 'beginner',
+    objectives: ['Coming soon'],
+    content: 'This course is coming soon! Check back later.',
+    codeBlocks: [],
+    studentActivity: 'Stay tuned for Python lessons!',
+    teacherTip: 'Python course will be available soon.',
+    quiz: [],
+    xpReward: 0,
+  },
+  {
+    id: 3,
+    title: 'Web Development - Coming Soon',
+    description: 'Learn HTML, CSS, and JavaScript',
+    phase: 'getting-started',
+    duration: 60,
+    difficulty: 'beginner',
+    objectives: ['Coming soon'],
+    content: 'This course is coming soon! Check back later.',
+    codeBlocks: [],
+    studentActivity: 'Stay tuned for Web Development lessons!',
+    teacherTip: 'Web Development course will be available soon.',
+    quiz: [],
+    xpReward: 0,
+  },
+  {
+    id: 4,
+    title: 'Game Design - Coming Soon',
+    description: 'Learn game design principles',
+    phase: 'getting-started',
+    duration: 60,
+    difficulty: 'beginner',
+    objectives: ['Coming soon'],
+    content: 'This course is coming soon! Check back later.',
+    codeBlocks: [],
+    studentActivity: 'Stay tuned for Game Design lessons!',
+    teacherTip: 'Game Design course will be available soon.',
+    quiz: [],
+    xpReward: 0,
+  },
+];
+
 export const MINECRAFT_LESSONS: Lesson[] = [
   {
     id: 1,
