@@ -1,32 +1,24 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { LogOut, Menu, X, BarChart3, Users, Settings, Bell, TrendingUp, Award } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { authService, User } from "@/lib/auth-service";
 import { useI18n } from "@/contexts/I18nContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-
-const weeklyData = [
-  { name: "Mon", value: 400 },
-  { name: "Tue", value: 300 },
-  { name: "Wed", value: 200 },
-  { name: "Thu", value: 278 },
-  { name: "Fri", value: 189 },
-  { name: "Sat", value: 239 },
-  { name: "Sun", value: 349 },
-];
-
-const performanceData = [
-  { name: "Excellent", value: 45, color: "#10b981" },
-  { name: "Good", value: 30, color: "#3b82f6" },
-  { name: "Average", value: 15, color: "#f59e0b" },
-  { name: "Needs Help", value: 10, color: "#ef4444" },
-];
+import ParentDashboard from "./ParentDashboard";
+import TeacherDashboard from "./TeacherDashboard";
 
 export default function ProfessionalDashboard({ user }: { user: User }) {
   const [, setLocation] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t } = useI18n();
+
+  // Route to appropriate dashboard based on role
+  if (user.role === 'parent') {
+    return <ParentDashboard />;
+  }
+  if (user.role === 'teacher') {
+    return <TeacherDashboard />;
+  }
 
   const handleLogout = async () => {
     await authService.logout();
@@ -200,79 +192,7 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
             ))}
           </div>
 
-          {/* Charts Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            {/* Weekly Activity */}
-            <div
-              className="lg:col-span-2 rounded-xl p-6 border"
-              style={{
-                backgroundColor: "#ffffff",
-                borderColor: "#e5e7eb",
-              }}
-            >
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Weekly Activity</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={weeklyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis dataKey="name" stroke="#6b7280" />
-                  <YAxis stroke="#6b7280" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #e5e7eb",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Bar dataKey="value" fill="#3b82f6" radius={[8, 8, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Performance Distribution */}
-            <div
-              className="rounded-xl p-6 border"
-              style={{
-                backgroundColor: "#ffffff",
-                borderColor: "#e5e7eb",
-              }}
-            >
-              <h3 className="text-lg font-bold text-gray-900 mb-6">Performance</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie
-                    data={performanceData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={100}
-                    paddingAngle={2}
-                    dataKey="value"
-                  >
-                    {performanceData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="mt-4 space-y-2">
-                {performanceData.map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className="w-3 h-3 rounded-full"
-                        style={{ backgroundColor: item.color }}
-                      />
-                      <span className="text-gray-600">{item.name}</span>
-                    </div>
-                    <span className="font-bold text-gray-900">{item.value}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Recent Activity */}
+          {/* Admin/School Dashboard Content */}
           <div
             className="rounded-xl p-6 border"
             style={{
@@ -280,26 +200,8 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
               borderColor: "#e5e7eb",
             }}
           >
-            <h3 className="text-lg font-bold text-gray-900 mb-6">Recent Activity</h3>
-            <div className="space-y-4">
-              {[
-                { action: "New assignment created", time: "2 hours ago", icon: "📝" },
-                { action: "Student completed quiz", time: "4 hours ago", icon: "✓" },
-                { action: "Course updated", time: "1 day ago", icon: "📚" },
-                { action: "New student enrolled", time: "2 days ago", icon: "👤" },
-              ].map((activity, idx) => (
-                <div key={idx} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl">{activity.icon}</span>
-                    <div>
-                      <p className="text-gray-900 font-medium">{activity.action}</p>
-                      <p className="text-gray-500 text-sm">{activity.time}</p>
-                    </div>
-                  </div>
-                  <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">View</button>
-                </div>
-              ))}
-            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-6">{getRoleLabel(user.role)}</h3>
+            <p className="text-gray-600">Welcome to your {user.role} dashboard. More features coming soon!</p>
           </div>
         </div>
       </main>
