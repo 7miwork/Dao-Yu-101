@@ -6,6 +6,7 @@ import { useI18n } from "@/contexts/I18nContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import ParentDashboard from "./ParentDashboard";
 import TeacherDashboard from "./TeacherDashboard";
+import AdminDashboard from "./AdminDashboard";
 
 export default function ProfessionalDashboard({ user }: { user: User }) {
   const [, setLocation] = useLocation();
@@ -18,6 +19,9 @@ export default function ProfessionalDashboard({ user }: { user: User }) {
   }
   if (user.role === 'teacher') {
     return <TeacherDashboard />;
+  }
+  if (user.role === 'admin') {
+    return <AdminDashboard />;
   }
 
   const handleLogout = async () => {
