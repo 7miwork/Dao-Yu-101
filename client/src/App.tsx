@@ -5,6 +5,9 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { I18nProvider } from "./contexts/I18nContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import { NotificationContainer } from "./components/NotificationToast";
+import { useNotification } from "./contexts/NotificationContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import DashboardRouter from "./components/DashboardRouter";
@@ -12,6 +15,8 @@ import Courses from "./pages/Courses";
 import ArchipelagoMap from "./pages/ArchipelagoMap";
 import LessonPage from "./pages/LessonPage";
 import MinecraftLessonPage from "./pages/MinecraftLessonPage";
+import SchoolDashboard from "./pages/SchoolDashboard";
+import Leaderboard from "./pages/Leaderboard";
 
 function Router() {
   return (
@@ -23,10 +28,25 @@ function Router() {
       <Route path={"/archipelago"} component={ArchipelagoMap} />
       <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
+      <Route path={"/school-dashboard"} component={SchoolDashboard} />
+      <Route path={"/leaderboard"} component={Leaderboard} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
+  );
+}
+
+function AppContent() {
+  const { notifications, removeNotification } = useNotification();
+  return (
+    <>
+      <TooltipProvider>
+        <Toaster />
+        <Router />
+        <NotificationContainer notifications={notifications} onClose={removeNotification} />
+      </TooltipProvider>
+    </>
   );
 }
 
@@ -39,15 +59,14 @@ function App() {
   return (
     <ErrorBoundary>
       <I18nProvider>
-        <ThemeProvider
-          defaultTheme="light"
-          // switchable
-        >
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </ThemeProvider>
+        <NotificationProvider>
+          <ThemeProvider
+            defaultTheme="light"
+            // switchable
+          >
+            <AppContent />
+          </ThemeProvider>
+        </NotificationProvider>
       </I18nProvider>
     </ErrorBoundary>
   );
