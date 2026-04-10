@@ -56,7 +56,7 @@ export default function AdminDashboard() {
       )}
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {[
           { label: 'Total Users', value: mockSystemStats.totalUsers.toLocaleString(), icon: '👥', color: '#3b82f6' },
           { label: 'Total Schools', value: mockSystemStats.totalSchools, icon: '🏫', color: '#10b981' },
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Revenue Chart */}
         <div
-          className="lg:col-span-2 rounded-xl p-6 border"
+          className="lg:col-span-2 rounded-xl p-4 sm:p-6 border"
           style={{
             backgroundColor: "#ffffff",
             borderColor: "#e5e7eb",
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
 
         {/* User Distribution */}
         <div
-          className="rounded-xl p-6 border"
+          className="rounded-xl p-4 sm:p-6 border"
           style={{
             backgroundColor: "#ffffff",
             borderColor: "#e5e7eb",
@@ -163,7 +163,7 @@ export default function AdminDashboard() {
 
       {/* Engagement Chart */}
       <div
-        className="rounded-xl p-6 border"
+        className="rounded-xl p-4 sm:p-6 border"
         style={{
           backgroundColor: "#ffffff",
           borderColor: "#e5e7eb",
@@ -191,8 +191,8 @@ export default function AdminDashboard() {
 
   const renderUsersTab = () => (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">User Management</h2>
         <button
           className="px-4 py-2 rounded-lg font-medium text-white transition"
           style={{ backgroundColor: '#3b82f6' }}
@@ -202,31 +202,31 @@ export default function AdminDashboard() {
       </div>
 
       <div
-        className="rounded-xl border overflow-hidden"
+        className="rounded-xl border overflow-x-auto"
         style={{
           backgroundColor: "#ffffff",
           borderColor: "#e5e7eb",
         }}
       >
-        <table className="w-full">
+        <table className="w-full min-w-full">
           <thead style={{ backgroundColor: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
             <tr>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Name</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Email</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Role</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Last Login</th>
-              <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Name</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Email</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Role</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Status</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900 hidden md:table-cell">Last Login</th>
+              <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Actions</th>
             </tr>
           </thead>
           <tbody>
             {mockUsers.map((user) => (
               <tr key={user.id} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                <td className="px-6 py-4 text-sm text-gray-900 font-medium">{user.firstName} {user.lastName}</td>
-                <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
-                <td className="px-6 py-4 text-sm">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">{user.firstName} {user.lastName}</td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-600 hidden sm:table-cell">{user.email}</td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm">
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
+                    className="px-2 sm:px-3 py-1 rounded-full text-xs font-medium"
                     style={{
                       backgroundColor: '#dbeafe',
                       color: '#1e40af',
@@ -235,9 +235,9 @@ export default function AdminDashboard() {
                     {user.role}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm">
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
+                    className="px-2 sm:px-3 py-1 rounded-full text-xs font-medium"
                     style={{
                       backgroundColor: user.status === 'active' ? '#dcfce7' : '#fee2e2',
                       color: user.status === 'active' ? '#166534' : '#991b1b',
@@ -246,10 +246,10 @@ export default function AdminDashboard() {
                     {user.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-600">{new Date(user.lastLogin).toLocaleDateString()}</td>
-                <td className="px-6 py-4 text-sm space-x-2">
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-600 hidden md:table-cell">{new Date(user.lastLogin).toLocaleDateString()}</td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm space-x-1 sm:space-x-2">
                   <button className="text-blue-600 hover:text-blue-700 font-medium">Edit</button>
-                  <button className="text-red-600 hover:text-red-700 font-medium">Suspend</button>
+                  <button className="text-red-600 hover:text-red-700 font-medium hidden sm:inline">Suspend</button>
                 </td>
               </tr>
             ))}
@@ -502,9 +502,9 @@ export default function AdminDashboard() {
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className="md:hidden text-gray-700 hover:text-gray-900"
               >
-                {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {sidebarOpen ? <X className="w-5 sm:w-6 h-5 sm:h-6" /> : <Menu className="w-5 sm:w-6 h-5 sm:h-6" />}
               </button>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Console</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Console</h1>
             </div>
 
             {/* Right */}
@@ -512,13 +512,13 @@ export default function AdminDashboard() {
               <button className="p-2 rounded-lg hover:bg-gray-100 transition">
                 <Bell className="w-5 h-5 text-gray-600" />
               </button>
-              <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-                <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">Admin User</p>
+              <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-4 border-l border-gray-200">
+                <div className="text-right hidden xs:block">
+                  <p className="text-xs sm:text-sm font-medium text-gray-900">Admin User</p>
                   <p className="text-xs text-gray-500">System Administrator</p>
                 </div>
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+                  className="w-8 sm:w-10 h-8 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base"
                   style={{ backgroundColor: "#3b82f6" }}
                 >
                   A
@@ -529,7 +529,7 @@ export default function AdminDashboard() {
         </nav>
 
         {/* Page Content */}
-        <div className="p-6 md:p-8">
+        <div className="p-3 sm:p-6 md:p-8">
           {activeTab === 'overview' && renderOverviewTab()}
           {activeTab === 'users' && renderUsersTab()}
           {activeTab === 'schools' && renderSchoolsTab()}

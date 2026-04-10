@@ -139,11 +139,11 @@ export default function SchoolDashboard() {
   const renderOverviewTab = () => (
     <div className="space-y-6">
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">
+              <p className="text-gray-600 text-xs sm:text-sm font-medium">
                 {t("total_students", "Total Students")}
               </p>
               <p className="text-3xl font-bold text-gray-900 mt-2">
@@ -154,10 +154,10 @@ export default function SchoolDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">
+              <p className="text-gray-600 text-xs sm:text-sm font-medium">
                 {t("total_teachers", "Total Teachers")}
               </p>
               <p className="text-3xl font-bold text-gray-900 mt-2">
@@ -168,10 +168,10 @@ export default function SchoolDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">
+              <p className="text-gray-600 text-xs sm:text-sm font-medium">
                 {t("active_classes", "Active Classes")}
               </p>
               <p className="text-3xl font-bold text-gray-900 mt-2">
@@ -182,10 +182,10 @@ export default function SchoolDashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">
+              <p className="text-gray-600 text-xs sm:text-sm font-medium">
                 {t("avg_progress", "Avg Progress")}
               </p>
               <p className="text-3xl font-bold text-gray-900 mt-2">

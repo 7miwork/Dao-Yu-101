@@ -179,11 +179,11 @@ export default function Leaderboard() {
   const renderGlobalLeaderboard = () => (
     <div className="space-y-6">
       {/* Top 3 Podium */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         {globalLeaderboardData.slice(0, 3).map((player, idx) => (
           <div
             key={player.rank}
-            className={`rounded-lg border-2 p-6 text-center ${
+            className={`rounded-lg border-2 p-4 sm:p-6 text-center ${
               idx === 0
                 ? "bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-300 md:col-span-1 md:order-2 md:scale-105"
                 : idx === 1
@@ -194,8 +194,8 @@ export default function Leaderboard() {
             <div className="flex justify-center mb-3">
               {getRankMedal(player.rank)}
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">{player.name}</h3>
-            <p className="text-sm text-gray-600 mb-4">{player.school}</p>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">{player.name}</h3>
+            <p className="text-xs sm:text-sm text-gray-600 mb-4">{player.school}</p>
 
             <div className="bg-white rounded-lg p-4 mb-4">
               <div className="text-3xl font-bold text-indigo-600 mb-1">
@@ -224,8 +224,8 @@ export default function Leaderboard() {
 
       {/* Full Leaderboard Table */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">
+        <div className="p-4 sm:p-6 border-b border-gray-200">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900">
             {t("global_rankings", "Global Rankings")}
           </h3>
         </div>
