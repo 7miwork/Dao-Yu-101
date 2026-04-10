@@ -17,6 +17,9 @@ import LessonPage from "./pages/LessonPage";
 import MinecraftLessonPage from "./pages/MinecraftLessonPage";
 import SchoolDashboard from "./pages/SchoolDashboard";
 import Leaderboard from "./pages/Leaderboard";
+import Archipelago from "./pages/Archipelago";
+import Island from "./pages/Island";
+import Lesson from "./pages/Lesson";
 
 function Router() {
   return (
@@ -25,11 +28,13 @@ function Router() {
       <Route path={"/login"} component={Login} />
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
-      <Route path={"/archipelago"} component={ArchipelagoMap} />
       <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/school-dashboard"} component={SchoolDashboard} />
       <Route path={"/leaderboard"} component={Leaderboard} />
+      <Route path={"/archipelago"} component={Archipelago} />
+      <Route path={"/island/:id"} component={Island} />
+      <Route path={"/island/:islandId/lesson/:lessonId"} component={Lesson} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
