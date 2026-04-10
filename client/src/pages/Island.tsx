@@ -1,6 +1,6 @@
 import { useLocation, useRoute } from "wouter";
 import { getIslandById } from "@/data/lessons";
-import { ArrowRight, BookOpen, Clock, Zap, ChevronRight } from "lucide-react";
+import { BookOpen, ChevronDown, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -16,10 +16,10 @@ export default function Island() {
 
   if (!island) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-300 to-cyan-300">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Island Not Found</h1>
-          <Button onClick={() => setLocation("/archipelago")} className="bg-indigo-600 hover:bg-indigo-700 text-white">
+          <h1 className="text-4xl font-bold text-white drop-shadow-lg mb-4">Island Not Found</h1>
+          <Button onClick={() => setLocation("/archipelago")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold">
             Back to Archipelago
           </Button>
         </div>
@@ -39,132 +39,133 @@ export default function Island() {
   const phases = Object.keys(lessonsByPhase);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950">
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-cyan-300 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-20 right-10 w-32 h-16 bg-white rounded-full opacity-40 animate-pulse"></div>
+        <div className="absolute bottom-40 left-10 w-24 h-12 bg-white rounded-full opacity-50 animate-pulse" style={{ animationDelay: "1s" }}></div>
+      </div>
+
       {/* Navigation Header */}
-      <nav className="sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
+      <nav className="relative z-50 border-b-4 border-yellow-400 bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <button
             onClick={() => setLocation("/archipelago")}
-            className="flex items-center gap-3 hover:opacity-80 transition"
+            className="flex items-center gap-3 hover:scale-110 transition-transform"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-              <BookOpen className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+              <span className="text-2xl">🎮</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-              Dao-Yu-101
-            </span>
+            <span className="text-3xl font-black text-white drop-shadow-lg">Dao-Yu-101</span>
           </button>
           <Button
             onClick={() => setLocation("/archipelago")}
-            variant="outline"
-            className="border-gray-300 dark:border-gray-700"
+            className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold border-2 border-white shadow-lg"
           >
-            ← Back to Archipelago
+            ← Back
           </Button>
         </div>
       </nav>
 
       {/* Island Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-12 animate-fadeInUp">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="text-6xl">{island.icon}</div>
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
-                {island.name}
-              </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
-                {island.description}
-              </p>
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-12 text-center animate-fadeInUp">
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="text-9xl drop-shadow-lg animate-bounce">{island.icon}</div>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-black text-white drop-shadow-lg mb-4">
+            {island.name.split(":")[1].trim()}
+          </h1>
+          <p className="text-2xl text-white font-bold drop-shadow-md max-w-2xl mx-auto mb-8">
+            {island.description}
+          </p>
+
+          {/* Island Stats */}
+          <div className="flex justify-center gap-4 flex-wrap mb-8">
+            <div className="px-6 py-3 bg-yellow-300 rounded-full font-bold text-lg text-gray-900 shadow-lg border-4 border-white">
+              ⚔️ {island.lessons.length} Quests
+            </div>
+            <div className="px-6 py-3 bg-green-400 rounded-full font-bold text-lg text-white shadow-lg border-4 border-white">
+              ⏱️ {island.lessons.length * 60}m Total
+            </div>
+            <div className="px-6 py-3 bg-purple-400 rounded-full font-bold text-lg text-white shadow-lg border-4 border-white">
+              🎯 {phases.length} Phases
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-2 mb-2">
-                <Zap className="w-5 h-5 text-amber-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Lessons</span>
-              </div>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {island.lessons.length}
-              </p>
+          {/* Progress Bar */}
+          <div className="max-w-md mx-auto">
+            <div className="w-full bg-white rounded-full h-6 border-4 border-yellow-400 shadow-lg overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-500"
+                style={{ width: "0%" }}
+              ></div>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-5 h-5 text-blue-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">Total Duration</span>
-              </div>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {island.lessons.length * 60}m
-              </p>
-            </div>
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-2 mb-2">
-                <Zap className="w-5 h-5 text-indigo-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-400">Phases</span>
-              </div>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                {phases.length}
-              </p>
-            </div>
+            <p className="text-white font-bold drop-shadow-md mt-2">0 / {island.lessons.length} Quests Completed</p>
           </div>
         </div>
 
         {/* Lessons by Phase */}
-        <div className="space-y-6">
-          {phases.map((phase) => (
-            <div key={phase} className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+        <div className="space-y-6 mb-12">
+          {phases.map((phase, phaseIdx) => (
+            <div key={phase} className="animate-fadeInUp" style={{ animationDelay: `${phaseIdx * 0.1}s` }}>
               {/* Phase Header */}
               <button
                 onClick={() => setExpandedPhase(expandedPhase === phase ? null : phase)}
-                className="w-full bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/30 hover:from-indigo-100 hover:to-blue-100 dark:hover:from-indigo-900/50 dark:hover:to-blue-900/50 px-6 py-4 flex items-center justify-between transition-colors"
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-6 py-6 flex items-center justify-between transition-all transform hover:scale-105 rounded-2xl border-4 border-white shadow-lg"
               >
                 <div className="text-left">
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                  <h2 className="text-3xl font-black text-white drop-shadow-lg">
                     {phase}
                   </h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    {lessonsByPhase[phase].length} lessons
+                  <p className="text-lg text-white font-bold drop-shadow-md mt-1">
+                    {lessonsByPhase[phase].length} Quests
                   </p>
                 </div>
-                <ChevronRight
-                  className={`w-6 h-6 text-indigo-600 dark:text-indigo-400 transition-transform ${
-                    expandedPhase === phase ? "rotate-90" : ""
+                <ChevronDown
+                  className={`w-8 h-8 text-white drop-shadow-lg transition-transform ${
+                    expandedPhase === phase ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
               {/* Lessons List */}
               {expandedPhase === phase && (
-                <div className="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-slate-800">
-                  {lessonsByPhase[phase].map((lesson) => (
+                <div className="mt-4 space-y-3">
+                  {lessonsByPhase[phase].map((lesson, lessonIdx) => (
                     <div
                       key={lesson.id}
                       onClick={() => setLocation(`/island/${islandId}/lesson/${lesson.id}`)}
-                      className="p-6 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors cursor-pointer group"
+                      className="group cursor-pointer transform hover:scale-105 transition-all duration-200 animate-fadeInUp"
+                      style={{ animationDelay: `${lessonIdx * 0.05}s` }}
                     >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white font-bold text-sm flex-shrink-0">
+                      <div className="bg-gradient-to-r from-yellow-300 to-orange-300 hover:from-yellow-400 hover:to-orange-400 rounded-2xl p-6 border-4 border-white shadow-lg">
+                        <div className="flex items-center justify-between gap-4">
+                          {/* Level Badge and Title */}
+                          <div className="flex items-center gap-4 flex-1 min-w-0">
+                            <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 text-white font-black text-2xl flex items-center justify-center border-4 border-white shadow-lg drop-shadow-lg">
                               {lesson.number}
-                            </span>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                              {lesson.title}
-                            </h3>
+                            </div>
+                            <div className="min-w-0">
+                              <h3 className="text-xl font-black text-gray-900 group-hover:text-blue-600 transition-colors drop-shadow-md">
+                                {lesson.title}
+                              </h3>
+                              <div className="flex flex-wrap items-center gap-2 mt-2 text-sm font-bold">
+                                <span className="px-3 py-1 bg-white rounded-full text-gray-900 shadow-md">
+                                  ⏱️ {lesson.duration}m
+                                </span>
+                                <span className="px-3 py-1 bg-blue-500 text-white rounded-full shadow-md">
+                                  {lesson.phase}
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex flex-wrap items-center gap-4 ml-11 text-sm text-gray-600 dark:text-gray-400">
-                            <span className="inline-flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              {lesson.duration} min
-                            </span>
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700">
-                              {lesson.phase}
-                            </span>
+
+                          {/* CTA Arrow */}
+                          <div className="flex-shrink-0 text-4xl group-hover:translate-x-2 transition-transform">
+                            ▶️
                           </div>
                         </div>
-                        <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors flex-shrink-0 mt-1" />
                       </div>
                     </div>
                   ))}
@@ -174,47 +175,42 @@ export default function Island() {
           ))}
         </div>
 
-        {/* Progress Info */}
-        <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            Learning Path
+        {/* Learning Path Info */}
+        <div className="bg-gradient-to-r from-indigo-500 to-blue-500 rounded-3xl p-8 md:p-12 border-8 border-white shadow-2xl">
+          <h3 className="text-4xl font-black text-white drop-shadow-lg mb-6 text-center">
+            🗺️ Your Learning Journey
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            This island is designed to take you from beginner to advanced programmer. Each lesson builds on the previous one, introducing new concepts and challenges.
-          </p>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">What You'll Learn:</h4>
-              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
-                  Block-based programming fundamentals
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
-                  Loops and control flow
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
-                  Conditional logic and decision-making
-                </li>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-2xl p-6 border-4 border-yellow-300 shadow-lg">
+              <h4 className="text-2xl font-black text-gray-900 mb-4">🎯 What You'll Master:</h4>
+              <ul className="space-y-3">
+                {[
+                  "Block-based coding fundamentals",
+                  "Loops and control flow",
+                  "Conditional logic",
+                  "Functions and modularity"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 font-bold text-gray-700">
+                    <span className="text-2xl">✨</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Projects:</h4>
-              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                  Build structures and paths
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                  Navigate mazes and obstacles
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                  Design and code a complete village
-                </li>
+            <div className="bg-white rounded-2xl p-6 border-4 border-green-400 shadow-lg">
+              <h4 className="text-2xl font-black text-gray-900 mb-4">🏗️ Epic Projects:</h4>
+              <ul className="space-y-3">
+                {[
+                  "Build structures and paths",
+                  "Navigate mazes",
+                  "Design a complete village",
+                  "Solve real-world challenges"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 font-bold text-gray-700">
+                    <span className="text-2xl">🚀</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

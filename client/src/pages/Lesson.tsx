@@ -1,6 +1,6 @@
 import { useLocation, useRoute } from "wouter";
 import { getIslandById, getLessonById } from "@/data/lessons";
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Target, Lightbulb, Users, Briefcase } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Lesson() {
@@ -17,10 +17,10 @@ export default function Lesson() {
 
   if (!island || !lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-300 to-cyan-300">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Lesson Not Found</h1>
-          <Button onClick={() => setLocation(`/island/${islandId}`)} className="bg-indigo-600 hover:bg-indigo-700 text-white">
+          <h1 className="text-4xl font-bold text-white drop-shadow-lg mb-4">Quest Not Found</h1>
+          <Button onClick={() => setLocation(`/island/${islandId}`)} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold">
             Back to Island
           </Button>
         </div>
@@ -45,214 +45,220 @@ export default function Lesson() {
     }
   };
 
+  const progressPercent = (lesson.number / island.lessons.length) * 100;
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950">
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-cyan-300 relative overflow-hidden">
       {/* Navigation Header */}
-      <nav className="sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
+      <nav className="relative z-50 border-b-4 border-yellow-400 bg-gradient-to-r from-blue-500 to-cyan-500 shadow-lg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <button
             onClick={() => setLocation(`/island/${islandId}`)}
-            className="flex items-center gap-3 hover:opacity-80 transition"
+            className="flex items-center gap-3 hover:scale-110 transition-transform"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-              <BookOpen className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+              <span className="text-2xl">🎮</span>
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-              Dao-Yu-101
-            </span>
+            <span className="text-3xl font-black text-white drop-shadow-lg">Dao-Yu-101</span>
           </button>
           <Button
             onClick={() => setLocation(`/island/${islandId}`)}
-            variant="outline"
-            className="border-gray-300 dark:border-gray-700"
+            className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold border-2 border-white shadow-lg"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Island
+            ← Back
           </Button>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Lesson Header */}
-        <div className="mb-12 animate-fadeInUp">
+        <div className="mb-8 animate-fadeInUp">
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-6">
+          <div className="flex items-center gap-2 text-sm font-bold text-white drop-shadow-md mb-6 flex-wrap">
             <button
               onClick={() => setLocation("/archipelago")}
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+              className="hover:underline"
             >
-              Archipelago
+              🏝️ Archipelago
             </button>
             <span>/</span>
             <button
               onClick={() => setLocation(`/island/${islandId}`)}
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+              className="hover:underline"
             >
-              {island.name}
+              {island.name.split(":")[1].trim()}
             </button>
             <span>/</span>
-            <span className="text-gray-900 dark:text-white font-semibold">Lesson {lesson.number}</span>
+            <span>Quest {lesson.number}</span>
           </div>
 
-          {/* Lesson Title and Meta */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 text-white font-bold text-lg">
+          {/* Lesson Title and Badge */}
+          <div className="mb-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl p-8 border-8 border-white shadow-2xl">
+            <div className="flex items-center gap-6 mb-4">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-yellow-300 to-orange-400 text-white font-black text-5xl flex items-center justify-center border-4 border-white shadow-lg drop-shadow-lg">
                 {lesson.number}
-              </span>
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+              </div>
+              <div className="flex-1">
+                <h1 className="text-4xl md:text-5xl font-black text-white drop-shadow-lg mb-2">
                   {lesson.title}
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Phase: <span className="font-semibold text-indigo-600 dark:text-indigo-400">{lesson.phase}</span>
+                <p className="text-xl text-white font-bold drop-shadow-md">
+                  Phase: <span className="text-yellow-300">{lesson.phase}</span>
                 </p>
               </div>
             </div>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap gap-4 text-sm">
-              <div className="flex items-center gap-2 bg-white dark:bg-slate-800 rounded-lg px-4 py-2 border border-gray-200 dark:border-gray-700">
-                <Clock className="w-5 h-5 text-blue-500" />
-                <span className="text-gray-700 dark:text-gray-300">{lesson.duration} minutes</span>
+            <div className="flex flex-wrap gap-4">
+              <div className="px-6 py-3 bg-yellow-300 rounded-full font-bold text-gray-900 shadow-lg border-2 border-white">
+                ⏱️ {lesson.duration} minutes
               </div>
-              <div className="flex items-center gap-2 bg-white dark:bg-slate-800 rounded-lg px-4 py-2 border border-gray-200 dark:border-gray-700">
-                <Target className="w-5 h-5 text-indigo-500" />
-                <span className="text-gray-700 dark:text-gray-300">Lesson {lesson.number} of {island.lessons.length}</span>
+              <div className="px-6 py-3 bg-green-400 rounded-full font-bold text-white shadow-lg border-2 border-white">
+                🎯 Quest {lesson.number} of {island.lessons.length}
               </div>
             </div>
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-2">
+          <div className="bg-white rounded-full p-2 border-4 border-yellow-400 shadow-lg mb-2">
             <div
-              className="bg-gradient-to-r from-indigo-600 to-blue-600 h-2 rounded-full transition-all"
-              style={{ width: `${(lesson.number / island.lessons.length) * 100}%` }}
+              className="bg-gradient-to-r from-green-400 to-emerald-500 h-6 rounded-full transition-all duration-500"
+              style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
-          <p className="text-xs text-gray-600 dark:text-gray-400">
-            Progress: {lesson.number} of {island.lessons.length} lessons
+          <p className="text-white font-bold drop-shadow-md text-center">
+            Progress: {lesson.number} of {island.lessons.length} Quests
           </p>
         </div>
 
         {/* Lesson Content */}
-        <div className="space-y-8">
+        <div className="space-y-6 mb-12">
           {/* Objective */}
-          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <Target className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Objective</h2>
-            </div>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+          <div className="bg-gradient-to-br from-blue-400 to-cyan-400 rounded-3xl p-8 border-6 border-white shadow-2xl animate-fadeInUp">
+            <h2 className="text-3xl font-black text-white drop-shadow-lg mb-4 flex items-center gap-3">
+              <span className="text-5xl">🎯</span>
+              Your Mission
+            </h2>
+            <p className="text-xl text-white font-bold drop-shadow-md leading-relaxed">
               {lesson.objective}
             </p>
-          </section>
+          </div>
 
           {/* What Students Learn */}
-          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <Lightbulb className="w-6 h-6 text-amber-500" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">What Students Learn</h2>
-            </div>
-            <ul className="space-y-3">
+          <div className="bg-gradient-to-br from-green-400 to-emerald-500 rounded-3xl p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.1s" }}>
+            <h2 className="text-3xl font-black text-white drop-shadow-lg mb-6 flex items-center gap-3">
+              <span className="text-5xl">💡</span>
+              What You'll Learn
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4">
               {lesson.whatStudentsLearn.map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-semibold flex-shrink-0 mt-0.5">
-                    {idx + 1}
-                  </span>
-                  <span className="text-gray-700 dark:text-gray-300">{item}</span>
-                </li>
+                <div key={idx} className="bg-white rounded-2xl p-4 border-4 border-yellow-300 shadow-lg">
+                  <div className="flex items-start gap-3">
+                    <span className="text-3xl flex-shrink-0">✨</span>
+                    <p className="font-bold text-gray-900">{item}</p>
+                  </div>
+                </div>
               ))}
-            </ul>
-          </section>
+            </div>
+          </div>
 
           {/* Explanation */}
-          <section className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Explanation</h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          <div className="bg-gradient-to-br from-yellow-300 to-orange-400 rounded-3xl p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
+            <h2 className="text-3xl font-black text-gray-900 drop-shadow-lg mb-4 flex items-center gap-3">
+              <span className="text-5xl">📚</span>
+              The Story
+            </h2>
+            <p className="text-lg text-gray-900 font-bold leading-relaxed drop-shadow-md">
               {lesson.explanation}
             </p>
-          </section>
+          </div>
 
           {/* Student Activity */}
-          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Student Activity</h2>
-            </div>
-            <div className="bg-green-50 dark:bg-green-950/20 border-l-4 border-green-500 p-6 rounded">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          <div className="bg-gradient-to-br from-pink-400 to-red-400 rounded-3xl p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
+            <h2 className="text-3xl font-black text-white drop-shadow-lg mb-4 flex items-center gap-3">
+              <span className="text-5xl">⚡</span>
+              Your Challenge
+            </h2>
+            <div className="bg-white rounded-2xl p-6 border-4 border-yellow-300 shadow-lg">
+              <p className="text-lg text-gray-900 font-bold leading-relaxed">
                 {lesson.studentActivity}
               </p>
             </div>
-          </section>
+          </div>
 
           {/* Teacher Tip */}
-          <section className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <Briefcase className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Teacher Tip</h2>
-            </div>
-            <div className="bg-purple-50 dark:bg-purple-950/20 border-l-4 border-purple-500 p-6 rounded">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-3xl p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
+            <h2 className="text-3xl font-black text-white drop-shadow-lg mb-4 flex items-center gap-3">
+              <span className="text-5xl">💬</span>
+              Pro Tip
+            </h2>
+            <div className="bg-white rounded-2xl p-6 border-4 border-yellow-300 shadow-lg">
+              <p className="text-lg text-gray-900 font-bold leading-relaxed">
                 {lesson.teacherTip}
               </p>
             </div>
-          </section>
+          </div>
         </div>
 
         {/* Navigation Buttons */}
-        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 justify-between mb-8 animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
           <Button
             onClick={handlePreviousLesson}
             disabled={!previousLesson}
-            className={`flex-1 py-6 text-lg ${
+            className={`flex-1 py-6 text-lg font-black border-4 rounded-2xl transform hover:scale-105 transition-all ${
               previousLesson
-                ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
+                ? "bg-blue-500 hover:bg-blue-600 text-white border-white shadow-lg"
+                : "bg-gray-300 text-gray-600 border-gray-400 cursor-not-allowed"
             }`}
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Previous Lesson
+            ⬅️ Previous Quest
           </Button>
 
           <Button
             onClick={() => setLocation(`/island/${islandId}`)}
-            className="flex-1 py-6 text-lg bg-indigo-600 hover:bg-indigo-700 text-white"
+            className="flex-1 py-6 text-lg font-black bg-yellow-400 hover:bg-yellow-500 text-gray-900 border-4 border-white shadow-lg rounded-2xl transform hover:scale-105 transition-all"
           >
-            Back to Lesson List
+            🏝️ Back to Island
           </Button>
 
           <Button
             onClick={handleNextLesson}
             disabled={!nextLesson}
-            className={`flex-1 py-6 text-lg ${
+            className={`flex-1 py-6 text-lg font-black border-4 rounded-2xl transform hover:scale-105 transition-all ${
               nextLesson
-                ? "bg-indigo-600 hover:bg-indigo-700 text-white"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
+                ? "bg-green-500 hover:bg-green-600 text-white border-white shadow-lg"
+                : "bg-gray-300 text-gray-600 border-gray-400 cursor-not-allowed"
             }`}
           >
-            Next Lesson
-            <ArrowRight className="w-5 h-5 ml-2" />
+            Next Quest ➡️
           </Button>
         </div>
 
         {/* Completion Message */}
         {!nextLesson && (
-          <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl p-8 border border-green-200 dark:border-green-800 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              🎉 You've reached the final lesson!
+          <div className="bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl p-8 md:p-12 border-8 border-white shadow-2xl text-center animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
+            <div className="text-8xl mb-4 animate-bounce">🎉</div>
+            <h3 className="text-4xl font-black text-white drop-shadow-lg mb-4">
+              QUEST COMPLETE!
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Congratulations on completing all {island.lessons.length} lessons in {island.name}. You've learned valuable programming skills!
+            <p className="text-2xl text-white font-bold drop-shadow-md mb-6">
+              You've conquered all {island.lessons.length} quests on this island! You're a true Coding Legend! 🏆
             </p>
-            <Button
-              onClick={() => setLocation("/archipelago")}
-              className="bg-green-600 hover:bg-green-700 text-white"
-            >
-              Explore More Islands
-            </Button>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Button
+                onClick={() => setLocation("/archipelago")}
+                className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-black text-lg px-8 py-4 rounded-full border-4 border-white shadow-lg transform hover:scale-110 transition-all"
+              >
+                🗺️ Explore More Islands
+              </Button>
+              <Button
+                onClick={() => setLocation(`/island/${islandId}`)}
+                className="bg-white hover:bg-gray-100 text-gray-900 font-black text-lg px-8 py-4 rounded-full border-4 border-yellow-400 shadow-lg transform hover:scale-110 transition-all"
+              >
+                🔄 Review Quests
+              </Button>
+            </div>
           </div>
         )}
       </div>
