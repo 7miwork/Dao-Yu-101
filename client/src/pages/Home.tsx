@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, Zap, Users, Trophy, ArrowRight, Globe, Sparkles, CheckCircle2 } from "lucide-react";
+import { BookOpen, Zap, Users, Trophy, ArrowRight, Globe, Sparkles, CheckCircle2, MapPin, Code, Users2 } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { useI18n } from "@/contexts/I18nContext";
@@ -66,83 +66,116 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Official Introduction Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="space-y-12">
+          {/* Main Introduction */}
           <div className="space-y-8 animate-fadeInUp">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-medium">
-              <Sparkles className="w-4 h-4" />
-              <span>Next-Generation EdTech Platform</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium">
+              <MapPin className="w-4 h-4" />
+              <span>Coding Archipelago</span>
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
-              {t("home.heroTitle")}
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg">
-              {t("home.heroDescription")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button onClick={() => setLocation("/register")} className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
-                {t("home.getStarted")} <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button onClick={() => setLocation("/courses")} variant="outline" className="border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 px-8 py-6 text-lg">
-                {t("home.watchDemo")}
-              </Button>
-            </div>
-            <div className="grid grid-cols-3 gap-6 pt-8">
-              {stats.map((stat, idx) => (
-                <div key={idx}>
-                  <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">{stat.value}</p>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{t(stat.label)}</p>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Hero Visual */}
-          <div className="relative animate-slideInRight">
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-3xl blur-3xl opacity-20"></div>
-            <div className="relative bg-white dark:bg-slate-800 rounded-3xl border border-gray-200 dark:border-gray-700 p-8 shadow-2xl">
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl">
-                    🏝️
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
+                Expert Full-Stack Developer & EdTech Platform
+              </h1>
+
+              <div className="space-y-4 text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-4xl">
+                <p>
+                  You are an expert full-stack developer, UI/UX designer, and DevOps engineer tasked with rebuilding and improving a comprehensive learning platform (Island-101 / Dao-Yu-101) to be fully functional, responsive, and directly deployable to GitHub Pages without additional fixes.
+                </p>
+
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800 space-y-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Final Goal</h2>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-800 dark:text-gray-200">The project MUST be ready to upload to GitHub</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-800 dark:text-gray-200">Work immediately with GitHub Pages deployment</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-800 dark:text-gray-200">No manual fixes required after generation</span>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-gray-900 dark:text-white font-semibold">Welcome to Archipelago</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Your learning journey starts here</p>
-                  </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-400 pt-4 italic">
+                    Users should be able to: Copy the project → Push to GitHub → Enable GitHub Pages → Site works immediately
+                  </p>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">Mathematics Kingdom</span>
-                    <span className="text-indigo-600 dark:text-indigo-400 font-bold">85%</span>
+
+                <div className="grid md:grid-cols-2 gap-6 pt-4">
+                  <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-blue-600" />
+                      Core Platform Features
+                    </h3>
+                    <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        Archipelago-based learning structure
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        Island 1: Minecraft Education Block Coding
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        15 comprehensive lessons per island
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        Mobile-first responsive design
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
+                        Works offline as static site
+                      </li>
+                    </ul>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-indigo-500 to-blue-500 h-2 rounded-full" style={{width: '85%'}}></div>
-                  </div>
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">English Literature</span>
-                    <span className="text-indigo-600 dark:text-indigo-400 font-bold">60%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-indigo-500 to-blue-500 h-2 rounded-full" style={{width: '60%'}}></div>
-                  </div>
-                </div>
-                <div className="border-t border-gray-200 dark:border-gray-700 pt-6 grid grid-cols-3 gap-4 text-center">
-                  <div>
-                    <p className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">2,450</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">XP Earned</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">5</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">Level</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">12</p>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">Streak</p>
+
+                  <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                      <Code className="w-5 h-5 text-indigo-600" />
+                      Technical Requirements
+                    </h3>
+                    <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                        Clean, modular code structure
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                        GitHub Pages compatible (static)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                        Relative paths for all resources
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                        No broken links or placeholders
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                        localStorage for progress tracking
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-8">
+              <Button onClick={() => setLocation("/login")} className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
+                Explore Platform <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+              <Button onClick={() => setLocation("/archipelago")} variant="outline" className="border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 px-8 py-6 text-lg">
+                Start Learning
+              </Button>
             </div>
           </div>
         </div>
@@ -171,7 +204,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-3xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Why Choose Dao-Yu?</h2>
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Why Choose Dao-Yu-101?</h2>
             <div className="space-y-4">
               {[
                 "Personalized learning paths for every student",
@@ -219,15 +252,8 @@ export default function Home() {
         <div className="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-3xl p-12 text-center shadow-2xl">
           <h2 className="text-4xl font-bold text-white mb-4">{t("home.readyToTransform")}</h2>
           <p className="text-lg text-indigo-100 mb-8">{t("home.joinThousands")}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <input
-              type="email"
-              placeholder={t("home.enterEmail")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="px-6 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-300 w-full sm:w-auto font-medium"
-            />
-            <Button onClick={() => setLocation("/register")} className="bg-white text-indigo-600 hover:bg-gray-100 border-0 px-8 py-3 font-semibold w-full sm:w-auto shadow-lg hover:shadow-xl transition-all">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button onClick={() => setLocation("/login")} className="bg-white text-indigo-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold shadow-lg">
               {t("home.startLearning")}
             </Button>
           </div>
@@ -235,49 +261,44 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-slate-900">
+      <footer className="bg-gray-900 dark:bg-black text-gray-400 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">{t("footer.product")}</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.features")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.pricing")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.security")}</a></li>
+              <h3 className="text-white font-semibold mb-4">{t("footer.product")}</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition">{t("footer.features")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.pricing")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.security")}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">{t("footer.company")}</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.about")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.blog")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.careers")}</a></li>
+              <h3 className="text-white font-semibold mb-4">{t("footer.company")}</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition">{t("footer.about")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.blog")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.careers")}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">{t("footer.resources")}</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.documentation")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.support")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.community")}</a></li>
+              <h3 className="text-white font-semibold mb-4">{t("footer.resources")}</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition">{t("footer.documentation")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.support")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.community")}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-900 dark:text-white font-semibold mb-4">{t("footer.legal")}</h4>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.privacy")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.terms")}</a></li>
-                <li><a href="#" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition">{t("footer.contact")}</a></li>
+              <h3 className="text-white font-semibold mb-4">{t("footer.legal")}</h3>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:text-white transition">{t("footer.privacy")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.terms")}</a></li>
+                <li><a href="#" className="hover:text-white transition">{t("footer.contact")}</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">© 2026 Dao-Yu. {t("footer.allRightsReserved")}</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition font-medium">Twitter</a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition font-medium">LinkedIn</a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition font-medium">GitHub</a>
-            </div>
+          <div className="border-t border-gray-800 pt-8 text-center text-sm">
+            <p>&copy; 2026 Dao-Yu-101. {t("footer.allRightsReserved")}</p>
           </div>
         </div>
       </footer>
