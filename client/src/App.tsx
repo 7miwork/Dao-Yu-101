@@ -8,7 +8,7 @@ import { I18nProvider } from "./contexts/I18nContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { NotificationContainer } from "./components/NotificationToast";
 import { useNotification } from "./contexts/NotificationContext";
-import Home from "./pages/Home";
+
 import Login from "./pages/Login";
 import DashboardRouter from "./components/DashboardRouter";
 import Courses from "./pages/Courses";
@@ -20,11 +20,12 @@ import Leaderboard from "./pages/Leaderboard";
 import Archipelago from "./pages/Archipelago";
 import Island from "./pages/Island";
 import Lesson from "./pages/Lesson";
+import Landing from "./pages/Landing";
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={Landing} />
       <Route path={"/login"} component={Login} />
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
