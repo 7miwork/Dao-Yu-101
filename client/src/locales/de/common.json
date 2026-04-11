@@ -94,7 +94,7 @@
     "createOne": "Erstellen Sie eins",
     "loginFailed": "Anmeldung fehlgeschlagen",
     "gamifiedExperience": "Gamifiziertes Lernerlebnis",
-    "trackProgress": "Verfolgen Sie Ihren Fortschritt in Echtzeit",
+    "trackProgressFeature": "Verfolgen Sie Ihren Fortschritt in Echtzeit",
     "earnBadges": "Verdienen Sie Abzeichen und klettern Sie die Bestenliste hinauf"
   },
   "register": {
@@ -122,7 +122,10 @@
     "accountCreated": "Willkommen!",
     "accountCreatedDesc": "Ihr Konto wurde erfolgreich erstellt. Wird zur Anmeldung weitergeleitet...",
     "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
-    "signIn": "Anmelden"
+    "signIn": "Anmelden",
+    "nameRequired": "Name ist erforderlich",
+    "passwordsDoNotMatch": "Passwörter stimmen nicht überein",
+    "mustAgreeTerms": "Sie müssen den Bedingungen zustimmen"
   },
   "home": {
     "heroTitle": "Lernen neu erfunden durch Gamifizierung",
@@ -208,7 +211,13 @@
     "completed": "Abgeschlossen",
     "selectIsland": "Wählen Sie eine Insel, um Lektionen anzuzeigen",
     "startLearning": "Mit dem Lernen beginnen",
-    "continueAdventure": "Setzen Sie Ihr Abenteuer fort"
+    "continueAdventure": "Setzen Sie Ihr Abenteuer fort",
+    "chooseIsland": "Wählen Sie eine Insel",
+    "clickToSeeQuests": "Klicken Sie auf eine Insel, um alle verfügbaren Quests anzuzeigen",
+    "completeLevels": "Lektionen absolvieren",
+    "workThroughChallenges": "Arbeiten Sie sich durch jede Programmierherausforderung Schritt für Schritt",
+    "earnRewards": "Verdienen Sie Belohnungen",
+    "unlockBadgesLevelUp": "Schalten Sie Abzeichen frei und steigen Sie auf, während Sie Fortschritte machen!"
   },
   "island": {
     "lessons": "Lektionen",
@@ -219,7 +228,15 @@
     "continueLesson": "Lektion fortsetzen",
     "lessonOf": "Lektion {current} von {total}",
     "progress": "Fortschritt",
-    "backToIsland": "Zurück zur Insel"
+    "backToIsland": "Zurück zur Insel",
+    "blockBasedCoding": "Blockbasierte Programmierung",
+    "loopsAndControl": "Schleifen und Kontrolle",
+    "conditionalLogic": "Bedingte Logik",
+    "functions": "Funktionen",
+    "buildStructures": "Strukturen bauen",
+    "navigateMazes": "Labyrinthe navigieren",
+    "designVillage": "Dorf entwerfen",
+    "solveChallenges": "Herausforderungen lösen"
   },
   "lesson": {
     "objective": "Ziel",
@@ -254,7 +271,20 @@
     "enrolled": "Angemeldet",
     "lessons": "Lektionen",
     "startCourse": "Kurs starten",
-    "continueCourse": "Kurs fortsetzen"
+    "continueCourse": "Kurs fortsetzen",
+    "searchCourses": "Kurse durchsuchen...",
+    "mathematicsKingdom": "Mathematik-Königreich",
+    "masterAlgebra": "Beherrschen Sie Algebra, Geometrie und Kalkül mit interaktiven Lektionen",
+    "englishLiterature": "Englische Literatur",
+    "explorePoetry": "Erkunden Sie Poesie, Romane und Literaturanalyse",
+    "scienceFundamentals": "Naturwissenschaftliche Grundlagen",
+    "learnPhysics": "Lernen Sie Physik, Chemie und Biologie Grundlagen",
+    "historyAndCulture": "Geschichte und Kultur",
+    "discoverWorldHistory": "Entdecken Sie Weltgeschichte und Kulturerbe",
+    "artAndDesign": "Kunst und Design",
+    "developCreativeSkills": "Entwickeln Sie kreative Fähigkeiten in der bildenden Kunst",
+    "technologyAndProgramming": "Technologie und Programmierung",
+    "learnCoding": "Lernen Sie Programmierung, Webentwicklung und Softwareentwicklung"
   },
   "schoolDashboard": {
     "schoolDashboard": "Schul-Dashboard",
@@ -337,7 +367,27 @@
     "deleteUser": "Benutzer löschen",
     "addSchool": "Schule hinzufügen",
     "editSchool": "Schule bearbeiten",
-    "deleteSchool": "Schule löschen"
+    "deleteSchool": "Schule löschen",
+    "overview": "Übersicht",
+    "users": "Benutzer",
+    "schools": "Schulen",
+    "activity": "Aktivität",
+    "settings": "Einstellungen",
+    "totalUsersLabel": "Gesamtzahl Benutzer",
+    "activeUsers24h": "Aktive Benutzer (24h)",
+    "systemUptime": "Systemverfügbarkeit",
+    "emailConfiguration": "E-Mail-Konfiguration",
+    "configureEmailSettings": "Konfigurieren Sie E-Mail-Einstellungen für Benachrichtigungen",
+    "apiKeys": "API-Schlüssel",
+    "manageApiKeys": "Verwalten Sie API-Schlüssel und Integrationen",
+    "securitySettings": "Sicherheitseinstellungen",
+    "configureSecurityPolicies": "Konfigurieren Sie Sicherheitsrichtlinien und 2FA",
+    "backupAndRecovery": "Sicherung und Wiederherstellung",
+    "configureAutomatedBackups": "Konfigurieren Sie automatisierte Sicherungen",
+    "maintenanceMode": "Wartungsmodus",
+    "enableDisableMaintenance": "Aktivieren/deaktivieren Sie den Wartungsmodus",
+    "systemLogs": "Systemprotokolle",
+    "viewAndExportLogs": "Anzeigen und exportieren Sie Systemprotokolle"
   },
   "notifications": {
     "lessonCompleted": "Lektion abgeschlossen!",

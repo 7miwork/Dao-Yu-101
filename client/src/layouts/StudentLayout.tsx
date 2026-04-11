@@ -73,7 +73,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
               className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-red-600 transition-colors font-semibold mt-4"
             >
               <LogOut className="w-5 h-5" />
-              Sign Out
+              {t('common.logout', 'Logout')}
             </button>
           </nav>
         )}
@@ -118,7 +118,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
               className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-red-500 hover:bg-red-600 text-white font-semibold transition-colors"
             >
               <LogOut className="w-5 h-5" />
-              Sign Out
+              {t('common.logout', 'Logout')}
             </button>
           </div>
         </div>

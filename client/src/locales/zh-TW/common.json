@@ -94,7 +94,7 @@
     "createOne": "建立一個",
     "loginFailed": "登入失敗",
     "gamifiedExperience": "遊戲化學習體驗",
-    "trackProgress": "實時追蹤您的進度",
+    "trackProgressFeature": "實時追蹤您的進度",
     "earnBadges": "獲得徽章並爬上排行榜"
   },
   "register": {
@@ -122,7 +122,10 @@
     "accountCreated": "歡迎！",
     "accountCreatedDesc": "您的帳戶已成功建立。正在重新導向至登入...",
     "alreadyHaveAccount": "已經有帳戶？",
-    "signIn": "登入"
+    "signIn": "登入",
+    "nameRequired": "需要名稱",
+    "passwordsDoNotMatch": "密碼不符",
+    "mustAgreeTerms": "您必須同意條款"
   },
   "home": {
     "heroTitle": "透過遊戲化重新想像學習",
@@ -208,7 +211,13 @@
     "completed": "已完成",
     "selectIsland": "選擇一個島嶼以查看課程",
     "startLearning": "開始學習",
-    "continueAdventure": "繼續您的冒險"
+    "continueAdventure": "繼續您的冒險",
+    "chooseIsland": "選擇一個島嶼",
+    "clickToSeeQuests": "點擊一個島嶼以查看所有可用的任務",
+    "completeLevels": "完成關卡",
+    "workThroughChallenges": "逐步完成每個編碼挑戰",
+    "earnRewards": "獲得獎勵",
+    "unlockBadgesLevelUp": "解鎖徽章並隨著進度升級!"
   },
   "island": {
     "lessons": "課程",
@@ -219,7 +228,15 @@
     "continueLesson": "繼續課程",
     "lessonOf": "課程 {current} / {total}",
     "progress": "進度",
-    "backToIsland": "返回島嶼"
+    "backToIsland": "返回島嶼",
+    "blockBasedCoding": "基於塊的編碼",
+    "loopsAndControl": "循環和控制",
+    "conditionalLogic": "條件邏輯",
+    "functions": "函數",
+    "buildStructures": "建造結構",
+    "navigateMazes": "導航迷宮",
+    "designVillage": "設計村莊",
+    "solveChallenges": "解決挑戰"
   },
   "lesson": {
     "objective": "目標",
@@ -254,7 +271,20 @@
     "enrolled": "已註冊",
     "lessons": "課程",
     "startCourse": "開始課程",
-    "continueCourse": "繼續課程"
+    "continueCourse": "繼續課程",
+    "searchCourses": "搜尋課程...",
+    "mathematicsKingdom": "數學王國",
+    "masterAlgebra": "通過互動課程掌握代數、幾何和微積分",
+    "englishLiterature": "英文文學",
+    "explorePoetry": "探索詩歌、小說和文學分析",
+    "scienceFundamentals": "科學基礎",
+    "learnPhysics": "學習物理、化學和生物學基礎",
+    "historyAndCulture": "歷史和文化",
+    "discoverWorldHistory": "發現世界歷史和文化遺產",
+    "artAndDesign": "藝術和設計",
+    "developCreativeSkills": "培養視覺藝術創意技能",
+    "technologyAndProgramming": "技術和編程",
+    "learnCoding": "學習編碼、網頁開發和軟體工程"
   },
   "schoolDashboard": {
     "schoolDashboard": "學校儀表板",
@@ -337,7 +367,27 @@
     "deleteUser": "刪除使用者",
     "addSchool": "新增學校",
     "editSchool": "編輯學校",
-    "deleteSchool": "刪除學校"
+    "deleteSchool": "刪除學校",
+    "overview": "概覽",
+    "users": "使用者",
+    "schools": "學校",
+    "activity": "活動",
+    "settings": "設定",
+    "totalUsersLabel": "使用者總數",
+    "activeUsers24h": "活躍使用者 (24 小時)",
+    "systemUptime": "系統正常運行時間",
+    "emailConfiguration": "電子郵件配置",
+    "configureEmailSettings": "配置通知的電子郵件設定",
+    "apiKeys": "API 密鑰",
+    "manageApiKeys": "管理 API 密鑰和集成",
+    "securitySettings": "安全設定",
+    "configureSecurityPolicies": "配置安全政策和 2FA",
+    "backupAndRecovery": "備份和恢復",
+    "configureAutomatedBackups": "配置自動備份",
+    "maintenanceMode": "維護模式",
+    "enableDisableMaintenance": "啟用/停用維護模式",
+    "systemLogs": "系統日誌",
+    "viewAndExportLogs": "查看和匯出系統日誌"
   },
   "notifications": {
     "lessonCompleted": "課程已完成！",
