@@ -17,9 +17,10 @@ import LessonPage from "./pages/LessonPage";
 import MinecraftLessonPage from "./pages/MinecraftLessonPage";
 import SchoolDashboard from "./pages/SchoolDashboard";
 import Leaderboard from "./pages/Leaderboard";
-import Archipelago from "./pages/Archipelago";
-import Island from "./pages/Island";
-import Lesson from "./pages/Lesson";
+import StudentArchipelago from "./pages/StudentArchipelago";
+import StudentIsland from "./pages/StudentIsland";
+import StudentLesson from "./pages/StudentLesson";
+import StudentLeaderboard from "./pages/StudentLeaderboard";
 import Landing from "./pages/Landing";
 
 function Router() {
@@ -32,10 +33,10 @@ function Router() {
       <Route path={"/lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/minecraft-lesson/:id"} component={MinecraftLessonPage} />
       <Route path={"/school-dashboard"} component={SchoolDashboard} />
-      <Route path={"/leaderboard"} component={Leaderboard} />
-      <Route path={"/archipelago"} component={Archipelago} />
-      <Route path={"/island/:id"} component={Island} />
-      <Route path={"/island/:islandId/lesson/:lessonId"} component={Lesson} />
+      <Route path={"/leaderboard"} component={StudentLeaderboard} />
+      <Route path={"/archipelago"} component={StudentArchipelago} />
+      <Route path={"/island/:id"} component={StudentIsland} />
+      <Route path={"/island/:islandId/lesson/:lessonId"} component={StudentLesson} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
