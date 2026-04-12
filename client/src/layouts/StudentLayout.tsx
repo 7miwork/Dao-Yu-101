@@ -81,7 +81,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
       </header>
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:fixed md:inset-y-0 md:left-0 md:w-64 md:bg-gradient-to-b md:from-indigo-600 md:to-blue-600 md:border-r-4 md:border-yellow-400 md:shadow-xl md:z-30">
+      <div className="hidden md:block md:fixed md:inset-y-0 md:left-0 md:w-64 md:bg-gradient-to-b md:from-indigo-600 md:to-blue-600 md:border-r-4 md:border-yellow-400 md:shadow-xl md:z-30">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <button
