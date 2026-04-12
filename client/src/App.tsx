@@ -22,12 +22,16 @@ import StudentIsland from "./pages/StudentIsland";
 import StudentLesson from "./pages/StudentLesson";
 import StudentLeaderboard from "./pages/StudentLeaderboard";
 import StudentProfileWrapper from "./pages/StudentProfileWrapper";
+import StudentDashboardWrapper from "./pages/StudentDashboardWrapper";
+import StudentHomeWrapper from "./pages/StudentHomeWrapper";
 import Landing from "./pages/Landing";
 
 function Router() {
+  const isLoggedIn = !!localStorage.getItem('auth_token');
+  
   return (
     <Switch>
-      <Route path={"/"} component={Landing} />
+      <Route path={"/"} component={isLoggedIn ? StudentHomeWrapper : Landing} />
       <Route path={"/login"} component={Login} />
       <Route path={"/dashboard"} component={DashboardRouter} />
       <Route path={"/courses"} component={Courses} />
@@ -39,6 +43,7 @@ function Router() {
       <Route path={"/island/:id"} component={StudentIsland} />
       <Route path={"/island/:islandId/lesson/:lessonId"} component={StudentLesson} />
       <Route path={"/student/profile"} component={StudentProfileWrapper} />
+      <Route path={"/student/dashboard"} component={StudentDashboardWrapper} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
