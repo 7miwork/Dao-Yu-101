@@ -21,6 +21,7 @@ import StudentArchipelago from "./pages/StudentArchipelago";
 import StudentIsland from "./pages/StudentIsland";
 import StudentLesson from "./pages/StudentLesson";
 import StudentLeaderboard from "./pages/StudentLeaderboard";
+import StudentProfileWrapper from "./pages/StudentProfileWrapper";
 import Landing from "./pages/Landing";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
       <Route path={"/archipelago"} component={StudentArchipelago} />
       <Route path={"/island/:id"} component={StudentIsland} />
       <Route path={"/island/:islandId/lesson/:lessonId"} component={StudentLesson} />
+      <Route path={"/student/profile"} component={StudentProfileWrapper} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
