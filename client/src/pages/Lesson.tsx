@@ -1,10 +1,23 @@
+import { useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { getIslandById, getLessonById } from "@/data/lessons";
+import { getQuizForLesson } from "@/data/quizzes";
 import { Button } from "@/components/ui/button";
+import Quiz from "@/components/Quiz";
+import QuizResults from "@/components/QuizResults";
+import { useI18n } from "@/contexts/I18nContext";
+import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 
 export default function Lesson() {
   const [match, params] = useRoute("/island/:islandId/lesson/:lessonId");
   const [, setLocation] = useLocation();
+  const { t } = useI18n();
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [quizResults, setQuizResults] = useState<{
+    score: number;
+    percentage: number;
+    xpEarned: number;
+  } | null>(null);
 
   if (!match) return null;
 
@@ -13,14 +26,15 @@ export default function Lesson() {
 
   const island = getIslandById(islandId);
   const lesson = getLessonById(islandId, lessonId);
+  const quiz = getQuizForLesson(lessonId);
 
   if (!island || !lesson) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-300 to-cyan-300 px-4">
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg mb-4">Quest Not Found</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg mb-4">{t('errors.pageNotFound', 'Quest Not Found')}</h1>
           <Button onClick={() => setLocation(`/island/${islandId}`)} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold">
-            Back to Island
+            {t('archipelago.backToIsland', 'Back to Island')}
           </Button>
         </div>
       </div>
@@ -44,8 +58,70 @@ export default function Lesson() {
     }
   };
 
+  const handleQuizComplete = (score: number, percentage: number, xpEarned: number) => {
+    setQuizResults({ score, percentage, xpEarned });
+  };
+
+  const handleContinueAfterQuiz = () => {
+    if (nextLesson) {
+      setLocation(`/island/${islandId}/lesson/${nextLesson.id}`);
+    } else {
+      setLocation(`/island/${islandId}`);
+    }
+  };
+
   const progressPercent = (lesson.number / island.lessons.length) * 100;
 
+  // Show Quiz
+  if (showQuiz && quiz && !quizResults) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 p-4 md:p-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="mb-8">
+            <button
+              onClick={() => setShowQuiz(false)}
+              className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 font-semibold mb-4"
+            >
+              <ChevronLeft className="w-5 h-5" />
+              {t('common.back', 'Back to Lesson')}
+            </button>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+              🎯 {t('quiz.title', 'Quiz')}: {lesson.title}
+            </h1>
+          </div>
+
+          {/* Quiz Component */}
+          <Quiz
+            quiz={quiz}
+            onComplete={handleQuizComplete}
+            onSkip={() => setShowQuiz(false)}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Show Quiz Results
+  if (quizResults && quiz) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 p-4 md:p-8">
+        <div className="max-w-4xl mx-auto">
+          <QuizResults
+            score={quizResults.score}
+            totalQuestions={quiz.questions.length}
+            percentage={quizResults.percentage}
+            xpEarned={quizResults.xpEarned}
+            passingScore={quiz.passingScore}
+            lessonTitle={lesson.title}
+            onContinue={handleContinueAfterQuiz}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Show Lesson Content
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-300 via-sky-200 to-cyan-300 relative overflow-hidden">
       {/* Navigation Header */}
@@ -56,7 +132,7 @@ export default function Lesson() {
             className="flex items-center gap-2 sm:gap-3 hover:scale-110 transition-transform flex-shrink-0"
           >
             <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
-              <span className="text-xl sm:text-2xl">🎮</span>
+              <span className="text-xl sm:text-2xl">🏝️</span>
             </div>
             <span className="text-xl sm:text-3xl font-black text-white drop-shadow-lg hidden xs:inline">Dao-Yu-101</span>
           </button>
@@ -64,7 +140,7 @@ export default function Lesson() {
             onClick={() => setLocation(`/island/${islandId}`)}
             className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold border-2 border-white shadow-lg text-xs sm:text-sm px-2 sm:px-4 py-2"
           >
-            ← Back
+            ← {t('common.back', 'Back')}
           </Button>
         </div>
       </nav>
@@ -79,187 +155,126 @@ export default function Lesson() {
               onClick={() => setLocation("/archipelago")}
               className="hover:underline"
             >
-              🏝️ Archipelago
+              🏝️ {t('archipelago.codingArchipelago', 'Coding Archipelago')}
             </button>
-            <span>/</span>
+            <span>→</span>
             <button
               onClick={() => setLocation(`/island/${islandId}`)}
-              className="hover:underline truncate"
+              className="hover:underline"
             >
-              {island.name.split(":")[1].trim()}
+              {island.name}
             </button>
-            <span>/</span>
-            <span>Quest {lesson.number}</span>
-          </div>
-
-          {/* Lesson Title and Badge */}
-          <div className="mb-6 sm:mb-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 sm:border-8 border-white shadow-2xl">
-            <div className="flex items-start gap-3 sm:gap-6 mb-3 sm:mb-4">
-              <div className="w-16 sm:w-24 h-16 sm:h-24 rounded-full bg-gradient-to-br from-yellow-300 to-orange-400 text-white font-black text-3xl sm:text-5xl flex items-center justify-center border-4 border-white shadow-lg drop-shadow-lg flex-shrink-0">
-                {lesson.number}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white drop-shadow-lg mb-1 sm:mb-2 break-words">
-                  {lesson.title}
-                </h1>
-                <p className="text-base sm:text-xl text-white font-bold drop-shadow-md">
-                  Phase: <span className="text-yellow-300">{lesson.phase}</span>
-                </p>
-              </div>
-            </div>
-
-            {/* Meta Info */}
-            <div className="flex flex-wrap gap-2 sm:gap-4">
-              <div className="px-3 sm:px-6 py-2 sm:py-3 bg-yellow-300 rounded-full font-bold text-xs sm:text-sm text-gray-900 shadow-lg border-2 border-white">
-                ⏱️ {lesson.duration}m
-              </div>
-              <div className="px-3 sm:px-6 py-2 sm:py-3 bg-green-400 rounded-full font-bold text-xs sm:text-sm text-white shadow-lg border-2 border-white">
-                🎯 {lesson.number}/{island.lessons.length}
-              </div>
-            </div>
+            <span>→</span>
+            <span>{lesson.title}</span>
           </div>
 
           {/* Progress Bar */}
-          <div className="bg-white rounded-full p-1 sm:p-2 border-4 border-yellow-400 shadow-lg mb-2">
-            <div
-              className="bg-gradient-to-r from-green-400 to-emerald-500 h-4 sm:h-6 rounded-full transition-all duration-500"
-              style={{ width: `${progressPercent}%` }}
-            ></div>
+          <div className="mb-4 sm:mb-6">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-2xl sm:text-4xl font-black text-white drop-shadow-lg">
+                {lesson.number}. {lesson.title}
+              </h2>
+              <span className="text-xs sm:text-sm font-bold text-white drop-shadow-md bg-black/30 px-3 py-1 rounded-full">
+                {lesson.number}/{island.lessons.length}
+              </span>
+            </div>
+            <div className="w-full bg-white/40 rounded-full h-3 overflow-hidden border-2 border-white shadow-lg">
+              <div
+                className="bg-gradient-to-r from-yellow-300 to-orange-400 h-full transition-all duration-500"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
           </div>
-          <p className="text-white font-bold drop-shadow-md text-center text-xs sm:text-base">
-            {lesson.number} of {island.lessons.length} Quests
-          </p>
         </div>
 
-        {/* Lesson Content */}
-        <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
+        {/* Lesson Content Cards */}
+        <div className="space-y-4 sm:space-y-6 mb-8">
           {/* Objective */}
-          <div className="bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 border-white shadow-2xl animate-fadeInUp">
-            <h2 className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
-              <span className="text-4xl sm:text-5xl">🎯</span>
-              <span className="break-words">Your Mission</span>
-            </h2>
-            <p className="text-base sm:text-xl text-white font-bold drop-shadow-md leading-relaxed">
-              {lesson.objective}
-            </p>
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border-4 border-blue-400 hover:shadow-xl transition-shadow animate-slideInUp">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-3xl">🎯</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{t('lesson.objective', 'Objective')}</h3>
+            </div>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{lesson.objective}</p>
           </div>
 
-          {/* What Students Learn */}
-          <div className="bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.1s" }}>
-            <h2 className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-              <span className="text-4xl sm:text-5xl">💡</span>
-              <span>You'll Learn</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {lesson.whatStudentsLearn.map((item, idx) => (
-                <div key={idx} className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 border-4 border-yellow-300 shadow-lg">
-                  <div className="flex items-start gap-2 sm:gap-3">
-                    <span className="text-2xl sm:text-3xl flex-shrink-0">✨</span>
-                    <p className="font-bold text-gray-900 text-sm sm:text-base">{item}</p>
-                  </div>
-                </div>
-              ))}
+          {/* What You Learn */}
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border-4 border-green-400 hover:shadow-xl transition-shadow animate-slideInUp" style={{ animationDelay: '0.1s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-3xl">📚</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{t('lesson.whatYouLearn', 'What You\'ll Learn')}</h3>
             </div>
+            <ul className="text-gray-700 text-sm sm:text-base leading-relaxed space-y-2">
+              {lesson.whatStudentsLearn.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-green-500 font-bold mt-0.5">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Explanation */}
-          <div className="bg-gradient-to-br from-yellow-300 to-orange-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 drop-shadow-lg mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
-              <span className="text-4xl sm:text-5xl">📚</span>
-              <span>The Story</span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-900 font-bold leading-relaxed drop-shadow-md">
-              {lesson.explanation}
-            </p>
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border-4 border-purple-400 hover:shadow-xl transition-shadow animate-slideInUp" style={{ animationDelay: '0.2s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-3xl">📖</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{t('lesson.explanation', 'The Story')}</h3>
+            </div>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{lesson.explanation}</p>
           </div>
 
           {/* Student Activity */}
-          <div className="bg-gradient-to-br from-pink-400 to-red-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.3s" }}>
-            <h2 className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
-              <span className="text-4xl sm:text-5xl">⚡</span>
-              <span>Your Challenge</span>
-            </h2>
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 border-4 border-yellow-300 shadow-lg">
-              <p className="text-base sm:text-lg text-gray-900 font-bold leading-relaxed">
-                {lesson.studentActivity}
-              </p>
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border-4 border-orange-400 hover:shadow-xl transition-shadow animate-slideInUp" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-3xl">🎮</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{t('lesson.studentActivity', 'Your Challenge')}</h3>
             </div>
+            <p className="text-gray-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{lesson.studentActivity}</p>
           </div>
 
           {/* Teacher Tip */}
-          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-6 border-white shadow-2xl animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
-            <h2 className="text-2xl sm:text-3xl font-black text-white drop-shadow-lg mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
-              <span className="text-4xl sm:text-5xl">💬</span>
-              <span>Pro Tip</span>
-            </h2>
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-6 border-4 border-yellow-300 shadow-lg">
-              <p className="text-base sm:text-lg text-gray-900 font-bold leading-relaxed">
-                {lesson.teacherTip}
-              </p>
+          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-4 sm:p-6 shadow-lg border-4 border-yellow-400 hover:shadow-xl transition-shadow animate-slideInUp" style={{ animationDelay: '0.4s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-3xl">💡</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{t('lesson.teacherTip', 'Pro Tip')}</h3>
             </div>
+            <p className="text-gray-800 text-sm sm:text-base leading-relaxed">{lesson.teacherTip}</p>
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between mb-6 sm:mb-8 animate-fadeInUp" style={{ animationDelay: "0.5s" }}>
-          <Button
-            onClick={handlePreviousLesson}
-            disabled={!previousLesson}
-            className={`flex-1 py-4 sm:py-6 text-sm sm:text-lg font-black border-4 rounded-xl sm:rounded-2xl transform hover:scale-105 transition-all ${
-              previousLesson
-                ? "bg-blue-500 hover:bg-blue-600 text-white border-white shadow-lg"
-                : "bg-gray-300 text-gray-600 border-gray-400 cursor-not-allowed"
-            }`}
-          >
-            ⬅️ <span className="hidden xs:inline">Previous</span>
-          </Button>
-
-          <Button
-            onClick={() => setLocation(`/island/${islandId}`)}
-            className="flex-1 py-4 sm:py-6 text-sm sm:text-lg font-black bg-yellow-400 hover:bg-yellow-500 text-gray-900 border-4 border-white shadow-lg rounded-xl sm:rounded-2xl transform hover:scale-105 transition-all"
-          >
-            🏝️ <span className="hidden xs:inline">Back to Island</span>
-          </Button>
-
-          <Button
-            onClick={handleNextLesson}
-            disabled={!nextLesson}
-            className={`flex-1 py-4 sm:py-6 text-sm sm:text-lg font-black border-4 rounded-xl sm:rounded-2xl transform hover:scale-105 transition-all ${
-              nextLesson
-                ? "bg-green-500 hover:bg-green-600 text-white border-white shadow-lg"
-                : "bg-gray-300 text-gray-600 border-gray-400 cursor-not-allowed"
-            }`}
-          >
-            <span className="hidden xs:inline">Next</span> ➡️
-          </Button>
-        </div>
-
-        {/* Completion Message */}
-        {!nextLesson && (
-          <div className="bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 border-6 sm:border-8 border-white shadow-2xl text-center animate-fadeInUp" style={{ animationDelay: "0.6s" }}>
-            <div className="text-6xl sm:text-8xl mb-3 sm:mb-4 animate-bounce">🎉</div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white drop-shadow-lg mb-3 sm:mb-4">
-              QUEST COMPLETE!
-            </h3>
-            <p className="text-lg sm:text-xl md:text-2xl text-white font-bold drop-shadow-md mb-4 sm:mb-6 px-2">
-              You've conquered all {island.lessons.length} quests! You're a Coding Legend! 🏆
-            </p>
-            <div className="flex gap-2 sm:gap-4 justify-center flex-wrap">
-              <Button
-                onClick={() => setLocation("/archipelago")}
-                className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-black text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-4 rounded-full border-4 border-white shadow-lg transform hover:scale-110 transition-all"
-              >
-                🗺️ <span className="hidden xs:inline">Explore More</span>
-              </Button>
-              <Button
-                onClick={() => setLocation(`/island/${islandId}`)}
-                className="bg-white hover:bg-gray-100 text-gray-900 font-black text-sm sm:text-lg px-4 sm:px-8 py-3 sm:py-4 rounded-full border-4 border-yellow-400 shadow-lg transform hover:scale-110 transition-all"
-              >
-                🔄 <span className="hidden xs:inline">Review</span>
-              </Button>
-            </div>
+        {/* Quiz Button */}
+        {quiz && !showQuiz && (
+          <div className="mb-8 animate-slideInUp" style={{ animationDelay: '0.5s' }}>
+            <button
+              onClick={() => setShowQuiz(true)}
+              className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 text-lg border-4 border-white"
+            >
+              <span>🎯 {t('quiz.startQuiz', 'Start Quiz')}</span>
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
         )}
+
+        {/* Navigation Buttons */}
+        <div className="flex gap-3 sm:gap-4 mb-8 animate-slideInUp" style={{ animationDelay: '0.6s' }}>
+          <button
+            onClick={handlePreviousLesson}
+            disabled={!previousLesson}
+            className="flex-1 bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 disabled:from-gray-400 disabled:to-gray-400 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 border-2 border-white disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span className="hidden sm:inline">{t('lesson.previousLesson', 'Previous')}</span>
+          </button>
+
+          <button
+            onClick={handleNextLesson}
+            disabled={!nextLesson}
+            className="flex-1 bg-gradient-to-r from-green-400 to-green-500 hover:from-green-500 hover:to-green-600 disabled:from-gray-400 disabled:to-gray-400 text-white font-bold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 border-2 border-white disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span className="hidden sm:inline">{t('lesson.nextLesson', 'Next')}</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </div>
   );
